@@ -107,6 +107,13 @@
         template='template0'
         owner=shibboleth
 
+    - name: Copy tables script
+      copy: src="files/tables.sql" dest="/tmp/tables.sql"
+
+    - name: Create tables
+      sudo_user: postgres
+      shell:  "psql -f /tmp/tables.sql shibboleth"
+
 
   handlers:
     - name: restart apache
@@ -114,4 +121,8 @@
 
     - name: restart tomcat
       sudo: True
-      service: name=tomcat7 state=restarted      
+      service: name=tomcat7 state=restarted
+
+    - name: restart postgres
+      sudo: True
+      service: name=postgresql state=restarted      
