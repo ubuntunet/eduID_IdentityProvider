@@ -1,0 +1,117 @@
+- name: Install Shibboleth IdP v3 for UbuntuNet Alliance
+  hosts: development
+  vars:
+    home_organisation_name: ubuntunet.net
+    fully_qualified_service_name: idp.{{ home_organisation_name }}
+    entity_id: https://{{ fully_qualified_service_name }}/shibboleth/idp
+    admin_email: idp@ubuntunet.net
+    certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
+    certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
+
+  tasks:
+    - name: Install needed utility programs
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      sudo: True
+      with_items:
+        - ntp
+        - unzip
+
+
+    # ToDo Refactor into an Webserver/Apache role
+    - name: Install apache2
+      sudo: True
+      apt: pkg=apache2 update_cache=yes cache_valid_time=3600
+
+    - name: Copy apache2 config file
+      sudo: True
+      template: >
+        src=templates/apache2.conf.j2
+        dest=/etc/apache2/sites-available/{{ fully_qualified_service_name }}.conf
+      notify: restart apache
+
+    - name: Disable default configuration
+      sudo: True
+      command: a2dissite 000-default
+      notify: restart apache
+
+    - name: Enable IdP configuration
+      sudo: True
+      command: a2ensite {{ fully_qualified_service_name }}
+      notify: restart apache
+
+    - name: Copy TLS key
+      sudo: True
+      copy: > 
+        src=files/{{ fully_qualified_service_name }}.key 
+        dest={{ certificate_key_path }}
+        owner=root
+        group=ssl-cert
+        mode=0600
+      notify: restart apache
+
+    - name: Copy TLS certificate
+      sudo: True
+      copy: > 
+        src=files/{{ fully_qualified_service_name }}.crt 
+        dest={{ certificate_cert_path }}
+      notify: restart apache
+
+    - name: Enable SSL and AJP Proxy modules
+      sudo: True
+      command: a2enmod ssl proxy_ajp
+      notify: restart apache
+
+
+    # ToDo Refactor into an Appserver/Tomcat role
+    - name: Install OpenJDK 7
+      sudo: True
+      apt: name=openjdk-7-jdk update_cache=yes cache_valid_time=3600
+
+    - name: Install Tomcat 7
+      sudo: True
+      apt: name=tomcat7 update_cache=yes cache_valid_time=3600
+
+    - name: Copy Tomcat config file
+      sudo: True
+      copy: > 
+        src=files/tomcat.xml 
+        dest=/etc/tomcat7/server.xml
+      notify: restart tomcat
+
+    - name: Adjust JAVA options
+      sudo: True
+      replace: >
+        dest=/etc/default/tomcat7 
+        regexp='JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:\+UseConcMarkSweepGC"' 
+        replace='JAVA_OPTS="-server -Xmx1024m -Djava.security.egd=file:/dev/./urandom"'
+
+
+    # ToDo Refactor into an Dbserver/Postgres role
+    - name: Install Postgres, Java Adapter and Psycog for postgresql_db module
+      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+      sudo: True
+      with_items:
+        - postgresql
+        - libpostgresql-jdbc-java
+        - python-psycopg2
+
+    - name: Create DB user
+      sudo_user: postgres
+      postgresql_user: name=shibboleth 
+
+    - name: Create database for Shibboleth
+      sudo_user: postgres
+      postgresql_db: >
+        name=shibboleth
+        encoding='UTF-8'
+        template='template0'
+        owner=shibboleth
+
+
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+
+    - name: restart tomcat
+      sudo: True
+      service: name=tomcat7 state=restarted      

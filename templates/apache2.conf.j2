@@ -1,0 +1,18 @@
+<VirtualHost *:443>
+  ServerName {{ fully_qualified_service_name }}
+  ServerAdmin {{ admin_email }}
+  CustomLog /var/log/apache2/{{ fully_qualified_service_name }}.access.log combined
+  ErrorLog /var/log/apache2/{{ fully_qualified_service_name }}.error.log
+
+  SSLEngine On
+  SSLCipherSuite HIGH:MEDIUM:!aNULL:!kRSA:!MD5:!RC4
+  SSLProtocol all -SSLv2 -SSLv3
+  SSLCertificateKeyFile {{ certificate_key_path }}
+  SSLCertificateFile {{ certificate_cert_path }}
+  SSLCertificateChainFile {{ certificate_cert_path }}
+
+  ProxyPass /idp ajp://localhost:8009/idp retry=5
+  <Proxy ajp://localhost:8009>
+    Require all granted
+  </Proxy>
+</VirtualHost>

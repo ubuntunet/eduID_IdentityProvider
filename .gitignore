@@ -1,0 +1,6 @@
+files/*.conf
+files/*.crt
+files/*.csr
+files/*.key
+
+.vagrant
