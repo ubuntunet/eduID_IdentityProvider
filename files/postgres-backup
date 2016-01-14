@@ -1,0 +1,2 @@
+40 4 * * * postgres pg_dumpall | gzip > /var/backups/postgresql/dumpall-`date +\%a`.sql.gz
+20 * * * * postgres pg_dumpall | gzip > /var/backups/postgresql/dumpall-latest.sql.gz

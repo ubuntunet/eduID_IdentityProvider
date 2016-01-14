@@ -20,6 +20,11 @@ Vagrant.configure(2) do |config|
     # idp.vm.network "forwarded_port", guest: 443, host: 8443
   end
   
+  config.vm.define "vagrant_vanilla" do |van|
+    van.vm.box = "ubuntu/trusty64"
+    van.vm.network "private_network", ip: "192.168.33.73"
+  end
+  
   # config.vm.define "vagrant_web" do |web|
   #   web.vm.box = "ubuntu/trusty64"
   #   web.vm.network "forwarded_port", guest: 80, host: 8080
