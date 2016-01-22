@@ -246,10 +246,10 @@
         src=templates/metadata-providers.xml.j2 
         dest=/opt/shibboleth-idp/conf/metadata-providers.xml
 
-    - name: Copy generic metadata file
-      template: > 
-        src=templates/idp-metadata.xml.j2
-        dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
+    # - name: Copy generic metadata file
+    #   template: > 
+    #     src=templates/idp-metadata.xml.j2
+    #     dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
 
     - name: Copy static metadata file for an sp
       copy: >
@@ -286,6 +286,18 @@
     # 6.9. Configuring periodic encryption key rotation
 
     # 6.10. Login form customization
+
+    - name: Copy View/Error Messages properties
+      template: >
+        src=templates/error-messages.properties.j2
+        dest=/opt/shibboleth-idp/messages/error-messages.properties
+
+
+    - name: Copy logo
+      copy: >
+        src=files/ualogo.png 
+        dest=/opt/shibboleth-idp/webapp/images/
+
 
     # 6.11. IdP status URL configuration
 
