@@ -1,12 +1,17 @@
 - name: Install Shibboleth IdP v3 for UbuntuNet Alliance
   hosts: development
-  sudo: True  
+  become: True  
   vars:
     home_organisation_name: ubuntunet.net
+    # fully_qualified_service_name: 192.168.33.44
     fully_qualified_service_name: idp.{{ home_organisation_name }}
-    entity_id: https://{{ fully_qualified_service_name }}/shibboleth/idp
+    ip_address: 192.168.33.44
+    entity_id: https://192.168.33.44/idp/shibboleth
+    sp_entity_id: https://192.168.33.88/shibboleth
+    # entity_id: https://{{ fully_qualified_service_name }}/shibboleth/idp
+    # entity_id: https://{{ fully_qualified_service_name }}/idp/shibboleth
     admin_email: idp@ubuntunet.net
-    # idp_home: /opt/shibboleth-idp
+    idp_home: /opt/shibboleth-idp
     certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
     certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
     tomcat_version: 7
@@ -100,11 +105,11 @@
 
     # 5.2. Database creation and settings
     - name: Create DB user
-      sudo_user: postgres
+      become_user: postgres
       postgresql_user: name=shibboleth 
 
     - name: Create database for Shibboleth
-      sudo_user: postgres
+      become_user: postgres
       postgresql_db: >
         name=shibboleth
         encoding='UTF-8'
@@ -115,7 +120,7 @@
       copy: src="files/tables.sql" dest="/tmp/tables.sql"
 
     - name: Create tables
-      sudo_user: postgres
+      become_user: postgres
       shell:  "psql -f /tmp/tables.sql shibboleth"
 
     - name: Enable autovacuum
@@ -165,6 +170,7 @@
         src=templates/idp-install.sh.j2
         dest=/usr/local/dist/idp-install.sh
         mode=0700
+
 
     - name: Install Shibboleth IdP
       command: ./idp-install.sh chdir=/usr/local/dist
@@ -219,16 +225,38 @@
     #     src=files/SWITCHaaiRootCA.crt.pem
     #     dest=/opt/shibboleth-idp/credentials
 
+    - name: Copy IdP properties
+      template: >
+        src=templates/idp.properties.j2
+        dest=/opt/shibboleth-idp/conf
+
     # - name: Insert Metadata Reference
     #   lineinfile: >
     #     dest=/opt/shibboleth-idp/conf/idp.properties
     #     insertafter=EOF
     #     line="idp.metadata = switchaai, interfederation"
 
-    - name: Copy UbuntuNet metadata providers
-      copy: > 
-        src=files/metadata-provider-ubuntunet.xml 
-        dest=/opt/shibboleth-idp/conf
+    # - name: Copy UbuntuNet metadata providers
+    #   copy: > 
+    #     src=files/metadata-provider-ubuntunet.xml 
+    #     dest=/opt/shibboleth-idp/conf
+
+    - name: Copy Generic metadata providers
+      template: > 
+        src=templates/metadata-providers.xml.j2 
+        dest=/opt/shibboleth-idp/conf/metadata-providers.xml
+
+    - name: Copy generic metadata file
+      template: > 
+        src=templates/idp-metadata.xml.j2
+        dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
+
+    - name: Copy static metadata file for an sp
+      copy: >
+        src=files/sp-metadata.xml 
+        dest=/opt/shibboleth-idp/metadata
+        owner=tomcat7
+
 
 
     # 6.4. Relying party configuration
@@ -285,9 +313,9 @@
         path=/opt/shibboleth-idp/edit-webapp/WEB-INF/classes/META-INF
         state=directory
 
-    - name: Download ORM workaround
-      get_url: > 
-        url=https://www.switch.ch/aai/guides/idp/installation/orm.xml
+    - name: Copy ORM workaround
+      copy: > 
+        src=files/orm.xml 
         dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/classes/META-INF
 
     - name: Rebuild id.war
@@ -309,14 +337,11 @@
       service: name=apache2 state=restarted
 
     - name: restart tomcat
-      sudo: True
       service: name=tomcat{{ tomcat_version }} state=restarted
 
     - name: restart postgres
-      sudo: True
       service: name=postgresql state=restarted
 
     # # TODO - Either create a dedicated service or use Tomcat
     # - name: restart shibboleth
-    #   sudo: True
     #   service: name=tomcat{{ tomcat_version }} state=restarted
