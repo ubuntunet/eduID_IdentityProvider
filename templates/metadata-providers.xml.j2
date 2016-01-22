@@ -36,13 +36,14 @@
     The EntityRoleWhiteList saves memory by only loading metadata from SAML roles
     that the IdP needs to interoperate with.
     -->
-
-    <!--
+<!-- 
     <MetadataProvider id="HTTPMetadata"
                       xsi:type="FileBackedHTTPMetadataProvider"
-                      backingFile="%{idp.home}/metadata/localCopyFromXYZHTTP.xml"
-                      metadataURL="http://WHATEVER">
-
+                      disregardTLSCertificate='true'
+                      backingFile="{{ idp_home }}/metadata/sp-metadata.xml"
+                      metadataURL="https://192.168.33.88/Shibboleth.sso/Metadata">
+ -->
+    <!--
         <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true">
             <PublicKey>
                 MIIBI.....
@@ -64,9 +65,9 @@
     ensure that the contents are trustworthy.
     -->
 
-    <!--
-    <MetadataProvider id="LocalMetadata"  xsi:type="FilesystemMetadataProvider" metadataFile="PATH_TO_YOUR_METADATA"/>
-    -->
+    
+    <MetadataProvider id="LocalMetadata" xsi:type="FilesystemMetadataProvider" metadataFile="{{ idp_home }}/metadata/sp-metadata.xml"/>
+    
 
 
 </MetadataProvider>
