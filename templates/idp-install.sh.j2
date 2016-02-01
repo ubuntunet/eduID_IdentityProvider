@@ -11,8 +11,7 @@ ERROR: command execution failed, see above. Aborting."' ERR
 
 INSTALLDIR=/opt/shibboleth-idp
 SCOPE={{ home_organisation_name }}
-# SVCNAME=idp.{{ fully_qualified_service_name }}
-SVCNAME=192.168.33.44
+SVCNAME={{ ip_address }}
 
 
 if [ -d $INSTALLDIR ]; then
@@ -49,7 +48,7 @@ cd /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}
 #   read -p "Please enter the name of your home organization [$DFLT]: " SCOPE
 #   SCOPE=${SCOPE:-$DFLT}
 
-#   DFLT=idp.{{ fully_qualified_service_name }}
+#   DFLT={{ fully_qualified_service_name }}
 #   read -p "Please specify the service name for your IdP [$DFLT]: " SVCNAME
 #   SVCNAME=${SVCNAME:-$DFLT}
 #   echo
