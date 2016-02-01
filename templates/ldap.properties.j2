@@ -9,11 +9,13 @@ idp.authn.LDAP.authenticator                   = bindSearchAuthenticator
 idp.authn.LDAP.ldapURL                          = {{ ldap_protocol }}://{{ ldap_url }}:{{ ldap_port }}
 #idp.authn.LDAP.ldapURL                          = ldap://localhost:10389
 #idp.authn.LDAP.useStartTLS                     = true
-#idp.authn.LDAP.useSSL                          = false
+idp.authn.LDAP.useStartTLS                     = false
+idp.authn.LDAP.useSSL                          = false
 #idp.authn.LDAP.connectTimeout                  = 3000
 
 ## SSL configuration, either jvmTrust, certificateTrust, or keyStoreTrust
 #idp.authn.LDAP.sslConfig                       = certificateTrust
+idp.authn.LDAP.sslConfig                       = jvmTrust
 ## If using certificateTrust above, set to the trusted certificate's path
 idp.authn.LDAP.trustCertificates                = %{idp.home}/credentials/ldap-server.crt
 ## If using keyStoreTrust above, set to the truststore path
@@ -27,20 +29,21 @@ idp.authn.LDAP.returnAttributes                 = passwordExpirationTime,loginGr
 
 # Search DN resolution, used by anonSearchAuthenticator, bindSearchAuthenticator
 # for AD: CN=Users,DC=example,DC=org
+# idp.authn.LDAP.baseDN                           = cn=Manager,dc=ubuntunet,dc=net
+# idp.authn.LDAP.baseDN                           = dc=ubuntunet,dc=net
 idp.authn.LDAP.baseDN                           = ou=people,dc=ubuntunet,dc=net
-#idp.authn.LDAP.baseDN                           = ou=people,dc=example,dc=org
 #idp.authn.LDAP.subtreeSearch                   = false
 idp.authn.LDAP.userFilter                       = (uid={user})
 # bind search configuration
 # for AD: idp.authn.LDAP.bindDN=adminuser@domain.com
 #idp.authn.LDAP.bindDN                           = uid=myservice,ou=system
-idp.authn.LDAP.bindDN                           = cn=idp,dc=ubuntunet,dc=net
-#idp.authn.LDAP.bindDNCredential                 = myServicePassword
-idp.authn.LDAP.bindDNCredential                 = jk66Wd8x
+idp.authn.LDAP.bindDN                           = cn=Manager,dc=ubuntunet,dc=net
+# Use credentials.properties.j2 for the password instead,
+idp.authn.LDAP.bindDNCredential                 = {{ ldap_bind_credential }}
 
 # Format DN resolution, used by directAuthenticator, adAuthenticator
 # for AD use idp.authn.LDAP.dnFormat=%s@domain.com
-idp.authn.LDAP.dnFormat                         = uid=%s,ou=people,dc=example,dc=org
+# idp.authn.LDAP.dnFormat                         = uid=%s,ou=people,dc=example,dc=org
 
 # LDAP attribute configuration, see attribute-resolver.xml
 # Note, this likely won't apply to the use of legacy V2 resolver configurations
