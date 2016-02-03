@@ -3,4 +3,6 @@ files/*.crt
 files/*.csr
 files/*.key
 
+files/switch
+
 .vagrant
