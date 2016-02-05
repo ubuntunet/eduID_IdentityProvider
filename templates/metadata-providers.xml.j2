@@ -37,13 +37,21 @@
     that the IdP needs to interoperate with.
     -->
     
-    
+<!--     
     <MetadataProvider id="HTTPMetadata"
                       xsi:type="FileBackedHTTPMetadataProvider"
                       disregardTLSCertificate='true'
                       backingFile="{{ idp_home }}/metadata/sp_dev-metadata.xml"
                       metadataURL="https://192.168.33.88/Shibboleth.sso/Metadata">
    
+    </MetadataProvider>
+ -->
+
+    <MetadataProvider id="HTTPMetadata"
+                      xsi:type="FileBackedHTTPMetadataProvider"
+                      backingFile="{{ idp_home }}/metadata/sp_dev-metadata.xml"
+                      metadataURL="{{ metadata_url }}"
+                      disregardTLSCertificate="true"/>
     
     <!--
         <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true">
