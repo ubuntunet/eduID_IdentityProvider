@@ -1,10 +1,13 @@
-gcloud_idp ansible_ssh_host=104.155.65.222 ansible_ssh_user=chris_rohrer
+gcloud_idp ansible_ssh_host=104.155.65.222 
+
+[gcloud]
+gcloud_idp
+
+[gcloud:vars]
+ansible_user=chris_rohrer
 
 [idp]
 gcloud_idp
 
 [staging:children]
-idp
-
-[azure:children]
 idp
