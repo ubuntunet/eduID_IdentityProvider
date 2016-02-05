@@ -1,5 +1,5 @@
 - name: Install Shibboleth IdP v3 for UbuntuNet Alliance
-  hosts: development
+  hosts: idp
   become: True  
   vars:
     home_organisation_name: ubuntunet.net
@@ -9,6 +9,7 @@
     sp_entity_id: https://192.168.33.88/shibboleth
     admin_email: idp@ubuntunet.net
     idp_home: /opt/shibboleth-idp
+    metadata_url: https://192.168.33.44/metadata.xml
     certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
     certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
     tomcat_version: 7
@@ -22,7 +23,7 @@
     # TODO - These should be kept secret
     ldap_bind_credential: jk66Wd8x
     persistent_id_salt: Ncy442acgPSTHX51KwZjSu56wgyn/xwTYRh+A738mXF3XfsK
-
+ 
   tasks:
     # 1. Systems Requirememts
     - name: Install needed utility programs
@@ -65,7 +66,7 @@
       notify: restart apache
 
     - name: Enable SSL and AJP Proxy modules
-      command: a2enmod ssl proxy_ajp
+      command: a2enmod ssl proxy_ajp rewrite
       notify: restart apache
 
 
@@ -105,6 +106,7 @@
 
     # 5.2. Database creation and settings
     - name: Create DB user
+      become: yes
       become_user: postgres
       postgresql_user: name=shibboleth 
 
@@ -376,6 +378,13 @@
         src=files/idp.xml 
         dest=/etc/tomcat7/Catalina/localhost/idp.xml
       notify: restart tomcat
+
+
+    - name: Copy UFed Metadata File #TODO: Refactor!
+      copy: > 
+        src=files/uafed-metadata.xml 
+        dest=/var/www/html/index.html
+      notify: restart apache
 
 
   handlers:
