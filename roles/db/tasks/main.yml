@@ -10,9 +10,8 @@
 
 # 5.2. Database creation and settings
 - name: Create DB user
-  become: yes
+  postgresql_user: name=shibboleth
   become_user: postgres
-  postgresql_user: name=shibboleth 
 
 - name: Create database for Shibboleth
   become_user: postgres
@@ -20,7 +19,7 @@
     name=shibboleth
     encoding='UTF-8'
     template='template0'
-    owner=shibboleth
+    owner=postgres
 
 - name: Copy tables script
   copy: src="files/tables.sql" dest="/tmp/tables.sql"

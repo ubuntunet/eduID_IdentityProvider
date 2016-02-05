@@ -1,7 +1,5 @@
-files/*.conf
-files/*.crt
-files/*.csr
-files/*.key
+*.crt
+*.key
 
 files/switch
 
