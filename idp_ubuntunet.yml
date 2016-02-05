@@ -2,27 +2,8 @@
   hosts: idp
   become: True  
   vars:
-    home_organisation_name: ubuntunet.net
-    ip_address: 192.168.33.44
-    fully_qualified_service_name: idp.{{ home_organisation_name }}
-    entity_id: https://{{ fully_qualified_service_name }}/shibboleth
-    sp_entity_id: https://192.168.33.88/shibboleth
-    admin_email: idp@ubuntunet.net
-    idp_home: /opt/shibboleth-idp
-    metadata_url: https://192.168.33.44/metadata.xml
-    certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
-    certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
-    tomcat_version: 7
-    catalina_home: /usr/share/tomcat7
-    catalina_base: /var/lib/tomcat7
-    postgres_version: 9.3
-    shibboleth_version: 3.2.1
-    ldap_url: 192.168.33.10
-    ldap_port: 389
-    ldap_protocol: ldap
-    # TODO - These should be kept secret
-    ldap_bind_credential: jk66Wd8x
-    persistent_id_salt: Ncy442acgPSTHX51KwZjSu56wgyn/xwTYRh+A738mXF3XfsK
+  roles:
+    - role: db
  
   tasks:
     # 1. Systems Requirememts
@@ -93,59 +74,6 @@
         regexp='JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:\+UseConcMarkSweepGC"' 
         replace='JAVA_OPTS="-server -Xmx1024m -Djava.security.egd=file:/dev/./urandom"'
 
-
-    # 5. SQL database: PostgreSQL 9
-
-    # 5.1. Installation
-    - name: Install Postgres, Java Adapter and Psycog for postgresql_db module
-      apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
-      with_items:
-        - postgresql
-        - libpostgresql-jdbc-java
-        - python-psycopg2
-
-    # 5.2. Database creation and settings
-    - name: Create DB user
-      become: yes
-      become_user: postgres
-      postgresql_user: name=shibboleth 
-
-    - name: Create database for Shibboleth
-      become_user: postgres
-      postgresql_db: >
-        name=shibboleth
-        encoding='UTF-8'
-        template='template0'
-        owner=shibboleth
-
-    - name: Copy tables script
-      copy: src="files/tables.sql" dest="/tmp/tables.sql"
-
-    - name: Create tables
-      become_user: postgres
-      shell:  "psql -f /tmp/tables.sql shibboleth"
-
-    - name: Enable autovacuum
-      replace: >
-        dest=/etc/postgresql/{{ postgres_version }}/main/postgresql.conf 
-        regexp='#autovacuum_vacuum_scale_factor = 0.2' 
-        replace='autovacuum_vacuum_scale_factor = 0.002'
-
-    - name: Enable autoanalyze
-      replace: >
-        dest=/etc/postgresql/{{ postgres_version }}/main/postgresql.conf 
-        regexp='#autovacuum_analyze_scale_factor = 0.1' 
-        replace='autovacuum_analyze_scale_factor = 0.001'
-      notify: restart postgres
-
-    # 5.3. Database backup
-    - name: Create backup directory
-      file: >
-        path=/var/backups/postgresql 
-        state=directory
-        owner=postgres
-        group=postgres
-        mode=0700
 
 
     # 6. Shibboleth IdP
