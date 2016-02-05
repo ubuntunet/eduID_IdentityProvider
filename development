@@ -4,7 +4,7 @@ vagrant_web ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222
 vagrant_app ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200
 vagrant_ldap ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201
 
-[development]
+[idp]
 vagrant_idp
 
 [vanilla]
