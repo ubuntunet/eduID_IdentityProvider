@@ -13,7 +13,7 @@ catalina_home: /usr/share/tomcat7
 catalina_base: /var/lib/tomcat7
 postgres_version: 9.3
 shibboleth_version: 3.2.1
-ldap_url: 192.168.33.10
+ldap_url: 192.168.33.11
 ldap_port: 389
 ldap_protocol: ldap
 # TODO - These should be kept secret

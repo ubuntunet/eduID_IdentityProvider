@@ -1,4 +1,5 @@
-  <EntitiesDescriptor Name="https://ubuntunet.net/metadata/ubuntunet.xml" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8"?>
+<EntitiesDescriptor Name="https://ubuntunet.net/metadata/ubuntunet.xml" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- An identity provider. -->
     <EntityDescriptor entityID="https://idp.ubuntunet.net/shibboleth">
@@ -71,9 +72,9 @@
           </ds:KeyInfo>
         </KeyDescriptor>
 
-        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://192.168.33.44:8443/idp/profile/SAML1/SOAP/AttributeQuery" />
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://192.168.33.44/idp/profile/SAML1/SOAP/AttributeQuery" />
 
-        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://192.168.33.44:8443/idp/profile/SAML2/SOAP/AttributeQuery" />
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://192.168.33.44/idp/profile/SAML2/SOAP/AttributeQuery" />
 
         <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
         <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
