@@ -1,0 +1,36 @@
+# 3. Apache HTTP Server installation
+- name: Install apache2
+  apt: pkg=apache2 update_cache=yes cache_valid_time=3600
+
+- name: Copy apache2 config file
+  template: >
+    src=templates/apache2.conf.j2
+    dest=/etc/apache2/sites-available/{{ fully_qualified_service_name }}.conf
+  notify: restart apache
+
+- name: Disable default configuration
+  command: a2dissite 000-default
+  notify: restart apache
+
+- name: Enable IdP configuration
+  command: a2ensite {{ fully_qualified_service_name }}
+  notify: restart apache
+
+- name: Copy TLS key
+  copy: > 
+    src=files/{{ fully_qualified_service_name }}.key 
+    dest={{ certificate_key_path }}
+    owner=root
+    group=ssl-cert
+    mode=0600
+  notify: restart apache
+
+- name: Copy TLS certificate
+  copy: > 
+    src=files/{{ fully_qualified_service_name }}.crt 
+    dest={{ certificate_cert_path }}
+  notify: restart apache
+
+- name: Enable SSL and AJP Proxy modules
+  command: a2enmod ssl proxy_ajp rewrite
+  notify: restart apache

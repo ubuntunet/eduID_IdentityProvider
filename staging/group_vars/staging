@@ -1,11 +1,11 @@
-home_organisation_name: ubuntunet.net
-ip_address: 192.168.33.44
+home_organisation_name: staging.ubuntunet.net
+ip_address: 104.155.65.222
 fully_qualified_service_name: idp.{{ home_organisation_name }}
 entity_id: https://{{ fully_qualified_service_name }}/shibboleth
-sp_entity_id: https://192.168.33.88/shibboleth
+sp_entity_id: https://130.211.57.98/shibboleth
 admin_email: idp@ubuntunet.net
 idp_home: /opt/shibboleth-idp
-metadata_url: https://192.168.33.44/metadata.xml
+metadata_url: https://{{ ip_address }}/metadata.xml
 certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
 certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
 tomcat_version: 7
@@ -13,7 +13,7 @@ catalina_home: /usr/share/tomcat7
 catalina_base: /var/lib/tomcat7
 postgres_version: 9.3
 shibboleth_version: 3.2.1
-ldap_url: 192.168.33.11
+ldap_url: 104.155.48.139
 ldap_port: 389
 ldap_protocol: ldap
 # TODO - These should be kept secret

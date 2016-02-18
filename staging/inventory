@@ -1,4 +1,4 @@
-gcloud_idp ansible_ssh_host=104.155.65.222 
+gcloud_idp ansible_ssh_host=104.155.68.99 
 
 [gcloud]
 gcloud_idp
