@@ -16,6 +16,3 @@ shibboleth_version: 3.2.1
 ldap_url: 192.168.33.11
 ldap_port: 389
 ldap_protocol: ldap
-# TODO - These should be kept secret
-ldap_bind_credential: jk66Wd8x
-persistent_id_salt: Ncy442acgPSTHX51KwZjSu56wgyn/xwTYRh+A738mXF3XfsK

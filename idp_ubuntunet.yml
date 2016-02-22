@@ -1,6 +1,8 @@
 - name: Install Shibboleth IdP v3 for UbuntuNet Alliance
   hosts: idp
-  become: True  
+  become: True
+  vars_files:
+    - secrets.yml
   roles:
     - webserver
     - db

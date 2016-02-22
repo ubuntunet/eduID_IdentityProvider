@@ -1,6 +1,8 @@
 *.crt
 *.key
 
+secrets.yml
+
 files/switch
 
 .vagrant
