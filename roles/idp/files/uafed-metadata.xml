@@ -2,7 +2,7 @@
 <EntitiesDescriptor Name="https://ubuntunet.net/metadata/ubuntunet.xml" xmlns="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <!-- An identity provider. -->
-    <EntityDescriptor entityID="https://idp.ubuntunet.net/shibboleth">
+    <EntityDescriptor entityID="https://{{ fqdn }}/shibboleth">
 
       <IDPSSODescriptor protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:2.0:protocol">
         <Extensions>
@@ -37,11 +37,11 @@
         <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
         <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
 
-        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://192.168.33.44/idp/profile/Shibboleth/SSO" />
+        <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://{{ fqdn }}/idp/profile/Shibboleth/SSO" />
 
-        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://192.168.33.44/idp/profile/SAML2/POST/SSO" />
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://{{ fqdn }}/idp/profile/SAML2/POST/SSO" />
 
-        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://192.168.33.44/idp/profile/SAML2/Redirect/SSO" />
+        <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://{{ fqdn }}/idp/profile/SAML2/Redirect/SSO" />
       </IDPSSODescriptor>
 
       <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
@@ -72,9 +72,9 @@
           </ds:KeyInfo>
         </KeyDescriptor>
 
-        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://192.168.33.44/idp/profile/SAML1/SOAP/AttributeQuery" />
+        <AttributeService Binding="urn:oasis:names:tc:SAML:1.0:bindings:SOAP-binding" Location="https://{{ fqdn }}/idp/profile/SAML1/SOAP/AttributeQuery" />
 
-        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://192.168.33.44/idp/profile/SAML2/SOAP/AttributeQuery" />
+        <AttributeService Binding="urn:oasis:names:tc:SAML:2.0:bindings:SOAP" Location="https://{{ fqdn }}/idp/profile/SAML2/SOAP/AttributeQuery" />
 
         <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
         <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
@@ -95,12 +95,12 @@
     </EntityDescriptor>
 
     <!-- A service provider. -->
-    <EntityDescriptor entityID="https://192.168.33.88/shibboleth">
+    <EntityDescriptor entityID="{{ sp_entity_id }}">
       <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol">
 
         <Extensions>
-          <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" index="1" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="http://192.168.33.88/Shibboleth.sso/Login"/>
-          <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" index="2" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://192.168.33.88/Shibboleth.sso/Login"/>
+          <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" index="1" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="http://{{ sp_fqdn }}/Shibboleth.sso/Login"/>
+          <idpdisc:DiscoveryResponse xmlns:idpdisc="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" index="2" Binding="urn:oasis:names:tc:SAML:profiles:SSO:idp-discovery-protocol" Location="https://{{ sp_fqdn }}/Shibboleth.sso/Login"/>
         </Extensions>
 
         <KeyDescriptor>
@@ -133,10 +133,10 @@
         <NameIDFormat>urn:mace:shibboleth:1.0:nameIdentifier</NameIDFormat>
 
         <AssertionConsumerService index="1" isDefault="true" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://192.168.33.88/Shibboleth.sso/SAML2/POST"/>
-        <AssertionConsumerService index="2" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://192.168.33.88/Shibboleth.sso/SAML2/POST-SimpleSign"/>
-        <AssertionConsumerService index="3" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://192.168.33.88/Shibboleth.sso/SAML2/Artifact"/>
-        <AssertionConsumerService index="4" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://192.168.33.88/Shibboleth.sso/SAML/POST"/>
-        <AssertionConsumerService index="5" Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://192.168.33.88/Shibboleth.sso/SAML/Artifact"/>
+        <AssertionConsumerService index="2" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://{{ sp_fqdn }}/Shibboleth.sso/SAML2/POST-SimpleSign"/>
+        <AssertionConsumerService index="3" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Artifact" Location="https://{{ sp_fqdn }}/Shibboleth.sso/SAML2/Artifact"/>
+        <AssertionConsumerService index="4" Binding="urn:oasis:names:tc:SAML:1.0:profiles:browser-post" Location="https://{{ sp_fqdn }}/Shibboleth.sso/SAML/POST"/>
+        <AssertionConsumerService index="5" Binding="urn:oasis:names:tc:SAML:1.0:profiles:artifact-01" Location="https://{{ sp_fqdn }}/Shibboleth.sso/SAML/Artifact"/>
 
       </SPSSODescriptor>
 
