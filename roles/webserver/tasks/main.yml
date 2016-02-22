@@ -5,7 +5,7 @@
 - name: Copy apache2 config file
   template: >
     src=templates/apache2.conf.j2
-    dest=/etc/apache2/sites-available/{{ fully_qualified_service_name }}.conf
+    dest=/etc/apache2/sites-available/{{ fqdn }}.conf
   notify: restart apache
 
 - name: Disable default configuration
@@ -13,12 +13,12 @@
   notify: restart apache
 
 - name: Enable IdP configuration
-  command: a2ensite {{ fully_qualified_service_name }}
+  command: a2ensite {{ fqdn }}
   notify: restart apache
 
 - name: Copy TLS key
   copy: > 
-    src=files/{{ fully_qualified_service_name }}.key 
+    src=files/{{ fqdn }}.key 
     dest={{ certificate_key_path }}
     owner=root
     group=ssl-cert
@@ -27,7 +27,7 @@
 
 - name: Copy TLS certificate
   copy: > 
-    src=files/{{ fully_qualified_service_name }}.crt 
+    src=files/{{ fqdn }}.crt 
     dest={{ certificate_cert_path }}
   notify: restart apache
 

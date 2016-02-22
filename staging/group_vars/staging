@@ -1,18 +1,17 @@
 home_organisation_name: staging.ubuntunet.net
-ip_address: 104.155.65.222
-fully_qualified_service_name: idp.{{ home_organisation_name }}
-entity_id: https://{{ fully_qualified_service_name }}/shibboleth
-sp_entity_id: https://130.211.57.98/shibboleth
+fqdn: staging.idp.ubuntunet.net
+entity_id: https://{{ fqdn }}/shibboleth
+sp_entity_id: https://staging.sp.ubuntunet.net/shibboleth
 admin_email: idp@ubuntunet.net
 idp_home: /opt/shibboleth-idp
-metadata_url: https://{{ ip_address }}/metadata.xml
-certificate_key_path: /etc/ssl/private/{{ fully_qualified_service_name }}.key
-certificate_cert_path: /etc/ssl/certs/{{ fully_qualified_service_name }}.crt
+metadata_url: https://{{ fqdn }}/metadata.xml
+certificate_key_path: /etc/ssl/private/{{ fqdn }}.key
+certificate_cert_path: /etc/ssl/certs/{{ fqdn }}.crt
 tomcat_version: 7
 catalina_home: /usr/share/tomcat7
 catalina_base: /var/lib/tomcat7
 postgres_version: 9.3
 shibboleth_version: 3.2.1
-ldap_url: 104.155.48.139
+ldap_url: staging.ldap.ubuntunet.net
 ldap_port: 389
 ldap_protocol: ldap
