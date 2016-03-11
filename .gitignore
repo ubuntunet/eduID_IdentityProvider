@@ -1,6 +1,8 @@
 *.crt
 *.key
 
+*.retry
+
 secrets.yml
 
 files/switch
