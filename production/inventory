@@ -1,0 +1,13 @@
+wingu_idp ansible_ssh_host=idp.ubuntunet.net
+
+[wingu]
+wingu_idp
+
+[wingu:vars]
+ansible_user=ubuntu
+
+[idp]
+wingu_idp
+
+[staging:children]
+idp
