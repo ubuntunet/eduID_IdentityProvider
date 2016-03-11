@@ -238,9 +238,9 @@
 
 
 - name: Copy UFed Metadata File #TODO: Refactor!
-  copy: > 
-    src=files/uafed-metadata.xml 
-    dest=/var/www/html/index.html
+  template: > 
+    src=templates/uafed-metadata.xml.j2
+    dest=/var/www/html/metadata.xml
   notify: restart apache
 
 
