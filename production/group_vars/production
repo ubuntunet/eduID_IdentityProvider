@@ -1,7 +1,7 @@
-home_organisation_name: staging.ubuntunet.net
-fqdn: staging.idp.ubuntunet.net
+home_organisation_name: ubuntunet.net
+fqdn: idp.ubuntunet.net
 entity_id: https://{{ fqdn }}/shibboleth
-sp_fqdn: staging.sp.ubuntunet.net
+sp_fqdn: sp.ubuntunet.net
 sp_entity_id: https://{{ sp_fqdn }}/shibboleth
 admin_email: idp@ubuntunet.net
 idp_home: /opt/shibboleth-idp
@@ -14,6 +14,6 @@ catalina_home: /usr/share/tomcat7
 catalina_base: /var/lib/tomcat7
 postgres_version: 9.3
 shibboleth_version: 3.2.1
-ldap_url: staging.ldap.ubuntunet.net
+ldap_url: ldap.ubuntunet.net
 ldap_port: 389
 ldap_protocol: ldap

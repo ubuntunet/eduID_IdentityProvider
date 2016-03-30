@@ -22,7 +22,7 @@
   SSLProtocol all -SSLv2 -SSLv3
   SSLCertificateKeyFile {{ certificate_key_path }}
   SSLCertificateFile {{ certificate_cert_path }}
-  SSLCertificateChainFile {{ certificate_cert_path }}
+  SSLCertificateChainFile {{ certificate_chain_path }}
 
   ProxyPass /idp ajp://localhost:8009/idp retry=5
   <Proxy ajp://localhost:8009>
