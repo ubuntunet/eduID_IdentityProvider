@@ -16,6 +16,24 @@
   command: a2ensite {{ fqdn }}
   notify: restart apache
 
+# 
+############ If Certificates exist? ##################################
+
+- name: Check if there is a website certificate locally
+  become: False
+  local_action:
+    module: stat
+    path: "roles/webserver/files/{{ fqdn }}.crt"
+  register: have_web_cert
+
+- name: Check if there is a website key locally
+  become: False
+  local_action:
+    module: stat
+    path: "roles/webserver/files/{{ fqdn }}.key"
+  register: have_web_key
+
+################## Then < Copy existing certificates to remote #######################
 - name: Copy TLS key
   copy: > 
     src=files/{{ fqdn }}.key 
@@ -23,13 +41,46 @@
     owner=root
     group=ssl-cert
     mode=0600
+  when: have_web_key.stat.exists == True
   notify: restart apache
 
 - name: Copy TLS certificate
   copy: > 
     src=files/{{ fqdn }}.crt 
     dest={{ certificate_cert_path }}
+  when: have_web_cert.stat.exists == True
   notify: restart apache
+
+############ Else > Create self-signed certificates ##################################
+- name: Copy Web certificate config file
+  template: >
+    src=web_cert.cnf.j2
+    dest=/tmp/web_cert.cnf
+  when: (have_web_cert.stat.exists == False) and (have_web_key.stat.exists == False)
+
+- name: Generate key and certificate
+  command: openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -config /tmp/web_cert.cnf -keyout {{ certificate_key_path }} -out {{ certificate_cert_path }}
+  when: (have_web_cert.stat.exists == False) and (have_web_key.stat.exists == False)
+
+- name: Tighten permission on key
+  file: > 
+    path={{ certificate_key_path }} 
+    owner=root
+    group=ssl-cert
+    mode=0600
+
+################## End Certificates #######################
+
+# - name: Add default ServerName
+#   template: >
+#     src=apache2_fqdn.conf.j2
+#     dest=/etc/apache2/conf-available/fqdn.conf
+#   notify: restart apache
+
+# - name: Enable default ServerName
+#   command: a2enconf fqdn
+#   notify: restart apache
+
 
 - name: Enable SSL and AJP Proxy modules
   command: a2enmod ssl proxy_ajp rewrite
