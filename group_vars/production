@@ -1,0 +1,11 @@
+fqdn: idp.ubuntunet.net
+entity_id: https://{{ fqdn }}/shibboleth
+home_organisation_name: ubuntunet.net
+federation: unida
+metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+sp_fqdn: sp.ubuntunet.net
+sp_entity_id: https://{{ sp_fqdn }}/shibboleth
+admin_email: idp@ubuntunet.net
+ldap_url: ldap.ubuntunet.net
+ldap_port: 389
+ldap_protocol: ldap

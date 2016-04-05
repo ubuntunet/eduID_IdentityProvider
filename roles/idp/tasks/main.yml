@@ -26,7 +26,7 @@
 
 - name: Copy customised install script
   template: >
-    src=templates/idp-install.sh.j2
+    src=idp-install.sh.j2
     dest=/usr/local/dist/idp-install.sh
     mode=0700
 
