@@ -1,6 +1,10 @@
-files/*.conf
-files/*.crt
-files/*.csr
-files/*.key
+*.crt
+*.key
+
+*.retry
+
+secrets.yml
+
+files/switch
 
 .vagrant

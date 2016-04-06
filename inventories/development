@@ -1,0 +1,24 @@
+vagrant_idp ansible_ssh_host=192.168.33.44  
+
+#vagrant_web ansible_ssh_host=127.0.0.1 ansible_port=2222
+#vagrant_app ansible_ssh_host=127.0.0.1 ansible_port=2200
+#vagrant_ldap ansible_ssh_host=127.0.0.1 ansible_port=2201
+
+[vagrant]
+vagrant_idp
+#vagrant_web
+#vagrant_app
+#vagrant_ldap
+
+[vagrant:vars]
+ansible_user=vagrant
+ansible_private_key_file=~/.vagrant.d/insecure_private_key
+
+[idp]
+vagrant_idp
+
+[ldap]
+vagrant_ldap
+
+[development:children]
+idp

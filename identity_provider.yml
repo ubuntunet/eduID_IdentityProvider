@@ -1,0 +1,21 @@
+- name: Install Shibboleth IdP v3 for UbuntuNet Alliance
+  hosts: idp
+  become: True
+  vars_files:
+    - secrets.yml
+  roles:
+    - webserver
+    - db
+    - appserver
+    - idp
+ 
+  handlers:
+    - name: restart apache
+      service: name=apache2 state=restarted
+
+    - name: restart tomcat
+      service: name=tomcat{{ tomcat_version }} state=restarted
+
+    - name: restart postgres
+      service: name=postgresql state=restarted
+

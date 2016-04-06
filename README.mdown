@@ -1,0 +1,30 @@
+Create a random vault password - Unless you haven't done so already
+```
+openssl rand -base64 32 > ~/.ansible_vault_pass
+```
+
+Copy, populate and encrypt secrets.yml
+```
+cp secrets.yml.example secrets.yml
+vi secrets.yml
+ansible-vault encrypt secrets.yml --vault-password-file ~/.ansible_vault_pass
+```
+
+Run the Playbook
+```
+ansible-playbook -i [development|staging] idp_ubuntunet.yml --vault-password-file ~/.ansible_vault_pass
+```
+
+Show the secret vars
+```
+ansible-vault view secrets.yml --vault-password-file ~/.ansible_vault_pass
+``
+
+Create a certificate for the webserver
+--------------------------------------
+
+For any productive webserver, we recommend using a certificate issued by a trusted CA. For testing and development, a self-signed certificate will do the job.
+
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout roles/webserver/files/{{ fqdn }}.key -out roles/webserver/files/{{ fqdn }}.crt
+

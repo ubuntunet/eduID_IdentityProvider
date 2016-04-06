@@ -1,0 +1,22 @@
+# 4. Java Servlet Container Installation
+
+# 4.1. Java runtime environment: OpenJDK 7
+# Replace with Oracle Java 
+- name: Install OpenJDK 7
+  apt: name=openjdk-7-jdk update_cache=yes cache_valid_time=3600
+
+# 4.2. Servlet container: Apache Tomcat 7
+- name: Install Tomcat 7
+  apt: name=tomcat{{ tomcat_version }} update_cache=yes cache_valid_time=3600
+
+- name: Copy Tomcat config file
+  copy: > 
+    src=files/tomcat.xml 
+    dest=/etc/tomcat{{ tomcat_version }}/server.xml
+  notify: restart tomcat
+
+- name: Adjust JAVA options
+  replace: >
+    dest=/etc/default/tomcat{{ tomcat_version }} 
+    regexp='JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:\+UseConcMarkSweepGC"' 
+    replace='JAVA_OPTS="-server -Xmx1024m -Djava.security.egd=file:/dev/./urandom"'

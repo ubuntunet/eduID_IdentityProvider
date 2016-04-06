@@ -1,0 +1,38 @@
+<VirtualHost *:80>
+  ServerName {{ fqdn }}
+  DocumentRoot /var/www/html
+
+  RewriteEngine on
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*) https://%{HTTP_HOST}/$1
+  
+</VirtualHost>
+
+<VirtualHost *:443>
+  ServerName {{ fqdn }}
+  ServerAdmin {{ admin_email }}
+  CustomLog /var/log/apache2/{{ fqdn }}.access.log combined
+  ErrorLog /var/log/apache2/{{ fqdn }}.error.log
+
+
+  DocumentRoot /var/www/html
+
+  SSLEngine On
+  SSLCipherSuite HIGH:MEDIUM:!aNULL:!kRSA:!MD5:!RC4
+  SSLProtocol all -SSLv2 -SSLv3
+  SSLCertificateKeyFile {{ certificate_key_path }}
+  SSLCertificateFile {{ certificate_cert_path }}
+  SSLCertificateChainFile {{ certificate_chain_path }}
+
+  ProxyPass /idp ajp://localhost:8009/idp retry=5
+  <Proxy ajp://localhost:8009>
+    Require all granted
+  </Proxy>
+
+  BrowserMatch "MSIE [2-6]" \
+      nokeepalive ssl-unclean-shutdown \
+      downgrade-1.0 force-response-1.0
+  # MSIE 7 and newer should be able to use keepalive
+  BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+
+</VirtualHost>
