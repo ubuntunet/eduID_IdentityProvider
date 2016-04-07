@@ -1,0 +1,6 @@
+# 6.6. Attribute resolution configuration
+
+- name: Copy Attribute Resolver based on LDAP
+  copy: >
+    src=attribute-resolver-ldap.xml
+    dest=/opt/shibboleth-idp/conf/attribute-resolver.xml

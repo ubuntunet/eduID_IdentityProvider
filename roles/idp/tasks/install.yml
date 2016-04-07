@@ -1,0 +1,36 @@
+# 1. Systems Requirememts
+- name: Install needed utility programs
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=36000
+  with_items:
+    - ntp
+    - unzip
+
+# 6. Shibboleth IdP
+
+# 6.1. IdP installation
+- name: Create download directory
+  file: >
+    path=/usr/local/dist
+    state=directory
+
+- name: Download Shibboleth IdP
+  get_url: > 
+    url=https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    dest=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+
+- name: Extract Shibboleth IdP
+  unarchive: > 
+    src=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz 
+    dest=/usr/local/dist
+    copy=no
+
+- name: Copy customised install script
+  template: >
+    src=idp-install.sh.j2
+    dest=/usr/local/dist/idp-install.sh
+    mode=0700
+
+
+- name: Install Shibboleth IdP
+  command: ./idp-install.sh chdir=/usr/local/dist
+

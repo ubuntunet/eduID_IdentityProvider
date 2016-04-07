@@ -1,0 +1,34 @@
+
+# 6.12. Hibernate ORM workaround for JPAStorageService
+
+- name: Create META-INF directory
+  file: >
+    path=/opt/shibboleth-idp/edit-webapp/WEB-INF/classes/META-INF
+    state=directory
+
+- name: Copy ORM workaround
+  copy: > 
+    src=files/orm.xml 
+    dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/classes/META-INF
+
+- name: Rebuild id.war
+  shell: "JAVACMD=/usr/bin/java /opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
+  notify: restart tomcat
+
+
+# 6.13. Web application enablement
+
+- name: Enable IdP Web application
+  copy: > 
+    src=files/idp.xml 
+    dest=/etc/tomcat7/Catalina/localhost/idp.xml
+  notify: restart tomcat
+
+
+# - name: Copy UFed Metadata File #TODO: Refactor!
+#   template: > 
+#     src=templates/uafed-metadata.xml.j2
+#     dest=/var/www/html/metadata.xml
+#   notify: restart apache
+
+
