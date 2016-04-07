@@ -106,14 +106,15 @@ bin/install.sh \
 
 mv credentials.properties $INSTALLDIR/conf
 
-echo -e "\nCreating self-signed certificate..."
-bin/keygen.sh --lifetime 3 \
---certfile $INSTALLDIR/credentials/idp.crt \
---keyfile $INSTALLDIR/credentials/idp.key \
---hostname $SVCNAME \
---uriAltName https://$SVCNAME/idp/shibboleth
-echo ...done
-chmod 600 $INSTALLDIR/credentials/idp.key
+# Signing Certificates are being created in a separate Ansible Task
+# echo -e "\nCreating self-signed certificate..."
+# bin/keygen.sh --lifetime 3 \
+# --certfile $INSTALLDIR/credentials/idp.crt \
+# --keyfile $INSTALLDIR/credentials/idp.key \
+# --hostname $SVCNAME \
+# --uriAltName https://$SVCNAME/idp/shibboleth
+# echo ...done
+# chmod 600 $INSTALLDIR/credentials/idp.key
 
 # adapt owner of key file and directories
 getent passwd tomcat7 >/dev/null && TCUSER=tomcat7 || TCUSER=tomcat

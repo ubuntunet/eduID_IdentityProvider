@@ -30,7 +30,23 @@
     dest=/usr/local/dist/idp-install.sh
     mode=0700
 
+- name: Create self-signed certificate - if it doesn't exist already
+  command: /usr/local/dist/bin/keygen.sh --lifetime 3 \
+    --certfile {{ idp_home }}/credentials/idp.crt \
+    --keyfile {{ idp_home }}/credentials/idp.key \
+    --hostname {{ fqdn }} \
+    --uriAltName https://{{ fqdn }}/idp/shibboleth
+  args:
+    creates: {{ idp_home }}/credentials/idp.key
+
+- name: Tighten access to signing key
+  file: path={{ idp_home }}/credentials/idp.key mode=0600
+
+- name: Copy certificate to this machine
+  fetch: >
+    src={{ idp_home }}/credentials/idp.crt 
+    dest=roles/idp/files/{{ fqdn }}_idp.crt 
+    flat=yes
 
 - name: Install Shibboleth IdP
   command: ./idp-install.sh chdir=/usr/local/dist
-
