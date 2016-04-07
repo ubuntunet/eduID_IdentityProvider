@@ -49,8 +49,8 @@
 
     <MetadataProvider id="HTTPMetadata"
                       xsi:type="FileBackedHTTPMetadataProvider"
-                      backingFile="{{ idp_home }}/metadata/sp_dev-metadata.xml"
                       metadataURL="{{ metadata_url }}"
+                      backingFile="{{ idp_home }}/metadata/{{ metadata_file }}"
                       disregardTLSCertificate="true"/>
     
     <!--
@@ -64,7 +64,7 @@
             <RetainedRole>md:SPSSODescriptor</RetainedRole>
         </MetadataFilter>
     -->
-    </MetadataProvider>
+    <!-- </MetadataProvider> -->
 
     <!--
     Example file metadata provider.  Use this if you want to load metadata
