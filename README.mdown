@@ -1,12 +1,35 @@
+# Ansible Playbook for Shibboleth Identity Provider
+
+## Setup and Provision locally with Vagrant/Virtualbox
+
+```
+vagrant up
+vagrant provision
+```
+
+## Copy & populate secrets.yml
+
+```
+cp secrets.yml.example secrets.yml
+vi secrets.yml
+```
+
+## Create random passwords to use in secrets.yml
+
+```
+openssl rand -base64 32
+```
+
+
+## Ansible Vault for added security
+
 Create a random vault password - Unless you haven't done so already
 ```
 openssl rand -base64 32 > ~/.ansible_vault_pass
 ```
-
 Copy, populate and encrypt secrets.yml
+
 ```
-cp secrets.yml.example secrets.yml
-vi secrets.yml
 ansible-vault encrypt secrets.yml --vault-password-file ~/.ansible_vault_pass
 ```
 
@@ -21,7 +44,6 @@ ansible-vault view secrets.yml --vault-password-file ~/.ansible_vault_pass
 ``
 
 Create a certificate for the webserver
---------------------------------------
 
 For any productive webserver, we recommend using a certificate issued by a trusted CA. For testing and development, a self-signed certificate will do the job.
 
