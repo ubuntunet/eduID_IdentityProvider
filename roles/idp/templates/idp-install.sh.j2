@@ -9,19 +9,24 @@ set -e
 trap 'echo "
 ERROR: command execution failed, see above. Aborting."' ERR
 
-INSTALLDIR=/opt/shibboleth-idp
+INSTALLDIR={{ idp_home }}
 SCOPE={{ home_organisation_name }}
 SVCNAME={{ fqdn }}
+TCUSER={{ tomcat_user }}
 
 
 if [ -d $INSTALLDIR ]; then
   rm -rf $INSTALLDIR
 fi
 
-# if [ $(id -u) -ne 0 ]; then
-#   echo "Must be run with root privileges. Aborting."
-#   exit 1
-# fi
+if [ $(id -u) -ne 0 ]; then
+  echo "Must be run with root privileges. Aborting."
+  exit 1
+fi
+
+mkdir $INSTALLDIR
+mkdir $INSTALLDIR/{bin,dist,doc,system,webapp}
+
 
 # if [ $# -ne 1 ]; then
 #   echo "Mandatory argument (IdP distribution directory) is missing. Aborting."
@@ -83,6 +88,7 @@ idp.entityID= {{ entity_id }}
 # idp.entityID= https://$SVCNAME/idp/shibboleth
 idp.scope= $SCOPE
 idp.consent.StorageService= shibboleth.JPAStorageService
+# idp.consent.StorageService= shibboleth.StorageService
 idp.consent.userStorageKey= shibboleth.consent.AttributeConsentStorageKey
 idp.consent.userStorageKeyAttribute= %{idp.persistentId.sourceAttribute}
 idp.consent.allowGlobal= false
@@ -117,8 +123,8 @@ mv credentials.properties $INSTALLDIR/conf
 # chmod 600 $INSTALLDIR/credentials/idp.key
 
 # adapt owner of key file and directories
-getent passwd tomcat7 >/dev/null && TCUSER=tomcat7 || TCUSER=tomcat
-chown $TCUSER $INSTALLDIR/credentials/{idp.key,sealer.*}
+# getent passwd tomcat7 >/dev/null && TCUSER=tomcat7 || TCUSER=tomcat
+#chown $TCUSER $INSTALLDIR/credentials/{idp.key,sealer.*}
 chown $TCUSER $INSTALLDIR/{metadata,logs}
 chown $TCUSER $INSTALLDIR/conf/credentials.properties
 
