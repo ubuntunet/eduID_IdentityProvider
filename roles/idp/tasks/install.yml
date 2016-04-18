@@ -43,60 +43,79 @@
     dest=roles/idp/files/{{ fqdn }}_idp.key
     flat=yes
 
-# Run Installation Script
 
-- name: Install Shibboleth IdP
-  command: ./idp-install.sh chdir=/usr/local/dist
-
-  # Certificates
-
-
+# Signing Certificates
 ############ If Certificates exist? ##################################
 
-- name: Check if there is a website certificate locally
+- name: Check if there is a signing certificate locally
   become: False
   local_action:
     module: stat
     path: "roles/idp/files/{{ fqdn }}_idp.crt"
   register: have_sign_cert
 
-- name: Check if there is a website key locally
+- name: Check if there is a signing key locally
   become: False
   local_action:
     module: stat
     path: "roles/idp/files/{{ fqdn }}_idp.key"
   register: have_sign_key
 
+# Run Installation Script
+
+- name: Install Shibboleth IdP
+  command: ./idp-install.sh chdir=/usr/local/dist
+  ignore_errors: yes
+
+
 ################## Then < Copy existing certificates to remote #######################
-- name: Copy TLS key
+- name: Copy signing key
   copy: > 
     src={{ fqdn }}_idp.key 
-    dest={{ certificate_key_path }}
+    dest={{ idp_home }}/credentials/idp.key
   when: have_sign_key.stat.exists == True
 
-- name: Copy TLS certificate
+- name: Copy signing certificate
   copy: > 
     src={{ fqdn }}_idp.crt
-    dest={{ certificate_cert_path }}
+    dest={{ idp_home }}/credentials/idp.crt
   when: have_sign_cert.stat.exists == True
 
 ############ Else > Create self-signed certificates ##################################
 
 
-- name: Create self-signed certificate - if it doesn't exist already
-  command: /usr/local/dist/bin/keygen.sh --lifetime 3 \
+- name: Create signing certificate and key - if it doesn't exist already
+  command: /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}/bin/keygen.sh --lifetime 3 \
     --certfile {{ idp_home }}/credentials/idp.crt \
     --keyfile {{ idp_home }}/credentials/idp.key \
     --hostname {{ fqdn }} \
-    --uriAltName https://{{ fqdn }}/idp/shibboleth
-  args:
-    creates: "{{ idp_home }}/credentials/idp.key"
+    --uriAltName https://{{ fqdn }}/idp/shibboleth  
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 - name: Tighten access to signing key
   file: path={{ idp_home }}/credentials/idp.key mode=0600
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
-- name: Copy certificate to this machine
+- name: Copy signing certificate to this machine
   fetch: >
     src={{ idp_home }}/credentials/idp.crt 
     dest=roles/idp/files/{{ fqdn }}_idp.crt 
     flat=yes
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+- name: Copy signing key to this machine, if it exists
+  fetch: >
+    src={{ idp_home }}/credentials/idp.key 
+    dest=roles/idp/files/{{ fqdn }}_idp.key
+    flat=yes
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+
+- name: Hand ownership to Tomcat user
+  file: >
+    path={{ idp_home }}
+    owner={{ tomcat_user }}
+    recurse=yes
+
