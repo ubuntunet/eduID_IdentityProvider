@@ -72,6 +72,21 @@
     <!-- ========================================== -->
 
     <!--
+    Example Static Connector
+    -->
+    <resolver:DataConnector id="staticEntitlements" xsi:type="dc:Static"
+                            xmlns="urn:mace:shibboleth:2.0:resolver:dc">
+        <Attribute id="eduPersonEntitlement">
+            <Value>urn:mace:dir:entitlement:common-lib-terms</Value>
+            <Value>urn:example.org:permissions:portal</Value>
+        </Attribute>
+        <Attribute id="eduPersonAffiliation">
+            <Value>member</Value>
+        </Attribute>        
+    </resolver:DataConnector>
+
+
+    <!--
     Example LDAP Connector
 
     The connectivity details can be specified in ldap.properties to
