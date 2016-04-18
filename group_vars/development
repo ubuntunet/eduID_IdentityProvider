@@ -1,7 +1,7 @@
 fqdn: 192.168.33.44
-entity_id: https://{{ fqdn }}
+entity_id: https://{{ fqdn }}/shibboleth
 home_organisation_name: ubuntunet.net
-federation: unida
+federation: unida-test
 admin_email: idp@ubuntunet.net
 metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
