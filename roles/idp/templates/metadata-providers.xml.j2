@@ -40,7 +40,7 @@
                       xsi:type="FileBackedHTTPMetadataProvider"
                       metadataURL="{{ metadata_url }}"
                       backingFile="{{ idp_home }}/metadata/{{ metadata_file }}"
-                      disregardTLSCertificate="false">
+                      disregardTLSCertificate="{{ disregard_tsl_certificate }}">
     
         <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P30D"/>
         <!--
