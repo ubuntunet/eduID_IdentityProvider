@@ -64,12 +64,6 @@
     src=templates/metadata-providers.xml.j2 
     dest=/opt/shibboleth-idp/conf/metadata-providers.xml
 
-# - name: Copy static metadata file for an sp
-#   copy: >
-#     src=files/sp_dev-metadata.xml 
-#     dest=/opt/shibboleth-idp/metadata
-#     owner=tomcat7
-
 
 - name: Download Metadata Backup File from RR 
   get_url: > 
@@ -80,5 +74,5 @@
 
 
 # 6.4. Relying party configuration
-# SWITCH recommends to keep the default IdP v3
+# It is recommended to keep the default IdP v3
 
