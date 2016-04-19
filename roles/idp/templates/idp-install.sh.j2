@@ -10,7 +10,7 @@ trap 'echo "
 ERROR: command execution failed, see above. Aborting."' ERR
 
 INSTALLDIR={{ idp_home }}
-SCOPE={{ home_organisation_name }}
+SCOPE={{ idp_name }}
 SVCNAME={{ fqdn }}
 TCUSER={{ tomcat_user }}
 
@@ -49,7 +49,7 @@ cd /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}
 
 
 # while [ "$ANS" != "yes" ]; do
-#   DFLT={{ home_organisation_name }}
+#   DFLT={{ idp_name }}
 #   read -p "Please enter the name of your home organization [$DFLT]: " SCOPE
 #   SCOPE=${SCOPE:-$DFLT}
 
