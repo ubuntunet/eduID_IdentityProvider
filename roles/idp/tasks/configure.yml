@@ -50,8 +50,14 @@
 
 - name: Copy IdP properties
   template: >
-    src=templates/idp.properties.j2
+    src=idp.properties.j2
     dest=/opt/shibboleth-idp/conf/idp.properties
+
+- name: Copy IdP metadata.xml
+  template: >
+    src=idp-metadata.xml.j2
+    dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
+
 
 # - name: Insert Metadata Reference
 #   lineinfile: >
@@ -59,9 +65,9 @@
 #     insertafter=EOF
 #     line="idp.metadata = switchaai, interfederation"
 
-- name: Copy Generic metadata providers
+- name: Copy metadata providers
   template: > 
-    src=templates/metadata-providers.xml.j2 
+    src=metadata-providers.xml.j2 
     dest=/opt/shibboleth-idp/conf/metadata-providers.xml
 
 
@@ -70,6 +76,7 @@
     url={{ metadata_url }}
     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
     owner=tomcat7
+    validate_certs=no
   notify: restart tomcat
 
 
