@@ -11,7 +11,7 @@
 
 - name: Copy logo
   copy: >
-    src=ualogo.png 
+    src= {{ idp_logo }}
     dest=/opt/shibboleth-idp/webapp/images/
 
 
