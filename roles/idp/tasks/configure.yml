@@ -74,9 +74,9 @@
 - name: Download Metadata Backup File from RR 
   get_url: > 
     url={{ metadata_url }}
+    validate_certs=no
     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
     owner=tomcat7
-    validate_certs=no
   notify: restart tomcat
 
 
