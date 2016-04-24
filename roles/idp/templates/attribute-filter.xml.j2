@@ -35,7 +35,7 @@
 
     <!-- Release displayName to two specific SPs -->
     <!-- 
-    <AttributeFilterPolicy id="example1">
+    <AttributeFilterPolicy id="releaseToMultipleSPs">
         <PolicyRequirementRule xsi:type="OR">
             <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
             <Rule xsi:type="Requester" value="https://crm.example.net/shibboleth" />
@@ -49,14 +49,30 @@
 
     <!-- Release displayName to any SP in your federation -->
     <!-- 
-    <AttributeFilterPolicy id="example2">
-        <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
+    <AttributeFilterPolicy id="releaseToAnySpInYourFederation">
+      <PolicyRequirementRule
+         xsi:type="InEntityGroup"
+         groupID="unida-test.ubuntunet.net"/>
 
         <AttributeRule attributeID="displayName">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
     </AttributeFilterPolicy>
     -->
+
+
+    <!-- Release displayName to anyone NOT RECOMMENDED -->
+    <!-- 
+    <AttributeFilterPolicy id="releaseToAnyone">
+     
+      <PolicyRequirementRule xsi:type="ANY"/>
+     
+      <AttributeRule attributeID="displayName">
+        <PermitValueRule xsi:type="ANY"/>
+      </AttributeRule>
+    </AttributeFilterPolicy>
+    -->
+
 
 
 </AttributeFilterPolicyGroup>
