@@ -29,17 +29,4 @@
     </AttributeFilterPolicy>
 
 
-
-    <!-- Release eduPersonAffiliation to two specific SPs. -->
-    <AttributeFilterPolicy id="example2">
-        <PolicyRequirementRule xsi:type="OR">
-            <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
-            <Rule xsi:type="Requester" value="https://another.example.org/shibboleth" />
-        </PolicyRequirementRule>
-
-        <AttributeRule attributeID="eduPersonScopedAffiliation">
-            <PermitValueRule xsi:type="ANY" />
-        </AttributeRule>
-    </AttributeFilterPolicy>
-
 </AttributeFilterPolicyGroup>
