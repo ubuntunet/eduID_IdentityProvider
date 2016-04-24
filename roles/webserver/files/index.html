@@ -68,6 +68,16 @@
         Now you need to add the AttributeDefinition for the homeOrganization. The id is <code>urn:oid:1.3.6.1.4.1.25178.1.2.9</code> and the ref value is the id you have chosen above in the connector.
       </p>
 
+      <h2>LDAP properties</h2>      
+
+      <p>
+        One last thing to keep in mind is the fact that each new attribute has to be added as one to be returned by the LDAP data connector. This is being done by adding it to the <code>idp.attribute.resolver.LDAP.returnAttributes</code> in the <code>/roles/idp/templates/ldap.properties.j2</code> file.
+      </p>
+
+      <p>
+        Propagate the attribute <code>schacGender</code> (urn:oid:1.3.6.1.4.1.25178.1.2.2) all the way from the LDAP to be shown in the SP.
+        </p>
+
 
       <h2>Solution</h2>
 
