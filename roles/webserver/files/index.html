@@ -1,66 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>IdP Task 1 - Attribute Release/Filtering</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>IdP Task 2 - Attribute Resolving</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+    <div class="container">
 
 
-<h1>Task 1 - Attribute Release/Filtering</h1>
 
-<p>
-  In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
-</p>
+      <h1>Task 1 - Attribute Release/Filtering</h1>
 
-<p>
-  You can find detailed information about Attribute Filtering in the Shibboleth Wiki:<br />
-  https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration<br />
-  https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter
-</p>
+      <p>
+        In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
+      </p>
 
-<p>
-  Don't forget to clear any browser session between every new try.
-</p>
+      <p>
+        You can find detailed information about Attribute Filtering in the Shibboleth Wiki:<br />
+        <a href="https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration">https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration</a><br />
+        <a href="https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter">https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter</a>
+      </p>
 
-<h2>Release the displayName attribute to your SP</h2>
+      <p>
+        Don't forget to clear any browser session between every new try.
+      </p>
 
-<ul>
-  <li>
-    <p>Checkout the branch for Task 1 from your Git Repository using your Git client or on the command line:</p>
-    <code>git checkout Task1_Attribute_Filtering</code>
-  </li>
+      <h2>Release the displayName attribute to your SP</h2>
 
-  <li>
-    <p>
-    Have a look in <code>roles/idp/templates/attribute-filter.xml.j2</code>, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
-    </p>
-  </li>
+      <ul>
+        <li>
+          <p>Checkout the branch for Task 1 from your Git Repository using your Git client or on the command line:</p>
+          <code>git checkout Task1_Attribute_Filtering</code>
+        </li>
 
-  <li>
-    <p>
-    Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
-    </p>
-  </li>
-</ul>
+        <li>
+          <p>
+          Have a look in <code>roles/idp/templates/attribute-filter.xml.j2</code>, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
+          </p>
+        </li>
 
-
-<h2>Extras</h2>
-
-<ul>
-  <li>How would change the policy to additionally release the attribute to the SP with the entityId <code>https://crm.example.net/shibboleth</code>?</li>
-  <li>
-    How would you reformulate the same policy so that it gets released to all SP in your Federation?<br />
-    Hint: Have a look at the options for <code>PolicyRequirementRule</code>
-  </li>
-  <li>How to release to anybody asking for it?</li>
-</ul>
+        <li>
+          <p>
+          Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
+          </p>
+        </li>
+      </ul>
 
 
-<p>If you can't work out the solution, you can checkout Task 2 and have a look at the attribute-filter.xml.j2 file</p>
-<code>
-  git checkout Task2_Attribute_Resolving
-  vi roles/idp/templates/attribute-filter.xml.j2
-</code>
+      <h2>Extras</h2>
 
-</body>
+      <ul>
+        <li>How would change the policy to additionally release the attribute to the SP with the entityId <code>https://crm.example.net/shibboleth</code>?</li>
+        <li>
+          How would you reformulate the same policy so that it gets released to all SP in your Federation?<br />
+          Hint: Have a look at the options for <code>PolicyRequirementRule</code>
+        </li>
+        <li>How to release to anybody asking for it?</li>
+      </ul>
+
+
+      <p>
+        If you can't work out the solution, you can checkout Task 2 and have a look at the attribute-filter.xml.j2 file
+      </p>
+      <code>
+        git checkout Task2_Attribute_Resolving<br />
+        vi roles/idp/templates/attribute-filter.xml.j2
+      </code>
+    </div>
+
+  </body>
 </html>
