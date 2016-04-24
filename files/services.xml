@@ -114,7 +114,6 @@
 <!-- 
         <value>%{idp.home}/conf/attribute-resolver-ldap.xml</value>
         <value>%{idp.home}/conf/attribute-resolver-full.xml</value>
-        <value>%{idp.home}/conf/attribute-resolver-switchaai-core.xml</value>
         <value>%{idp.home}/conf/attribute-resolver-interfederation-core.xml</value>
         <value>%{idp.home}/conf/attribute-resolver-connectors.xml</value>
         <value>%{idp.home}/conf/attribute-resolver-other.xml</value>
