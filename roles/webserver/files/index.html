@@ -34,7 +34,7 @@
 
       <p>
         You can find detailed information about Attribute Filtering in the Shibboleth Wiki:
-        https://wiki.shibboleth.net/confluence/display/IDP30/AttributeResolverConfiguration
+        <a href="https://wiki.shibboleth.net/confluence/display/IDP30/AttributeResolverConfiguration">https://wiki.shibboleth.net/confluence/display/IDP30/AttributeResolverConfiguration</a>
       </p>
 
       <p>
@@ -46,7 +46,7 @@
       <h2>Task 2 - Resolve and release the givenName attribute to your SP</h2>
 
       <p>
-        Have a look at roles.idp/templates/attribute-resolver.xml.j2. You will see entries for 4 attributes, one of them the displayName that you released in the first task. And right at the end of file you will see the connector to the data source (LDAP in our case) defined. 
+        Have a look at <code>roles.idp/templates/attribute-resolver.xml.j2</code>. You will see entries for 4 attributes, one of them the displayName that you released in the first task. And right at the end of file you will see the connector to the data source (LDAP in our case) defined. 
       </p>
 
       <p>
@@ -83,7 +83,7 @@
 
       <p>If you can't work out the solution, you can checkout Task 3 and have a look at the attribute-resolver.xml.j2 file</p>
       <code>
-        git checkout Task3_LDAP_Properties
+        git checkout Task3_LDAP_Properties<br />
         vi roles/idp/templates/attribute-filter.xml.j2
       </code>
     </div>
