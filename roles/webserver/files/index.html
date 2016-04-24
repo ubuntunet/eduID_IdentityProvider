@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdP Task 1 - Attribute Filtering</title>
+  <title>IdP Task 1 - Attribute Release/Filtering</title>
 </head>
 <body>
 
-<h2>Task 1 - Release the displayName attribute to your SP</h2>
+
+<h1>Task 1 - Attribute Release/Filtering</h1>
+
+<p>
+  In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
+</p>
+
+<p>
+  You can find detailed information about Attribute Filtering in the Shibboleth Wiki:<br />
+  https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration<br />
+  https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter
+</p>
+
+<p>
+  Don't forget to clear any browser session between every new try.
+</p>
+
+<h2>Release the displayName attribute to your SP</h2>
 
 <ul>
   <li>
@@ -15,13 +32,7 @@
 
   <li>
     <p>
-    In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
-    </p>
-  </li>
-
-  <li>
-    <p>
-    Have a look in attribute-filter.xml.j2, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
+    Have a look in <code>roles/idp/templates/attribute-filter.xml.j2</code>, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
     </p>
   </li>
 
@@ -33,15 +44,15 @@
 </ul>
 
 
+<h2>Extras</h2>
 
-<p>
-You can find detailed information about Attribute Filtering in the Shibboleth Wiki:
-https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter
-</p>
-
-<p>
-Don't forget to clear any browser session between every new try.
-</p>
+<ul>
+  <li>How would change the policy to additionally release the attribute to the SP with the entityId <code>https://crm.example.net/shibboleth</code>?</li>
+  <li>
+    How would you reformulate the same policy so that it gets released to all SP in your Federation?<br />
+    Hint: Have a look at the options for <code>PolicyRequirementRule</code>
+  </li>
+</ul>
 
 
 <p>If you can't work out the solution, you can checkout Task 2 and have a look at the attribute-filter.xml.j2 file</p>
