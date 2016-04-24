@@ -33,17 +33,30 @@
     </AttributeFilterPolicy>
 
 
-
-    <!-- Release eduPersonAffiliation to two specific SPs. -->
-    <AttributeFilterPolicy id="example2">
+    <!-- Release displayName to two specific SPs -->
+    <!-- 
+    <AttributeFilterPolicy id="example1">
         <PolicyRequirementRule xsi:type="OR">
             <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
-            <Rule xsi:type="Requester" value="https://another.example.org/shibboleth" />
+            <Rule xsi:type="Requester" value="https://crm.example.net/shibboleth" />
         </PolicyRequirementRule>
 
-        <AttributeRule attributeID="eduPersonScopedAffiliation">
+        <AttributeRule attributeID="displayName">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
     </AttributeFilterPolicy>
+    -->
+
+    <!-- Release displayName to any SP in your federation -->
+    <!-- 
+    <AttributeFilterPolicy id="example2">
+        <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
+
+        <AttributeRule attributeID="displayName">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+    </AttributeFilterPolicy>
+    -->
+
 
 </AttributeFilterPolicyGroup>
