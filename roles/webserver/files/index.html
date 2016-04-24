@@ -7,17 +7,32 @@
 
 <h2>Task 1 - Release the displayName attribute to your SP</h2>
 
-<p>
-In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
-</p>
+<ul>
+  <li>
+    <p>Checkout the branch for Task 1 from your Git Repository using your Git client or on the command line:</p>
+    <code>git checkout Task1_Attribute_Filtering</code>
+  </li>
 
-<p>
-Have a look in attribute-filter.xml.j2, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
-</p>
+  <li>
+    <p>
+    In order for the Identity Provider to release an attribute, a filter needs to be defined with the ID of the attribute and for which service(s) the attribute is released.
+    </p>
+  </li>
 
-<p>
-Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
-</p>
+  <li>
+    <p>
+    Have a look in attribute-filter.xml.j2, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
+    </p>
+  </li>
+
+  <li>
+    <p>
+    Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
+    </p>
+  </li>
+</ul>
+
+
 
 <p>
 You can find detailed information about Attribute Filtering in the Shibboleth Wiki:

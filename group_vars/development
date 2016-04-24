@@ -8,8 +8,8 @@ idp_logo: ualogo.png
 admin_email: idp@ubuntunet.net
 
 federation: unida-test
-metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-#metadata_url: https://192.168.33.99/metadata/federation/{{ federation }}/metadata.xml
+#metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://192.168.33.99/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: true
 
