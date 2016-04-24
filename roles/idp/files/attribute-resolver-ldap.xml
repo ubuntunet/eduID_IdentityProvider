@@ -60,6 +60,12 @@
     </resolver:AttributeDefinition>
 
 
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="displayName" sourceAttributeID="displayName">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:2.16.840.1.113730.3.1.241" friendlyName="displayName" encodeType="false" />
+    </resolver:AttributeDefinition>
+
+
 
     <!-- ========================================== -->
     <!--      Data Connectors                       -->
