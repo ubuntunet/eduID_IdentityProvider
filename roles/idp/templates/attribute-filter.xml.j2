@@ -14,19 +14,6 @@
         xsi:schemaLocation="urn:mace:shibboleth:2.0:afp http://shibboleth.net/schema/idp/shibboleth-afp.xsd">
 
 
-
-    <!-- Release eduPersonAffiliation to anyone. -->
-<!-- 
-    <AttributeFilterPolicy id="releaseToAnyone">     
-        <PolicyRequirementRule xsi:type="ANY" />
-
-        <AttributeRule attributeID="eduPersonAffiliation">
-            <PermitValueRule xsi:type="ANY" />
-        </AttributeRule>
-
-    </AttributeFilterPolicy>
- -->
-
     <!-- Release some attributes to an SP. -->
     <AttributeFilterPolicy id="release_to_one_sp">
         <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
@@ -35,14 +22,13 @@
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
-        <AttributeRule attributeID="uid">
-            <PermitValueRule xsi:type="ANY" />
-        </AttributeRule>
-
         <AttributeRule attributeID="mail">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
+
     </AttributeFilterPolicy>
+
+
 
     <!-- Release eduPersonAffiliation to two specific SPs. -->
     <AttributeFilterPolicy id="example2">
