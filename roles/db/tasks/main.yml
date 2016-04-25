@@ -50,3 +50,5 @@
     group=postgres
     mode=0700
 
+# TODO - Add cron job for backups
+

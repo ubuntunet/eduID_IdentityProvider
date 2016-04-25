@@ -10,6 +10,7 @@ vagrant provision
 ## Copy & populate secrets.yml
 
 ```
+cd group_vars
 cp secrets.yml.example secrets.yml
 vi secrets.yml
 ```
@@ -30,7 +31,7 @@ openssl rand -base64 32 > ~/.ansible_vault_pass
 Copy, populate and encrypt secrets.yml
 
 ```
-ansible-vault encrypt secrets.yml --vault-password-file ~/.ansible_vault_pass
+ansible-vault encrypt group_vars/secrets.yml --vault-password-file ~/.ansible_vault_pass
 ```
 
 Run the Playbook
@@ -40,7 +41,7 @@ ansible-playbook -i [development|staging] idp_ubuntunet.yml --vault-password-fil
 
 Show the secret vars
 ```
-ansible-vault view secrets.yml --vault-password-file ~/.ansible_vault_pass
+ansible-vault view group_vars/secrets.yml --vault-password-file ~/.ansible_vault_pass
 ``
 
 Create a certificate for the webserver

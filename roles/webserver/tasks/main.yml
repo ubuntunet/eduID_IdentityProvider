@@ -70,10 +70,12 @@
 
 ################## End Certificates #######################
 
-
 - name: Enable SSL and AJP Proxy modules
   command: a2enmod ssl proxy_ajp rewrite
   notify: restart apache
+
+
+################## Training Stuff #######################
 
 
 - name: Copy index with tasks
@@ -81,4 +83,10 @@
     src=index.html
     dest=/var/www/html/index.html
   notify: restart apache
+
+- name: Copy hands-on pic
+  copy: >
+    src=hands-on.png
+    dest=/var/www/html/hands-on.png
+
 
