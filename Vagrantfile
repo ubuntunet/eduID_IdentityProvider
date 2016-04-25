@@ -16,8 +16,7 @@ Vagrant.configure(2) do |config|
   config.vm.define "vagrant_idp" do |idp|
     idp.vm.box = "ubuntu/trusty64"
     idp.vm.network "private_network", ip: "192.168.33.44"
-    # idp.vm.network "forwarded_port", guest: 80, host: 8080
-    # idp.vm.network "forwarded_port", guest: 443, host: 8443
+    idp.vm.network :forwarded_port, guest: 22, host: 2244, id: 'ssh'
   end
 
   config.vm.provision "ansible" do |ansible|

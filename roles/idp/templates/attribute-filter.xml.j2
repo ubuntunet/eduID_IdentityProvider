@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This file is an EXAMPLE policy file.  While the policy presented in this
-    example file is illustrative of some simple cases, it relies on the names of
-    non-existent example services and the example attributes demonstrated in the
-    default attribute-resolver.xml file.
-
-    Deployers should refer to the documentation for a complete list of components
-    and their options.
+  Deployers should refer to the documentation for a complete list of components
+  and their options.
+  https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration
+  https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter
 -->
 <AttributeFilterPolicyGroup id="ShibbolethFilterPolicy"
         xmlns="urn:mace:shibboleth:2.0:afp"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="urn:mace:shibboleth:2.0:afp http://shibboleth.net/schema/idp/shibboleth-afp.xsd">
 
+
     <!-- Release some attributes to an SP. -->
-    <AttributeFilterPolicy id="example1">
-        <PolicyRequirementRule xsi:type="Requester" value="https://sp.example.org" />
+    <AttributeFilterPolicy id="release_to_one_sp">
+        <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
 
         <AttributeRule attributeID="eduPersonPrincipalName">
-            <PermitValueRule xsi:type="ANY" />
-        </AttributeRule>
-
-        <AttributeRule attributeID="uid">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
 
         <AttributeRule attributeID="mail">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
+
+        <AttributeRule attributeID="displayName">
+          <PermitValueRule xsi:type="ANY"/>
+        </AttributeRule>
+<!-- 
+        <AttributeRule attributeID="schacGender">
+          <PermitValueRule xsi:type="ANY"/>
+        </AttributeRule>
+ -->
     </AttributeFilterPolicy>
 
-    <!-- Release eduPersonAffiliation to two specific SPs. -->
-    <AttributeFilterPolicy id="example2">
+
+    <!-- Release displayName to two specific SPs -->
+    <!-- 
+    <AttributeFilterPolicy id="releaseToMultipleSPs">
         <PolicyRequirementRule xsi:type="OR">
-            <Rule xsi:type="Requester" value="https://sp.example.org" />
-            <Rule xsi:type="Requester" value="https://another.example.org/shibboleth" />
+            <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
+            <Rule xsi:type="Requester" value="https://crm.example.net/shibboleth" />
         </PolicyRequirementRule>
 
-        <AttributeRule attributeID="eduPersonScopedAffiliation">
+        <AttributeRule attributeID="displayName">
             <PermitValueRule xsi:type="ANY" />
         </AttributeRule>
     </AttributeFilterPolicy>
+    -->
+
+    <!-- Release displayName to any SP in your federation -->
+    <!-- 
+    <AttributeFilterPolicy id="releaseToAnySpInYourFederation">
+      <PolicyRequirementRule
+         xsi:type="InEntityGroup"
+         groupID="unida-test.ubuntunet.net"/>
+
+        <AttributeRule attributeID="displayName">
+            <PermitValueRule xsi:type="ANY" />
+        </AttributeRule>
+    </AttributeFilterPolicy>
+    -->
+
+
+    <!-- Release displayName to anyone NOT RECOMMENDED -->
+    <!-- 
+    <AttributeFilterPolicy id="releaseToAnyone">
+     
+      <PolicyRequirementRule xsi:type="ANY"/>
+     
+      <AttributeRule attributeID="displayName">
+        <PermitValueRule xsi:type="ANY"/>
+      </AttributeRule>
+    </AttributeFilterPolicy>
+    -->
+
+
 
 </AttributeFilterPolicyGroup>

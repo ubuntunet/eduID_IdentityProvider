@@ -3,7 +3,7 @@
 
 *.retry
 
-secrets.yml
+group_vars/secrets.yml
 
 files/switch
 

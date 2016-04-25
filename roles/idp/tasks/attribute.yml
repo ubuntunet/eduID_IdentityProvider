@@ -1,0 +1,11 @@
+# 6.6. Attribute resolution and filtering configuration
+
+- name: Copy Attribute Resolver [Based on LDAP]
+  template: >
+    src=attribute-resolver.xml.j2
+    dest=/opt/shibboleth-idp/conf/attribute-resolver.xml
+
+- name: Copy Attribute Filter
+  template: >
+    src=attribute-filter.xml.j2
+    dest=/opt/shibboleth-idp/conf/attribute-filter.xml    

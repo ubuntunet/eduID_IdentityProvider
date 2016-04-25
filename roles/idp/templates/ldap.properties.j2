@@ -53,7 +53,18 @@ idp.attribute.resolver.LDAP.bindDNCredential    = %{idp.authn.LDAP.bindDNCredent
 idp.attribute.resolver.LDAP.useStartTLS         = %{idp.authn.LDAP.useStartTLS:true}
 idp.attribute.resolver.LDAP.trustCertificates   = %{idp.authn.LDAP.trustCertificates:undefined}
 idp.attribute.resolver.LDAP.searchFilter        = (uid=$resolutionContext.principal)
-idp.attribute.resolver.LDAP.returnAttributes    = cn,homephone,mail
+
+idp.attribute.resolver.LDAP.returnAttributes    = cn,\
+                                                  sn,\
+                                                  displayName,\
+                                                  eduPersonAffiliation,\
+                                                  eduPersonPrincipalName,\
+                                                  givenName,\
+                                                  mail,\
+                                                  schacHomeOrganization,\
+                                                  schacHomeOrganizationType,\
+                                                  uid,\
+                                                  schacGender
 
 # LDAP pool configuration, used for both authn and DN resolution
 #idp.pool.LDAP.minSize                          = 3

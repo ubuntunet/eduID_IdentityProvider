@@ -1,0 +1,121 @@
+# 1. Systems Requirememts
+- name: Install needed utility programs
+  apt: pkg={{ item }} update_cache=yes cache_valid_time=36000
+  with_items:
+    - ntp
+    - unzip
+
+# 6. Shibboleth IdP
+
+# 6.1. IdP installation
+- name: Create download directory
+  file: >
+    path=/usr/local/dist
+    state=directory
+
+- name: Download Shibboleth IdP
+  get_url: > 
+    url=https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    dest=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+
+- name: Extract Shibboleth IdP
+  unarchive: > 
+    src=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz 
+    dest=/usr/local/dist
+    copy=no
+
+- name: Copy customised install script
+  template: >
+    src=idp-install.sh.j2
+    dest=/usr/local/dist/idp-install.sh
+    mode=0700
+
+
+- name: Copy signing cert to this machine, if it exists
+  fetch: >
+    src={{ idp_home }}/credentials/idp.crt 
+    dest=roles/idp/files/{{ fqdn }}_idp.crt 
+    flat=yes
+
+- name: Copy signing key to this machine, if it exists
+  fetch: >
+    src={{ idp_home }}/credentials/idp.key 
+    dest=roles/idp/files/{{ fqdn }}_idp.key
+    flat=yes
+
+
+# Signing Certificates
+############ If Certificates exist? ##################################
+
+- name: Check if there is a signing certificate locally
+  become: False
+  local_action:
+    module: stat
+    path: "roles/idp/files/{{ fqdn }}_idp.crt"
+  register: have_sign_cert
+
+- name: Check if there is a signing key locally
+  become: False
+  local_action:
+    module: stat
+    path: "roles/idp/files/{{ fqdn }}_idp.key"
+  register: have_sign_key
+
+# Run Installation Script
+
+- name: Install Shibboleth IdP
+  command: ./idp-install.sh chdir=/usr/local/dist
+  ignore_errors: yes
+
+
+################## Then < Copy existing certificates to remote #######################
+- name: Copy signing key
+  copy: > 
+    src={{ fqdn }}_idp.key 
+    dest={{ idp_home }}/credentials/idp.key
+  when: have_sign_key.stat.exists == True
+
+- name: Copy signing certificate
+  copy: > 
+    src={{ fqdn }}_idp.crt
+    dest={{ idp_home }}/credentials/idp.crt
+  when: have_sign_cert.stat.exists == True
+
+############ Else > Create self-signed certificates ##################################
+
+
+- name: Create signing certificate and key - if it doesn't exist already
+  command: /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}/bin/keygen.sh --lifetime 3 \
+    --certfile {{ idp_home }}/credentials/idp.crt \
+    --keyfile {{ idp_home }}/credentials/idp.key \
+    --hostname {{ fqdn }} \
+    --uriAltName https://{{ fqdn }}/idp/shibboleth  
+  environment:
+    JAVA_HOME: /usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+- name: Tighten access to signing key
+  file: path={{ idp_home }}/credentials/idp.key mode=0600
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+- name: Copy signing certificate to this machine
+  fetch: >
+    src={{ idp_home }}/credentials/idp.crt 
+    dest=roles/idp/files/{{ fqdn }}_idp.crt 
+    flat=yes
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+- name: Copy signing key to this machine, if it exists
+  fetch: >
+    src={{ idp_home }}/credentials/idp.key 
+    dest=roles/idp/files/{{ fqdn }}_idp.key
+    flat=yes
+  when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
+
+
+- name: Hand ownership to Tomcat user
+  file: >
+    path={{ idp_home }}
+    owner={{ tomcat_user }}
+    recurse=yes
+

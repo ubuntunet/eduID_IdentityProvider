@@ -1,0 +1,38 @@
+
+# 6.9. Configuring periodic encryption key rotation
+
+# 6.10. Login form customization
+
+- name: Copy View/Error Messages properties
+  template: >
+    src=error-messages.properties.j2
+    dest=/opt/shibboleth-idp/messages/error-messages.properties
+
+
+- name: Copy logo
+  copy: >
+    src= {{ idp_logo }}
+    dest=/opt/shibboleth-idp/webapp/images/
+
+
+# 6.11. IdP status URL configuration
+
+- name: Download IdP Status Page
+  copy: >
+    src=jstl-1.2.jar 
+    dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
+  # get_url: > 
+  #   url=https://repo1.maven.org/maven2/jstl/jstl/1.2/jstl-1.2.jar
+  #   dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
+
+- name: Enable IdP status URL
+  shell: "JAVACMD=/usr/bin/java /opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
+  notify: restart tomcat
+
+- name: Allow access from host machine
+  replace: >
+    dest=/opt/shibboleth-idp/conf/access-control.xml
+    regexp="{'127.0.0.1/32', '::1/128'}"
+    replace="{'127.0.0.1/32', '::1/128', '192.168.33.0/24'}"
+  notify: restart tomcat
+  

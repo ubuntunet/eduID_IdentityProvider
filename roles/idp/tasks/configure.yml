@@ -1,0 +1,85 @@
+# 6.2. General IdP settings: services.xml and global.xml
+# - name: Adapt MetadataResolverResources in services.xml
+#   replace: >
+#     dest=/opt/shibboleth-idp/conf/services.xml 
+#     regexp='<value>%{idp.home}/conf/metadata-providers.xml</value>' 
+#     replace="<value>#{ '%{idp.metadata}' matches '.*\bswitchaai\b.*' ? '%{idp.home}/conf/metadata-provider-switchaai.xml' : '' }</value>
+#              <value>#{ '%{idp.metadata}' matches '.*\binterfederation\b.*' ? '%{idp.home}/conf/metadata-provider-interfederation.xml' : '' }</value>"
+
+# - name: Adapt AttributeFilterResources in services.xml
+#   replace: >
+#     dest=/opt/shibboleth-idp/conf/services.xml 
+#     regexp='<value>%{idp.home}/conf/attribute-filter.xml</value>' 
+#     replace='<ref bean="FileBackedSWITCHaaiAttributeFilter"/>'
+
+#TODO - Insert this part as well
+# <bean id="FileBackedSWITCHaaiAttributeFilter"
+#       class="net.shibboleth.ext.spring.resource.FileBackedHTTPResource"
+#       c:client-ref="#{ '%{idp.http.proxyhost:null}' != 'null' ?
+#                        'shibboleth.ProxyHttpClient' : 'shibboleth.HttpClient' }"
+#       c:url="https://rr.aai.switch.ch/switchaai/example.org/attribute-filter.xml"
+#       c:backingFile="%{idp.home}/conf/attribute-filter.switchaai.xml">
+# </bean>
+
+# - name: Create attribute-filter.xml
+#   file: >
+#     path=/opt/shibboleth-idp/conf/attribute-filter.ubuntunet.xml 
+#     state=touch
+#     owner=tomcat{{ tomcat_version }}
+
+- name: Copy global.xml
+  copy: > 
+    src=global.xml
+    dest=/opt/shibboleth-idp/conf
+
+# 6.3. Federation metadata configuration
+# - name: Copy SWITCH metadata providers
+#   copy: > 
+#     src=files/metadata-provider-switchaai.xml 
+#     dest=/opt/shibboleth-idp/conf
+
+# - name: Copy interfederation metadata providers
+#   copy: > 
+#     src=files/metadata-provider-interfederation.xml 
+#     dest=/opt/shibboleth-idp/conf
+
+# - name: Copy Trust Anchor Root Certificate
+#   copy: > 
+#     src=files/SWITCHaaiRootCA.crt.pem
+#     dest=/opt/shibboleth-idp/credentials
+
+- name: Copy IdP properties
+  template: >
+    src=idp.properties.j2
+    dest=/opt/shibboleth-idp/conf/idp.properties
+
+- name: Copy IdP metadata.xml
+  template: >
+    src=idp-metadata.xml.j2
+    dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
+
+
+# - name: Insert Metadata Reference
+#   lineinfile: >
+#     dest=/opt/shibboleth-idp/conf/idp.properties
+#     insertafter=EOF
+#     line="idp.metadata = switchaai, interfederation"
+
+- name: Copy metadata providers
+  template: > 
+    src=metadata-providers.xml.j2 
+    dest=/opt/shibboleth-idp/conf/metadata-providers.xml
+
+
+- name: Download Metadata Backup File from RR 
+  get_url: > 
+    url={{ metadata_url }}
+    validate_certs=no
+    dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
+    owner=tomcat7
+  notify: restart tomcat
+
+
+# 6.4. Relying party configuration
+# It is recommended to keep the default IdP v3
+

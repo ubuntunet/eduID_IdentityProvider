@@ -1,11 +1,21 @@
 fqdn: 192.168.33.44
-entity_id: https://{{ fqdn }}
-home_organisation_name: ubuntunet.net
-federation: unida
-metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-sp_fqdn: 192.168.33.88
-sp_entity_id: https://{{ sp_fqdn }}/shibboleth
+entity_id: https://{{ fqdn }}/shibboleth
+
+idp_name: ubuntunet.net
+idp_displayname: Identity Provider for the UbuntuNet Alliance
+idp_description: IdP for the staff at the UbuntuNet Alliance offices
+idp_logo: ualogo.png 
 admin_email: idp@ubuntunet.net
+
+federation: unida-test
+metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+#metadata_url: https://192.168.33.99/metadata/federation/{{ federation }}/metadata.xml
+metadata_file: metadata.xml
+disregard_tsl_certificate: true
+
 ldap_url: 192.168.33.11
 ldap_port: 389
 ldap_protocol: ldap
+
+sp_fqdn: 192.168.33.88
+sp_entity_id: https://{{ sp_fqdn }}/shibboleth

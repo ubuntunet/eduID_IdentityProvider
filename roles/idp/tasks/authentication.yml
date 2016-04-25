@@ -1,0 +1,44 @@
+# 6.5. User authentication
+
+- name: Copy LDAP properties
+  template: >
+    src=ldap.properties.j2
+    dest=/opt/shibboleth-idp/conf/ldap.properties
+
+- name: Copy LDAP certificate
+  copy: >
+    src=ldap-server.crt 
+    dest=/opt/shibboleth-idp/credentials
+
+- name: Add logger for LDAP authentication
+  lineinfile: > 
+    dest=/opt/shibboleth-idp/conf/logback.xml
+    regexp="org.ldaptive.auth.Authenticator"
+    insertbefore="Logs inbound and outbound protocols messages at DEBUG level"
+    line='    <logger name="org.ldaptive.auth.Authenticator" level="INFO" />\n'
+
+# 6.7. Consent intercept configuration
+
+- name: Copy Consent agreement configuration
+  copy: >
+    src=files/consent-intercept-config.xml
+    dest=/opt/shibboleth-idp/conf/intercept
+
+
+# 6.8. Enabling support for generating persistent IDs
+
+- name: Copy SAML name properties
+  template: >
+    src=templates/saml-nameid.properties.j2
+    dest=/opt/shibboleth-idp/conf/saml-nameid.properties
+
+- name: Copy SAML name XML
+  copy: >
+    src=files/saml-nameid.xml
+    dest=/opt/shibboleth-idp/conf
+
+- name: Copy SAML Subject XML
+  copy: >
+    src=files/subject-c14n.xml
+    dest=/opt/shibboleth-idp/conf/c14n
+
