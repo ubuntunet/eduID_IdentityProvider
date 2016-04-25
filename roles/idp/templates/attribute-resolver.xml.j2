@@ -65,11 +65,35 @@
         <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:2.16.840.1.113730.3.1.241" friendlyName="displayName" encodeType="false" />
     </resolver:AttributeDefinition>
 
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="givenName" sourceAttributeID="givenName">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:2.5.4.42" friendlyName="displayName" encodeType="false" />
+    </resolver:AttributeDefinition>
+
+
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="homeOrganization" sourceAttributeID="homeOrganization">
+        <resolver:Dependency ref="staticAttributes" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.25178.1.2.9" friendlyName="homeOrganization" />
+    </resolver:AttributeDefinition>
+
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="schacGender" sourceAttributeID="schacGender">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.25178.1.2.2" friendlyName="displayName" encodeType="false" />
+    </resolver:AttributeDefinition>
 
 
     <!-- ========================================== -->
     <!--      Data Connectors                       -->
     <!-- ========================================== -->
+
+
+    <resolver:DataConnector id="staticAttributes" xsi:type="dc:Static"
+                            xmlns="urn:mace:shibboleth:2.0:resolver:dc">
+        <dc:Attribute id="homeOrganization">
+            <dc:Value>ubuntunet.net</dc:Value>
+        </dc:Attribute>
+    </resolver:DataConnector>
+
 
     <!--
     Example Static Connector

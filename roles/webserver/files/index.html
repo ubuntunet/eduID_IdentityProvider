@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>IdP Task 2 - Attribute Resolving</title>
+    <title>IdP Task 1 - Attribute Release/Filtering</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -49,13 +49,16 @@
 
         <li>
           <p>
-          Have a look in <code>roles/idp/templates/attribute-filter.xml.j2</code>, where you will find an entry for releasing the mail attribute to an SP. Add an additional entry for displayName and redeploy.
+            Have a look in <code>roles/idp/templates/attribute-filter.xml.j2</code>, where you will find an entry for releasing the mail attribute to an SP
+          </p>
+          <p>
+            Add an additional entry for displayName and redeploy. You might have to modify value in the <code>PolicyRequirementRule</code> to reflect the entityId of your SP.
           </p>
         </li>
 
         <li>
           <p>
-          Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
+            Go the SP (https://192.168.33.88) and click on the "Login via UbuntuNet Alliance (unIDa)" link. Make sure you see the displayName attribute.
           </p>
         </li>
       </ul>
@@ -64,7 +67,8 @@
       <h2>Extras</h2>
 
       <ul>
-        <li>How would change the policy to additionally release the attribute to the SP with the entityId <code>https://crm.example.net/shibboleth</code>?</li>
+        <li>
+          How would change the policy to additionally release the attribute to the SP with the entityId <code>https://crm.example.net/shibboleth</code>?</li>
         <li>
           How would you reformulate the same policy so that it gets released to all SP in your Federation?<br />
           Hint: Have a look at the options for <code>PolicyRequirementRule</code>

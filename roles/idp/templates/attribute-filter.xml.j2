@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    This file is an EXAMPLE policy file.  While the policy presented in this
-    example file is illustrative of some simple cases, it relies on the names of
-    non-existent example services and the example attributes demonstrated in the
-    default attribute-resolver.xml file.
-
-    Deployers should refer to the documentation for a complete list of components
-    and their options.
+  Deployers should refer to the documentation for a complete list of components
+  and their options.
+  https://wiki.shibboleth.net/confluence/display/IDP30/AttributeFilterConfiguration
+  https://wiki.shibboleth.net/confluence/display/SHIB2/IdPAddAttributeFilter
 -->
 <AttributeFilterPolicyGroup id="ShibbolethFilterPolicy"
         xmlns="urn:mace:shibboleth:2.0:afp"
@@ -14,9 +11,9 @@
         xsi:schemaLocation="urn:mace:shibboleth:2.0:afp http://shibboleth.net/schema/idp/shibboleth-afp.xsd">
 
 
-    <!-- Release some attributes to an SP. -->
+    <!-- Release some attributes to a SP. -->
     <AttributeFilterPolicy id="release_to_one_sp">
-        <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
+        <PolicyRequirementRule xsi:type="Requester" value="https://192.168.33.88/shibboleth" />
 
         <AttributeRule attributeID="eduPersonPrincipalName">
             <PermitValueRule xsi:type="ANY" />
@@ -27,6 +24,5 @@
         </AttributeRule>
 
     </AttributeFilterPolicy>
-
 
 </AttributeFilterPolicyGroup>
