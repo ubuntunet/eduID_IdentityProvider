@@ -13,7 +13,7 @@
 
     <!-- Release some attributes to an SP. -->
     <AttributeFilterPolicy id="release_to_one_sp">
-        <PolicyRequirementRule xsi:type="Requester" value="{{ sp_entity_id }}" />
+        <PolicyRequirementRule xsi:type="Requester" value="https://192.168.33.88/shibboleth" />
 
         <AttributeRule attributeID="eduPersonPrincipalName">
             <PermitValueRule xsi:type="ANY" />
@@ -38,7 +38,7 @@
     <!-- 
     <AttributeFilterPolicy id="releaseToMultipleSPs">
         <PolicyRequirementRule xsi:type="OR">
-            <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
+            <Rule xsi:type="Requester" value="https://192.168.33.88/shibboleth" />
             <Rule xsi:type="Requester" value="https://crm.example.net/shibboleth" />
         </PolicyRequirementRule>
 

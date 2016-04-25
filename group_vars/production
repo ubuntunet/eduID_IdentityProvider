@@ -15,6 +15,3 @@ disregard_tsl_certificate: true
 ldap_url: ldap.ubuntunet.net
 ldap_port: 389
 ldap_protocol: ldap
-
-sp_fqdn: sp.ubuntunet.net
-sp_entity_id: https://{{ sp_fqdn }}/shibboleth
