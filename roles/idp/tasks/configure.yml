@@ -76,18 +76,19 @@
 #   file: path=/opt/shibboleth-idp/metadata/{{ metadata_file }} state=touch owner=tomcat7
 #   notify: restart tomcat
 
-- name: Dummy Metadata File
-  copy: > 
-    src=dummy-metadata.xml 
-    dest=/opt/shibboleth-idp/metadata/{{ metadata_file }} 
-    owner=tomcat7
-# - name: Download Metadata Backup File from RR 
-#   get_url: > 
-#     url={{ metadata_url }}
-#     validate_certs=no
-#     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
+# - name: Dummy Metadata File
+#   copy: > 
+#     src=dummy-metadata.xml 
+#     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }} 
 #     owner=tomcat7
-#   notify: restart tomcat
+
+- name: Download Metadata Backup File from RR 
+  get_url: > 
+    url={{ metadata_url }}
+    validate_certs=no
+    dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
+    owner=tomcat7
+  notify: restart tomcat
 
 
 

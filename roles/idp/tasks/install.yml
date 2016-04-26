@@ -51,14 +51,14 @@
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp.crt"
+    path: "roles/idp/files/{{ fqdn }}_idp_crt"
   register: have_sign_cert
 
 - name: Check if there is a signing key locally
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp.key"
+    path: "roles/idp/files/{{ fqdn }}_idp_key"
   register: have_sign_key
 
 # Run Installation Script
@@ -71,13 +71,13 @@
 ################## Then < Copy existing certificates to remote #######################
 - name: Copy signing key
   copy: > 
-    src={{ fqdn }}_idp.key 
+    src={{ fqdn }}_idp_key
     dest={{ idp_home }}/credentials/idp.key
   when: have_sign_key.stat.exists == True
 
 - name: Copy signing certificate
   copy: > 
-    src={{ fqdn }}_idp.crt
+    src={{ fqdn }}_idp_crt
     dest={{ idp_home }}/credentials/idp.crt
   when: have_sign_cert.stat.exists == True
 
