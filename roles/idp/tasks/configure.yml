@@ -80,7 +80,6 @@
   copy: > 
     src=dummy-metadata.xml 
     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }} 
-    state=touch 
     owner=tomcat7
 # - name: Download Metadata Backup File from RR 
 #   get_url: > 
