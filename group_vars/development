@@ -13,6 +13,7 @@ metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/meta
 metadata_file: metadata.xml
 disregard_tsl_certificate: true
 
+#ldap_url: ldap.ubuntunet.net
 ldap_url: 192.168.33.11
 ldap_port: 389
 ldap_protocol: ldap
