@@ -7,8 +7,8 @@
 
 - name: Copy LDAP certificate
   copy: >
-    src=ldap-server.crt 
-    dest=/opt/shibboleth-idp/credentials
+    src=ldap-server
+    dest=/opt/shibboleth-idp/credentials/ldap-server.crt
 
 - name: Add logger for LDAP authentication
   lineinfile: > 
