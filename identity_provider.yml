@@ -8,6 +8,7 @@
     - db
     - appserver
     - idp
+    - newrelic
  
   handlers:
     - name: restart apache
