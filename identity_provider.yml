@@ -2,7 +2,7 @@
   hosts: idp
   become: True
   vars_files:
-    - group_vars/secrets.yml.example
+    - group_vars/secrets.yml
   roles:
     - webserver
     - db
