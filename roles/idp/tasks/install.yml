@@ -17,6 +17,7 @@
   get_url: > 
     url=https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
     dest=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    validate_certs=no
 
 - name: Extract Shibboleth IdP
   unarchive: > 
@@ -51,14 +52,14 @@
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp_crt"
+    path: "roles/idp/files/{{ fqdn }}_idp.crt"
   register: have_sign_cert
 
 - name: Check if there is a signing key locally
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp_key"
+    path: "roles/idp/files/{{ fqdn }}_idp.key"
   register: have_sign_key
 
 # Run Installation Script
@@ -71,13 +72,13 @@
 ################## Then < Copy existing certificates to remote #######################
 - name: Copy signing key
   copy: > 
-    src={{ fqdn }}_idp_key
+    src={{ fqdn }}_idp.key
     dest={{ idp_home }}/credentials/idp.key
   when: have_sign_key.stat.exists == True
 
 - name: Copy signing certificate
   copy: > 
-    src={{ fqdn }}_idp_crt
+    src={{ fqdn }}_idp.crt
     dest={{ idp_home }}/credentials/idp.crt
   when: have_sign_cert.stat.exists == True
 
