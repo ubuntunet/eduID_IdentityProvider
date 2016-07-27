@@ -1,0 +1,13 @@
+renu-idp ansible_ssh_host=idp.ubuntunet.net
+
+[renida]
+renu-idp
+
+[renida:vars]
+ansible_user=ubuntu
+
+[idp]
+renu-idp
+
+[renu:children]
+idp

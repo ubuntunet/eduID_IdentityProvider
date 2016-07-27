@@ -1,0 +1,13 @@
+ua-idp ansible_ssh_host=idp.ubuntunet.net
+
+[ua]
+ua-idp
+
+[ua:vars]
+ansible_user=ubuntu
+
+[idp]
+ua-idp
+
+[ubuntunet:children]
+idp

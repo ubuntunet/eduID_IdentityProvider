@@ -67,12 +67,10 @@
     </resolver:AttributeDefinition>
  -->
 
-
-    <resolver:AttributeDefinition xsi:type="ad:Simple" id="eduPersonAffiliation" sourceAttributeID="eduPersonAffiliation">
+    <resolver:AttributeDefinition xsi:type="ad:Simple" id="cn" sourceAttributeID="cn">
         <resolver:Dependency ref="myLDAP" />
-        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.1" friendlyName="eduPersonAffiliation" encodeType="false" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:2.5.4.3" friendlyName="cn" encodeType="false" />
     </resolver:AttributeDefinition>
-
 
     <resolver:AttributeDefinition xsi:type="ad:Simple" id="sn" sourceAttributeID="sn">
         <resolver:Dependency ref="myLDAP" />
@@ -102,6 +100,11 @@
     <resolver:AttributeDefinition xsi:type="ad:Simple" id="schacHomeOrganizationType" sourceAttributeID="schacHomeOrganizationType">
         <resolver:Dependency ref="myLDAP" />
         <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.25178.1.2.10" friendlyName="schacHomeOrganizationType" encodeType="false" />
+    </resolver:AttributeDefinition>
+
+    <resolver:AttributeDefinition id="eduPersonEntitlement" xsi:type="ad:Simple" sourceAttributeID="eduPersonEntitlement">
+        <resolver:Dependency ref="myLDAP" />
+        <resolver:AttributeEncoder xsi:type="enc:SAML2String" name="urn:oid:1.3.6.1.4.1.5923.1.1.1.7" friendlyName="eduPersonEntitlement" encodeType="false" />
     </resolver:AttributeDefinition>
 
 

@@ -17,6 +17,7 @@
   get_url: > 
     url=https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
     dest=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    validate_certs=no
 
 - name: Extract Shibboleth IdP
   unarchive: > 
@@ -71,7 +72,7 @@
 ################## Then < Copy existing certificates to remote #######################
 - name: Copy signing key
   copy: > 
-    src={{ fqdn }}_idp.key 
+    src={{ fqdn }}_idp.key
     dest={{ idp_home }}/credentials/idp.key
   when: have_sign_key.stat.exists == True
 
