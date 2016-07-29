@@ -1,6 +1,9 @@
 fqdn: 192.168.33.44
 entity_id: https://{{ fqdn }}/shibboleth
 
+organisation_name: UbuntuNet Alliance
+organisation_url: https://ubuntunet.net
+
 idp_name: ubuntunet.net
 idp_displayname: Identity Provider for the UbuntuNet Alliance
 idp_description: IdP for the staff at the UbuntuNet Alliance offices
@@ -20,3 +23,13 @@ ldap_protocol: ldap
 
 sp_fqdn: 192.168.33.88
 sp_entity_id: https://{{ sp_fqdn }}/shibboleth
+
+support_first_name: Support
+support_last_name: Mail
+support_email: support@ubuntunet.net
+admin_first_name: Admin
+admin_last_name: Mail
+admin_email: unida@ubuntunet.net
+technical_first_name: Technical
+technical_last_name: Mail
+technical_email: unida@ubuntunet.net
