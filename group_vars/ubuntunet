@@ -9,7 +9,6 @@ idp_name: ubuntunet.net
 idp_displayname: Identity Provider for the UbuntuNet Alliance
 idp_description: IdP for the staff at the UbuntuNet Alliance offices
 idp_logo: ualogo.png 
-admin_email: unida@ubuntunet.net
 
 federation: marida
 metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
