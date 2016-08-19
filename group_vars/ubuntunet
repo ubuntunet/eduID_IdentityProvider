@@ -11,7 +11,7 @@ idp_description: IdP for the staff at the UbuntuNet Alliance offices
 idp_logo: ualogo.png 
 
 federation: marida
-metadata_url: https://eduid.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: true
 

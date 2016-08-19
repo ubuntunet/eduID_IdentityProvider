@@ -6,7 +6,7 @@
 
 ## Register on UbuntuNets Resource Registry 
 
-UbuntuNet Alliance is running a resource registry at https://eduid.ubuntunet.net. This registry can be used by all our member NRENs. Please get in contact with us (unida@ubuntunet.net), so we can add you as a user.
+UbuntuNet Alliance is running a resource registry at https://rr.ubuntunet.net. This registry can be used by all our member NRENs. Please get in contact with us (unida@ubuntunet.net), so we can add you as a user.
 
 Once you have 
 

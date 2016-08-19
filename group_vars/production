@@ -10,7 +10,7 @@ organisation_name: Example University
 organisation_url: https://example.net
 
 federation: eduID
-metadata_url: https://eduid.example.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://rr.example.net/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: true
 
