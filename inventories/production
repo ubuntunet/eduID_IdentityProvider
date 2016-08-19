@@ -1,13 +1,13 @@
-wingu_idp ansible_ssh_host=idp.ubuntunet.net
+exuni_idp ansible_ssh_host=idp.example.net
 
-[wingu]
-wingu_idp
+[exuni]
+exuni_idp
 
-[wingu:vars]
+[exuni:vars]
 ansible_user=ubuntu
 
 [idp]
-wingu_idp
+exuni_idp
 
 [production:children]
 idp
