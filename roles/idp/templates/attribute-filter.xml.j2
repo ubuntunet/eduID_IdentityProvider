@@ -52,11 +52,15 @@
 
 
   <!-- 
-    Release ePPN, mail, sn, givenName to TERENA/GEANT SP Proxy
+    Release ePPN, mail, sn, givenName to TERENA/GEANT SP Proxy &
+    Sci-GaIA Discourse Forum
     See: https://wiki.geant.org/display/aai/Service+Provider+Proxy  
   -->
   <AttributeFilterPolicy id="TerenaSPP">
-    <PolicyRequirementRule xsi:type="Requester" value="https://terena.org/sp" />
+    <PolicyRequirementRule xsi:type="OR">
+        <Rule xsi:type="Requester" value="https://terena.org/sp" />
+        <Rule xsi:type="Requester" value="https://discourse.sci-gaia.eu/shibboleth" />
+    </PolicyRequirementRule>
     <AttributeRule attributeID="eduPersonPrincipalName">
       <PermitValueRule xsi:type="ANY" />
     </AttributeRule>
@@ -64,27 +68,12 @@
       <PermitValueRule xsi:type="ANY" />
     </AttributeRule>
     <AttributeRule attributeID="sn">
-      <PermitValueRule xsi:type="ANY"/>
+      <PermitValueRule xsi:type="ANY"
     </AttributeRule>
     <AttributeRule attributeID="givenName">
       <PermitValueRule xsi:type="ANY"/>
     </AttributeRule>
   </AttributeFilterPolicy>
-
-
-    <!-- Release displayName to two specific SPs -->
-    <!-- 
-    <AttributeFilterPolicy id="releaseToMultipleSPs">
-        <PolicyRequirementRule xsi:type="OR">
-            <Rule xsi:type="Requester" value="{{ sp_entity_id }}" />
-            <Rule xsi:type="Requester" value="https://crm.example.net/shibboleth" />
-        </PolicyRequirementRule>
-
-        <AttributeRule attributeID="displayName">
-            <PermitValueRule xsi:type="ANY" />
-        </AttributeRule>
-    </AttributeFilterPolicy>
-    -->
 
     <!-- Release displayName to any SP in your federation -->
     <!-- 
