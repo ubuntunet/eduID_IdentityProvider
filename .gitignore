@@ -1,4 +1,5 @@
 *.crt
+!fedsigner.crt
 *.key
 
 *.retry
