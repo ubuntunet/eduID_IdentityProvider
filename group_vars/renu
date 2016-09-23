@@ -1,16 +1,17 @@
 fqdn: idp.ubuntunet.net
 entity_id: https://{{ fqdn }}/shibboleth
 
-organisation_name: UbuntuNet Alliance
-organisation_url: https://ubuntunet.net
+organisation_name: RENU
+organisation_url: https://renu.ac.ug
 country_code: UG
 
-idp_name: ubuntunet.net
-idp_displayname: Identity Provider for the UbuntuNet Alliance
-idp_description: IdP for the staff at the UbuntuNet Alliance offices
-idp_logo: ualogo.png 
+idp_name: idp.renu.ac.ug
+idp_displayname: Identity Provider for RENU
+idp_description: IdP for the staff at the RENU office
+idp_logo: logo-renu.png 
 
-federation: marida
+federation: RIF
+registration_authority: https://eduid.ubuntunet.net
 metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: true
