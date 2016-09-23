@@ -36,22 +36,16 @@
     that the IdP needs to interoperate with.
     -->
     
-    <MetadataProvider id="HTTPMetadata"
+    <MetadataProvider id="FederationMetadata"
                       xsi:type="FileBackedHTTPMetadataProvider"
                       metadataURL="{{ metadata_url }}"
                       backingFile="{{ idp_home }}/metadata/{{ metadata_file }}"
                       disregardTLSCertificate="{{ disregard_tsl_certificate }}">
-        <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true">
-            <PublicKey>
-{{ lookup('file', 'roles/idp/files/fedsigner.crt') | replace('-----BEGIN CERTIFICATE-----', '') | replace('-----END CERTIFICATE-----', '') }}
-            </PublicKey>
-        </MetadataFilter>
-        <!--
-        <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P30D"/>
+       <MetadataFilter xsi:type="SignatureValidation" requireSignedRoot="true" certificateFile="{{ idp_home }}/credentials/fedsigner.crt.pem" />
+        <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P14D"/>
         <MetadataFilter xsi:type="EntityRoleWhiteList">
             <RetainedRole>md:SPSSODescriptor</RetainedRole>
         </MetadataFilter>
-        -->
     </MetadataProvider>
 
 

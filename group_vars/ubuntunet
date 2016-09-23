@@ -12,20 +12,20 @@ idp_logo: logo-ua.png
 
 federation: marida
 registration_authority: https://eduid.ubuntunet.net
-metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-#metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
+#metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
-disregard_tsl_certificate: true
+disregard_tsl_certificate: false
 
 support_first_name: Support
 support_last_name: Mail
 support_email: support@ubuntunet.net
 admin_first_name: Admin
 admin_last_name: Mail
-admin_email: unida@ubuntunet.net
+admin_email: eduid@ubuntunet.net
 technical_first_name: Technical
 technical_last_name: Mail
-technical_email: unida@ubuntunet.net
+technical_email: eduid@ubuntunet.net
 
 
 ldap_url: ldap.ubuntunet.net

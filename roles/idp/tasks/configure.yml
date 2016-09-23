@@ -30,7 +30,7 @@
 - name: Copy global.xml
   copy: > 
     src=global.xml
-    dest=/opt/shibboleth-idp/conf
+    dest={{ idp_home }}/conf
 
 # 6.3. Federation metadata configuration
 # - name: Copy SWITCH metadata providers
@@ -51,12 +51,12 @@
 - name: Copy IdP properties
   template: >
     src=idp.properties.j2
-    dest=/opt/shibboleth-idp/conf/idp.properties
+    dest={{ idp_home }}/conf/idp.properties
 
 - name: Copy IdP metadata.xml
   template: >
     src=idp-metadata.xml.j2
-    dest=/opt/shibboleth-idp/metadata/idp-metadata.xml
+    dest={{ idp_home }}/metadata/idp-metadata.xml
 
 
 # - name: Insert Metadata Reference
@@ -68,7 +68,15 @@
 - name: Copy metadata providers
   template: > 
     src=metadata-providers.xml.j2 
-    dest=/opt/shibboleth-idp/conf/metadata-providers.xml
+    dest={{ idp_home }}/conf/metadata-providers.xml
+
+
+- name: Copy Federation Metadata signer certificate
+  copy: >
+    src=fedsigner.crt.pem
+    dest={{ idp_home }}/credentials/fedsigner.crt.pem
+  notify: restart tomcat
+
 
 
 #TODO Replace this with the one below again
@@ -86,7 +94,7 @@
   get_url: > 
     url={{ metadata_url }}
     validate_certs=no
-    dest=/opt/shibboleth-idp/metadata/{{ metadata_file }}
+    dest={{ idp_home }}/metadata/{{ metadata_file }}
     owner=tomcat7
   notify: restart tomcat
 
