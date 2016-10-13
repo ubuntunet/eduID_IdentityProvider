@@ -19,9 +19,6 @@ ldap_url: ldap.example.net
 ldap_port: 389
 ldap_protocol: ldap
 
-sp_fqdn: sp.example.net
-sp_entity_id: https://{{ sp_fqdn }}/shibboleth
-
 support_first_name: Support
 support_last_name: Mail
 support_email: support@example.net
@@ -31,3 +28,25 @@ admin_email: eduid@example.net
 technical_first_name: Technical
 technical_last_name: Mail
 technical_email: eduid@example.net
+
+service_providers:
+  -
+    name: DummySP
+    entity_id: https://sp.example.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - cn
+      - sn
+      - givenName
+
+  -
+    name: AnotherSP
+    entity_id: https://example2.mw/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - eduPersonEntitlement
+      - sn
+      - givenName
+
