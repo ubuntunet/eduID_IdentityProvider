@@ -19,9 +19,6 @@ ldap_url: 192.168.33.11
 ldap_port: 389
 ldap_protocol: ldap
 
-sp_fqdn: 192.168.33.88
-sp_entity_id: https://{{ sp_fqdn }}/shibboleth
-
 support_first_name: Support
 support_last_name: Mail
 support_email: support@ubuntunet.net

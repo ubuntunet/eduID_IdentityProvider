@@ -27,11 +27,51 @@ technical_first_name: Technical
 technical_last_name: Mail
 technical_email: eduid@ubuntunet.net
 
-
 ldap_url: ldap.ubuntunet.net
 ldap_port: 389
 ldap_protocol: ldap
 
-sp_fqdn: sp.ubuntunet.net
-sp_entity_id: https://{{ sp_fqdn }}/shibboleth
+service_providers:
+  -
+    name: UbuntuNetDummySP
+    entity_id: https://sp.ubuntunet.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - cn
+      - sn
+      - givenName
+      - displayName
+      - schacGender
+      - schacHomeOrganization
+      - schacHomeOrganizationType
+      - uid      
+      - eduPersonEntitlement
 
+  -
+    name: eduroam_mw_registry
+    entity_id: https://eduroam.maren.ac.mw/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - eduPersonEntitlement
+      - sn
+      - givenName
+
+  - 
+    name: TerenaSPP
+    entity_id: https://terena.org/sp
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - sn
+      - givenName
+
+  - 
+    name: SciGaIADiscourse
+    entity_id: https://discourse.sci-gaia.eu/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - sn
+      - givenName
