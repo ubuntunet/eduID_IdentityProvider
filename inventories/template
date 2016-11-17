@@ -1,0 +1,11 @@
+shibboleth_idp ansible_host=idp.example.net
+
+[<institution>:children]
+idp
+
+[idp]
+shibboleth_idp
+
+[idp:vars]
+ansible_user=ubuntu
+
