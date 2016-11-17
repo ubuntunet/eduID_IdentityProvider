@@ -11,9 +11,9 @@ organisation_url: https://example.net
 
 federation: eduID
 registration_authority: https://eduid.ubuntunet.net
-metadata_url: https://rr.example.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
-disregard_tsl_certificate: true
+disregard_tsl_certificate: false
 
 ldap_url: ldap.example.net
 ldap_port: 389
