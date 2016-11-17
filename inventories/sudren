@@ -1,0 +1,10 @@
+sudren-idp ansible_host=idp.sudren.edu.sd
+
+[idp]
+sudren-idp
+
+[idp:vars]
+ansible_user=idp
+
+[sudren:children]
+idp

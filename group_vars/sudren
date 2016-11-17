@@ -1,0 +1,57 @@
+fqdn: idp.sudren.edu.sd
+entity_id: https://{{ fqdn }}/shibboleth
+
+organisation_name: SudREN
+organisation_url: https://ubuntunet.net
+country_code: MW
+
+idp_name: suin.edu.sd
+idp_displayname: SudREN IdP
+idp_description: IdP for the staff at SudREN
+idp_logo: logo-sudren.png 
+
+federation: sudif
+registration_authority: https://eduid.ubuntunet.net
+metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
+metadata_file: metadata.xml
+disregard_tsl_certificate: false
+
+support_first_name: Support
+support_last_name: Mail
+support_email: support@ubuntunet.net
+admin_first_name: Admin
+admin_last_name: Mail
+admin_email: eduid@ubuntunet.net
+technical_first_name: Technical
+technical_last_name: Mail
+technical_email: eduid@ubuntunet.net
+
+ldap_url: ldap.ubuntunet.net
+ldap_port: 389
+ldap_protocol: ldap
+
+service_providers:
+  -
+    name: UbuntuNetDummySP
+    entity_id: https://sp.ubuntunet.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - cn
+      - sn
+      - givenName
+      - displayName
+      - schacGender
+      - schacHomeOrganization
+      - schacHomeOrganizationType
+      - uid      
+      - eduPersonEntitlement
+
+  - 
+    name: TerenaSPP
+    entity_id: https://terena.org/sp
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - sn
+      - givenName
