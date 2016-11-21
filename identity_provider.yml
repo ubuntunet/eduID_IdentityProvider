@@ -1,8 +1,18 @@
+- name: Make sure Python2 is available
+  hosts: idp
+  become: True
+  gather_facts: False
+  tasks:
+    #- raw: test -e /usr/bin/python || (apt install -y python-minimal)
+    - raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+
 - name: Install Shibboleth IdP v3 for UbuntuNet Alliance
   hosts: idp
   become: True
   vars_files:
     - group_vars/secrets.yml
+    - "group_vars/{{ ansible_distribution_release }}.yml"
   roles:
     - webserver
     - db
