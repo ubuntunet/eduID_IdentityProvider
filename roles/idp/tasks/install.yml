@@ -92,7 +92,7 @@
     --hostname {{ fqdn }} \
     --uriAltName https://{{ fqdn }}/idp/shibboleth  
   environment:
-    JAVA_HOME: /usr/lib/jvm/java-1.7.0-openjdk-amd64/jre
+    JAVA_HOME: /usr/lib/jvm/{{ jre_version }}/jre
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 - name: Tighten access to signing key
