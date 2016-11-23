@@ -54,3 +54,12 @@ If you want to try it out locally, and you have Vagrant/Virtualbox installed, th
 
 UbuntuNet Alliance is running a resource registry at https://rr.ubuntunet.net. This registry can be used by all our member NRENs. Please get in contact with us (eduid@ubuntunet.net), so we can add you as a user.
 
+If you already have a federation on the Resource Registry:
+* Login at https://rr.ubuntunet.net
+* Go to Register > Identity Federation
+* Copy the content of the IdP metadata file (/opt/shibboleth-idp/metadata/idp-metadata.xml) from your server into the Metadata form field and click "Next".
+* Choose the federation you want your IdP to be added from the "Federation" drop down field and review the preset entries in the other fields.
+* Submit the registration request by clicking on "Register"
+
+
+

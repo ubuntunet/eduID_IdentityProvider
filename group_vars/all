@@ -5,10 +5,4 @@ certificate_key_path: /etc/ssl/private/{{ fqdn }}.key
 certificate_cert_path: /etc/ssl/certs/{{ fqdn }}.crt
 certificate_chain_path: /etc/ssl/certs/{{ fqdn }}.crt
 
-shibboleth_version: 3.2.1
-postgres_version: 9.3
-tomcat_version: 7
-tomcat_user: tomcat7
-catalina_home: /usr/share/tomcat7
-catalina_base: /var/lib/tomcat7
 
