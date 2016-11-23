@@ -1,9 +1,14 @@
 # 4. Java Servlet Container Installation
 
-# 4.1. Java runtime environment: OpenJDK 7
+# 4.1. Java runtime environment: OpenJDK
 # Replace with Oracle Java 
-- name: Install OpenJDK 7
-  apt: name=openjdk-7-jdk update_cache=yes cache_valid_time=3600
+- name: Install OpenJDK for 14.04
+  apt: name=openjdk-{{ openjdk_version }}-jdk update_cache=yes cache_valid_time=3600
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+
+- name: Install OpenJDK for 16.04
+  apt: name=default-jdk update_cache=yes cache_valid_time=3600
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
 # 4.2. Servlet container: Apache Tomcat 7
 - name: Install Tomcat 7

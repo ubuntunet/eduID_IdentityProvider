@@ -38,7 +38,7 @@ mkdir $INSTALLDIR/{bin,dist,doc,system,webapp}
 #   exit 1
 # fi
 
-export JAVA_HOME=${JAVA_HOME:-$(ls -d /usr/lib/jvm/java-1.7.0-openjdk-* 2>/dev/null | tail -1)/jre}
+export JAVA_HOME=${JAVA_HOME:-$(ls -d /usr/lib/jvm/{{ jre_version }} 2>/dev/null | tail -1)/jre}
 if [ -z "$JAVA_HOME" ]; then
   echo "\$JAVA_HOME not set, and no suitable JRE version found under /usr/lib/jvm"
   exit 1
