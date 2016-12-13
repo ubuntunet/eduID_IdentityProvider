@@ -1,0 +1,80 @@
+fqdn: 41.93.45 92
+entity_id: https://{{ fqdn }}/shibboleth
+
+organisation:
+  name: TERNET
+  fqdn: ternet.or.tz
+  url: "https://{{ fqdn }}"
+  type: NREN
+country_code: TG
+
+idp_name: ternet.or.tz
+idp_displayname: TERNET IdP
+idp_description: IdP for the Tanzanian Science Gateways
+idp_logo: logo-ua.png 
+
+federation: tanzanida
+registration_authority: https://eduid.ubuntunet.net
+#metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
+metadata_file: metadata.xml
+disregard_tsl_certificate: false
+
+support_first_name: Support
+support_last_name: Mail
+support_email: support@ternet.or.tz
+admin_first_name: Admin
+admin_last_name: Mail
+admin_email: support@ternet.or.tz
+technical_first_name: Technical
+technical_last_name: Mail
+technical_email: support@ternet.or.tz
+
+# ldap_url: ldap.ubuntunet.net
+# ldap_port: 389
+# ldap_protocol: ldap
+
+service_providers:
+  # -
+  #   name: UbuntuNetDummySP
+  #   entity_id: https://sp.ubuntunet.net/shibboleth
+  #   attributes:
+  #     - eduPersonPrincipalName
+  #     - mail
+  #     - cn
+  #     - sn
+  #     - givenName
+  #     - displayName
+  #     - schacGender
+  #     - schacHomeOrganization
+  #     - schacHomeOrganizationType
+  #     - uid      
+  #     - eduPersonEntitlement
+
+  # -
+  #   name: eduroam_mw_registry
+  #   entity_id: https://eduroam.maren.ac.mw/shibboleth
+  #   attributes:
+  #     - mail
+  #     - eduPersonPrincipalName
+  #     - eduPersonEntitlement
+  #     - sn
+  #     - givenName
+
+  # - 
+  #   name: TerenaSPP
+  #   entity_id: https://terena.org/sp
+  #   attributes:
+  #     - mail
+  #     - eduPersonPrincipalName
+  #     - sn
+  #     - givenName
+
+  # - 
+  #   name: SciGaIADiscourse
+  #   entity_id: https://discourse.sci-gaia.eu/shibboleth
+  #   attributes:
+  #     - mail
+  #     - eduPersonPrincipalName
+  #     - sn
+  #     - givenName

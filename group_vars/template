@@ -6,8 +6,12 @@ idp_displayname: Identity Provider for the Example University
 idp_description: IdP for students and staff at the Example University
 idp_logo: logo.png 
 
-organisation_name: Example University
-organisation_url: https://example.net
+organisation:
+  name: Example Institutions
+  fqdn: example.edu
+  url: "https://{{ fqdn }}"
+  type: NREN
+country_code: TLD
 
 federation: eduID
 registration_authority: https://eduid.ubuntunet.net

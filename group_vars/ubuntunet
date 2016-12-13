@@ -1,8 +1,11 @@
 fqdn: idp.ubuntunet.net
 entity_id: https://{{ fqdn }}/shibboleth
 
-organisation_name: UbuntuNet Alliance
-organisation_url: https://ubuntunet.net
+organisation:
+  name: UbuntuNet Alliance
+  fqdn: ubuntunet.net
+  url: "https://{{ fqdn }}"
+  type: NREN
 country_code: MW
 
 idp_name: ubuntunet.net

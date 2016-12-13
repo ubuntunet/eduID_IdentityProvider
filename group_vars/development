@@ -1,8 +1,11 @@
 fqdn: 192.168.33.44
 entity_id: https://{{ fqdn }}/shibboleth
 
-organisation_name: UbuntuNet Alliance
-organisation_url: https://ubuntunet.net
+organisation:
+  name: UbuntuNet Alliance
+  fqdn: ubuntunet.net
+  url: "https://{{ fqdn }}"
+  type: NREN
 
 idp_name: ubuntunet.net
 idp_displayname: Identity Provider for the UbuntuNet Alliance
