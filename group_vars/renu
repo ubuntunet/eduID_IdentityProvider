@@ -1,8 +1,11 @@
 fqdn: idp.ubuntunet.net
 entity_id: https://{{ fqdn }}/shibboleth
 
-organisation_name: RENU
-organisation_url: https://renu.ac.ug
+organisation:
+  name: RENU
+  fqdn: renu.ac.ug
+  url: "https://{{ fqdn }}"
+  type: NREN
 country_code: UG
 
 idp_name: idp.renu.ac.ug

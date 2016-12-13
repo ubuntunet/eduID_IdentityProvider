@@ -85,9 +85,9 @@ xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
     </AttributeAuthorityDescriptor>
 
     <Organization>
-        <OrganizationName xml:lang="{{ idp_language }}">{{ organisation_name }}</OrganizationName>
-        <OrganizationDisplayName xml:lang="{{ idp_language }}">{{ organisation_name }}</OrganizationDisplayName>
-        <OrganizationURL xml:lang="{{ idp_language }}">{{ organisation_url }}</OrganizationURL>
+        <OrganizationName xml:lang="{{ idp_language }}">{{ organisation.name }}</OrganizationName>
+        <OrganizationDisplayName xml:lang="{{ idp_language }}">{{ organisation.name }}</OrganizationDisplayName>
+        <OrganizationURL xml:lang="{{ idp_language }}">{{ organisation.url }}</OrganizationURL>
     </Organization>
     <ContactPerson contactType="support">
         <GivenName>{{ support_first_name }}</GivenName>

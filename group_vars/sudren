@@ -1,9 +1,12 @@
 fqdn: idp.sudren.edu.sd
 entity_id: https://{{ fqdn }}/shibboleth
 
-organisation_name: SudREN
-organisation_url: https://ubuntunet.net
-country_code: MW
+organisation:
+  name: SudREN
+  fqdn: sudren.edu.sd
+  url: "https://{{ fqdn }}"
+  type: NREN
+country_code: SD
 
 idp_name: suin.edu.sd
 idp_displayname: SudREN IdP
