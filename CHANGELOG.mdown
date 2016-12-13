@@ -6,3 +6,4 @@ Changelog
 
 * Add/Change static attributes: schacHomeOrganization, schacHomeOrganizationType, o
 * Renamed organisation_* variables to lists in group_vars
+* Add inventory/variables for TERNET
