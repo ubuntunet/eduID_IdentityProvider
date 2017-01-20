@@ -7,7 +7,7 @@ idp.additionalProperties= /conf/ldap.properties, /conf/saml-nameid.properties, /
 idp.entityID= {{ entity_id }}
 
 # Set the scope used in the attribute resolver for scoped attributes
-idp.scope= ubuntunet.net
+idp.scope= {{ idp_name }}
 
 # General cookie properties (maxAge only applies to persistent cookies)
 #idp.cookie.secure = false

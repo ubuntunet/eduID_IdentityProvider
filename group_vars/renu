@@ -30,6 +30,40 @@ technical_last_name: Mail
 technical_email: unida@ubuntunet.net
 
 
-ldap_url: ldap.ubuntunet.net
-ldap_port: 389
-ldap_protocol: ldap
+## Backends ##
+
+ldap:
+  url: ldap.example.net
+  use_ssl: false
+  # ldap or ldaps
+  protocol: ldap
+  # Defaults: 389 for ldap; 636 for ldaps
+  port: 389
+  # Distinguished Name used to connect to the LDAP server
+  bind_dn: cn=Manager,dc=example,dc=net
+  # Distinguished Name under which user information can be found
+  base_dn: ou=people,dc=example,dc=net
+
+
+## Service Providers ##
+
+service_providers:
+  -
+    name: DummySP
+    entity_id: https://sp.example.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - cn
+      - sn
+      - givenName
+
+  -
+    name: AnotherSP
+    entity_id: https://example2.mw/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - eduPersonEntitlement
+      - sn
+      - givenName
