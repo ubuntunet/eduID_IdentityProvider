@@ -11,17 +11,14 @@ organisation:
   fqdn: example.edu
   url: "https://{{ fqdn }}"
   type: NREN
-country_code: TLD
 
+country_code: TLD
 federation: eduID
 registration_authority: https://eduid.ubuntunet.net
 metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: false
 
-ldap_url: ldap.example.net
-ldap_port: 389
-ldap_protocol: ldap
 
 support_first_name: Support
 support_last_name: Mail
@@ -32,6 +29,25 @@ admin_email: eduid@example.net
 technical_first_name: Technical
 technical_last_name: Mail
 technical_email: eduid@example.net
+
+
+## Backends ##
+
+ldap:
+  url: ldap.example.net
+  use_ssl: false
+  # ldap or ldaps
+  protocol: ldap
+  # Defaults: 389 for ldap; 636 for ldaps
+  port: 389
+  # Distinguished Name used to connect to the LDAP server
+  bind_dn: cn=Manager,dc=example,dc=net
+  # Distinguished Name under which user information can be found
+  base_dn: ou=people,dc=example,dc=net
+
+
+
+## Service Providers ##
 
 service_providers:
   -
