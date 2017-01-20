@@ -30,17 +30,28 @@ technical_first_name: Technical
 technical_last_name: Mail
 technical_email: support@ternet.or.tz
 
-# ldap_url: ldap.ubuntunet.net
-# ldap_port: 389
-# ldap_protocol: ldap
+## Backends ##
+
+ldap:
+  url: ter-ldap.ternet.or.tz
+  use_ssl: false
+  # ldap or ldaps
+  protocol: ldap
+  # Defaults: 389 for ldap; 636 for ldaps
+  port: 389
+  # Distinguished Name used to connect to the LDAP server
+  bind_dn: cn=Manager,dc=ternet,dc=or,dc=tz
+  # Distinguished Name under which user information can be found
+  base_dn: ou=people,dc=ternet,dc=or,dc=tz
+
 
 service_providers:
-  # -
-  #   name: UbuntuNetDummySP
-  #   entity_id: https://sp.ubuntunet.net/shibboleth
-  #   attributes:
-  #     - eduPersonPrincipalName
-  #     - mail
+  -
+    name: UbuntuNetDummySP
+    entity_id: https://sp.ubuntunet.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
   #     - cn
   #     - sn
   #     - givenName

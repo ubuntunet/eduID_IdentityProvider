@@ -78,18 +78,6 @@
   notify: restart tomcat
 
 
-
-#TODO Replace this with the one below again
-# - name: Touch Metadata Backup File
-#   file: path=/opt/shibboleth-idp/metadata/{{ metadata_file }} state=touch owner=tomcat7
-#   notify: restart tomcat
-
-# - name: Dummy Metadata File
-#   copy: > 
-#     src=dummy-metadata.xml 
-#     dest=/opt/shibboleth-idp/metadata/{{ metadata_file }} 
-#     owner=tomcat7
-
 - name: Download Metadata Backup File from RR 
   get_url: > 
     url={{ metadata_url }}
