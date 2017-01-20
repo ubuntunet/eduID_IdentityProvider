@@ -35,12 +35,12 @@ technical_email: support@ternet.or.tz
 # ldap_protocol: ldap
 
 service_providers:
-  # -
-  #   name: UbuntuNetDummySP
-  #   entity_id: https://sp.ubuntunet.net/shibboleth
-  #   attributes:
-  #     - eduPersonPrincipalName
-  #     - mail
+  -
+    name: UbuntuNetDummySP
+    entity_id: https://sp.ubuntunet.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
   #     - cn
   #     - sn
   #     - givenName
