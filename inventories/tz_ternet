@@ -1,4 +1,4 @@
-ua-idp ansible_ssh_host=41.93.45 92
+ua-idp ansible_ssh_host=idp.ternet.or.tz
 
 [ua]
 ua-idp
@@ -9,5 +9,5 @@ ansible_user=ubuntu
 [idp]
 ua-idp
 
-[ternet:children]
+[tz_ternet:children]
 idp
