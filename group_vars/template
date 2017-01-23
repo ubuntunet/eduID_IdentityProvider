@@ -4,7 +4,8 @@ entity_id: https://{{ fqdn }}/shibboleth
 idp_name: example.net
 idp_displayname: Identity Provider for the Example University
 idp_description: IdP for students and staff at the Example University
-idp_logo: logo.png 
+#Add your own logo in roles/idp/files
+idp_logo: logo-default.png 
 
 organisation:
   name: Example Institutions

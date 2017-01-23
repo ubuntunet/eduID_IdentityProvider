@@ -10,9 +10,11 @@ organisation:
 idp_name: ubuntunet.net
 idp_displayname: Identity Provider for the UbuntuNet Alliance
 idp_description: IdP for the staff at the UbuntuNet Alliance offices
-idp_logo: ualogo.png 
+idp_logo: logo-default.jpg 
 
+country_code: ME
 federation: unida-test
+registration_authority: https://eduid.ubuntunet.net
 metadata_url: https://192.168.33.99/metadata/federation/{{ federation }}/metadata.xml
 metadata_file: metadata.xml
 disregard_tsl_certificate: true

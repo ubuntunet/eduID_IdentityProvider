@@ -10,8 +10,7 @@ idp.title.suffix = Error
 idp.logo = /images/{{ idp_logo }}
 idp.logo.alt-text = Replace or remove this logo
 idp.message = An unidentified error occurred.
-idp.footer = Insert your footer text here.
-
+idp.footer = &copy; {{ ansible_date_time.date }} {{ organisation.year }} | Questions? {{ support_email }}
 idp.client-storage-read.title = Loading Session State...
 idp.client-storage-write.title = Saving Session State...
 idp.client-storage.no-js = Since your browser does not support JavaScript, \
@@ -116,4 +115,4 @@ error.message = An error occurred: $eventId
 
 root.title = Shibboleth IdP
 root.message = No services are available at this location.
-root.footer = Insert your footer text here.
+root.footer = &copy; {{ ansible_date_time.year }} {{ organisation.name }} | Questions? {{ support_email }}

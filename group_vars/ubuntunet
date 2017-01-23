@@ -11,7 +11,7 @@ country_code: MW
 idp_name: ubuntunet.net
 idp_displayname: UbuntuNet Alliance IdP
 idp_description: IdP for the staff at the UbuntuNet Alliance offices
-idp_logo: logo-ua.png 
+idp_logo: logo-ua.png
 
 federation: marida
 registration_authority: https://eduid.ubuntunet.net

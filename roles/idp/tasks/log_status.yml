@@ -9,9 +9,9 @@
     dest=/opt/shibboleth-idp/messages/error-messages.properties
 
 
-- name: Copy logo
+- name: Copy Logo
   copy: >
-    src= {{ idp_logo }}
+    src= "{{ idp_logo | default('logo-default.png')}}"
     dest=/opt/shibboleth-idp/webapp/images/
 
 

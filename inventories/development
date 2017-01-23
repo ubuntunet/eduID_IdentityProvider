@@ -1,4 +1,4 @@
-shibboleth_idp ansible_host=192.168.33.45
+shibboleth_idp ansible_host=192.168.33.44
 
 [development:children]
 idp
