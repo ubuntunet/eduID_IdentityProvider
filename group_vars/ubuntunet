@@ -8,10 +8,16 @@ organisation:
   type: NREN
 country_code: MW
 
-idp_name: ubuntunet.net
-idp_displayname: UbuntuNet Alliance IdP
-idp_description: IdP for the staff at the UbuntuNet Alliance offices
-idp_logo: logo-ua.png
+idp:
+  name: ubuntunet.net
+  displayname: UbuntuNet Alliance IdP
+  description: IdP for the staff at the UbuntuNet Alliance offices
+  logo: logo-ua.png
+
+# idp_name: ubuntunet.net
+# idp_displayname: UbuntuNet Alliance IdP
+# idp_description: IdP for the staff at the UbuntuNet Alliance offices
+# idp_logo: logo-ua.png
 
 federation: marida
 registration_authority: https://eduid.ubuntunet.net

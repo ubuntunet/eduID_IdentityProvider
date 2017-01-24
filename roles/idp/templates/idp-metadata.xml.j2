@@ -12,12 +12,12 @@ xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
     <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:mace:shibboleth:1.0">
 
         <Extensions>
-            <shibmd:Scope regexp="false">{{ idp_name }}</shibmd:Scope>
+            <shibmd:Scope regexp="false">{{ idp.name }}</shibmd:Scope>
 
             <mdui:UIInfo>
-                <mdui:DisplayName xml:lang="{{ idp_language }}">{{ idp_displayname }}</mdui:DisplayName>
-                <mdui:Description xml:lang="{{ idp_language }}">{{ idp_description }}</mdui:Description>
-                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp_logo }}</mdui:Logo>
+                <mdui:DisplayName xml:lang="{{ idp_language }}">{{ idp.displayname }}</mdui:DisplayName>
+                <mdui:Description xml:lang="{{ idp_language }}">{{ idp.description }}</mdui:Description>
+                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp.logo }}</mdui:Logo>
             </mdui:UIInfo>
         </Extensions>
 
@@ -58,7 +58,7 @@ xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
     <AttributeAuthorityDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol">
 
         <Extensions>
-            <shibmd:Scope regexp="false">{{ idp_name }}</shibmd:Scope>
+            <shibmd:Scope regexp="false">{{ idp.name }}</shibmd:Scope>
         </Extensions>
 
         <KeyDescriptor>
