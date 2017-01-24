@@ -1,12 +1,13 @@
 fqdn: idp.example.net
 entity_id: https://{{ fqdn }}/shibboleth
 
-idp_name: example.net
-idp_displayname: Identity Provider for the Example University
-idp_description: IdP for students and staff at the Example University
-#Add your own logo in roles/idp/files
-idp_logo: logo-default.png 
-
+idp:
+  name: example.net
+  displayname: Identity Provider for the Example University
+  description: IdP for students and staff at the Example University
+  #Add your own logo in roles/idp/files
+  logo: logo-default.png 
+  
 organisation:
   name: Example Institutions
   fqdn: example.edu

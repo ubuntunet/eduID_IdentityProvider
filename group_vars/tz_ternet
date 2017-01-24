@@ -8,11 +8,13 @@ organisation:
   type: NREN
 country_code: TG
 
-idp_name: ternet.or.tz
-idp_displayname: TERNET IdP
-idp_description: IdP for the Tanzanian Science Gateways
-idp_logo: logo-ternet.jpg
 
+idp:
+  name: ternet.or.tz
+  displayname: TERNET IdP
+  description: IdP for the Tanzanian Science Gateways
+  logo: logo-ternet.jpg
+  
 federation: eduID_tz
 registration_authority: https://eduid.ubuntunet.net
 #metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml

@@ -6,5 +6,5 @@ sudren-idp
 [idp:vars]
 ansible_user=idp
 
-[sudren:children]
+[sd_sudren:children]
 idp
