@@ -8,10 +8,11 @@ organisation:
   type: NREN
 country_code: UG
 
-idp_name: idp.renu.ac.ug
-idp_displayname: Identity Provider for RENU
-idp_description: IdP for the staff at the RENU office
-idp_logo: logo-renu.png 
+idp:
+  name: idp.renu.ac.ug
+  displayname: Identity Provider for RENU
+  description: IdP for the staff at the RENU office
+  logo: logo-renu.png 
 
 federation: RIF
 registration_authority: https://eduid.ubuntunet.net

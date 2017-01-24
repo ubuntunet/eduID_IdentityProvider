@@ -9,5 +9,5 @@ ansible_user=ubuntu
 [idp]
 ua-idp
 
-[ubuntunet:children]
+[mw_ubuntunet:children]
 idp

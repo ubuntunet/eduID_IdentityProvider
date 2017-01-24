@@ -8,10 +8,11 @@ organisation:
   type: NREN
 country_code: SD
 
-idp_name: suin.edu.sd
-idp_displayname: SudREN IdP
-idp_description: IdP for the staff at SudREN
-idp_logo: logo-sudren.png 
+idp:
+  name: suin.edu.sd
+  displayname: SudREN IdP
+  description: IdP for the staff at SudREN
+  logo: logo-sudren.png 
 
 federation: sudif
 registration_authority: https://eduid.ubuntunet.net

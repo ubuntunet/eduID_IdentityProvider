@@ -9,5 +9,5 @@ ansible_user=ubuntu
 [idp]
 renu-idp
 
-[renu:children]
+[ug_renu:children]
 idp
