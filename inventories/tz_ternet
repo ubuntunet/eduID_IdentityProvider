@@ -1,13 +1,13 @@
-ua-idp ansible_ssh_host=idp.ternet.or.tz
+ua-shibboleth_idp ansibled_host=idp.ternet.or.tz
 
 [ua]
 ua-idp
 
 [ua:vars]
-ansible_user=ubuntu
+ansible_user=sysadm
 
 [idp]
-ua-idp
+shibboleth_idp
 
 [tz_ternet:children]
 idp
