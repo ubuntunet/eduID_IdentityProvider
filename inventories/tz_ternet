@@ -1,4 +1,4 @@
-shibboleth_idp ansibled_host=idp.ternet.or.tz
+shibboleth_idp ansible_host=idp.ternet.or.tz
 
 [ua]
 ua-idp
