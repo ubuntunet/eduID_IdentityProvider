@@ -1,13 +1,10 @@
 shibboleth_idp ansible_host=idp.ternet.or.tz
 
-[ua]
-ua-idp
-
-[ua:vars]
-ansible_user=sysadm
-
 [idp]
 shibboleth_idp
+
+[idp:vars]
+ansible_user=sysadm
 
 [tz_ternet:children]
 idp

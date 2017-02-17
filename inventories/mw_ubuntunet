@@ -1,4 +1,4 @@
-ua-idp ansible_ssh_host=idp.ubuntunet.net
+ua-idp ansible_host=idp.ubuntunet.net
 
 [ua]
 ua-idp
