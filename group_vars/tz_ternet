@@ -6,14 +6,14 @@ organisation:
   fqdn: ternet.or.tz
   url: "https://{{ fqdn }}"
   type: NREN
-country_code: TG
+country_code: TZ
 
 
 idp:
   name: ternet.or.tz
   displayname: TERNET IdP
   description: IdP for the Tanzanian Science Gateways
-  logo: logo-ternet.jpg
+  logo: ternet-logo.jpg
   
 federation: eduID_tz
 registration_authority: https://eduid.ubuntunet.net
