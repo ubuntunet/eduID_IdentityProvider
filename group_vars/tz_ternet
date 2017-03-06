@@ -13,7 +13,7 @@ idp:
   name: ternet.or.tz
   displayname: TERNET IdP
   description: IdP for the Tanzanian Science Gateways
-  logo: ternet-logo.jpg
+  logo: logo-ternet.jpg
   
 federation: eduID_tz
 registration_authority: https://eduid.ubuntunet.net
