@@ -4,5 +4,3 @@ idp_language: en
 certificate_key_path: /etc/ssl/private/{{ fqdn }}.key
 certificate_cert_path: /etc/ssl/certs/{{ fqdn }}.crt
 certificate_chain_path: /etc/ssl/certs/{{ fqdn }}.crt
-
-
