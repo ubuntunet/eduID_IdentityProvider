@@ -62,4 +62,12 @@ If you already have a federation on the Resource Registry:
 * Submit the registration request by clicking on "Register"
 
 
+### RedHat 6
+
+The playbook runs on RHEL6, but when running it on PPC architecture, you'll need to download and install current versions of Java (7 or 8) and Tomcat7 yourself.
+
+Here is a useful guide:
+http://lifeofageekadmin.com/install-tomcat-7-java-1-7-centos-6-rhel-6
+
+There is an error, replace /app with /opt in the init.d and setenv.sh scripts.
 

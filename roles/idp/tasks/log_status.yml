@@ -25,10 +25,16 @@
   #   url=https://repo1.maven.org/maven2/jstl/jstl/1.2/jstl-1.2.jar
   #   dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
 
-- name: Enable IdP status URL
+- name: Enable IdP status URL on RedHat
+  shell: "/opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
+  notify: restart tomcat
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: Enable IdP status URL on Debian
   shell: "JAVACMD=/usr/bin/java /opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
   notify: restart tomcat
-
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  
 - name: Allow access from host machine
   replace: >
     dest=/opt/shibboleth-idp/conf/access-control.xml

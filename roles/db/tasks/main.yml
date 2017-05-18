@@ -1,19 +1,44 @@
 # 5. SQL database: PostgreSQL 9
 
 # 5.1. Installation
-- name: Install Postgres, Java Adapter and Psycog for postgresql_db module
+- name: Install Postgres on RedHat
+  package: "name={{ postgres.name }} state=present"
+  notify: restart postgres
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: Install Postgres on Debian
+  apt: pkg={{ postgres.name }} update_cache=yes cache_valid_time=3600
+  notify: restart postgres
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+# - name: Init Postgres on RedHat
+#   command: service postgresql initdb
+#   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: Install Postgres Java Adapter and Psycog on RedHat
+  package: name={{ item }} state=latest
+  #apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
+  with_items:
+    - "{{ postgres.java_driver }}"
+    - "{{ postgres.python_driver }}"
+  notify: restart postgres
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+
+- name: Install Postgres Java Adapter and Psycog on Debian
+  # package: name={{ item }} state=latest
   apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
   with_items:
-    - postgresql
-    - libpostgresql-jdbc-java
-    - python-psycopg2
+    - "{{ postgres.java_driver }}"
+    - "{{ postgres.python_driver }}"
+  notify: restart postgres
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 # 5.2. Database creation and settings
 - name: Create DB user
   postgresql_user: name=shibboleth
   become_user: postgres
 
-- name: Create database for Shibboleth
+- name: Create database for Shibboleth on Debian
   become_user: postgres
   postgresql_db: >
     name=shibboleth
@@ -30,13 +55,13 @@
 
 - name: Enable autovacuum
   replace: >
-    dest=/etc/postgresql/{{ postgres_version }}/main/postgresql.conf 
+    dest={{ postgres.conf_path }}/postgresql.conf 
     regexp='#autovacuum_vacuum_scale_factor = 0.2' 
     replace='autovacuum_vacuum_scale_factor = 0.002'
 
 - name: Enable autoanalyze
   replace: >
-    dest=/etc/postgresql/{{ postgres_version }}/main/postgresql.conf 
+    dest={{ postgres.conf_path }}/postgresql.conf 
     regexp='#autovacuum_analyze_scale_factor = 0.1' 
     replace='autovacuum_analyze_scale_factor = 0.001'
   notify: restart postgres

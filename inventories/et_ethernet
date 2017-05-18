@@ -1,0 +1,14 @@
+shibboleth_idp ansible_host=idp.ethernet.edu.et ansible_user=root
+#shibboleth_idp1 ansible_host=192.168.0.125 ansible_user=root
+shibboleth_idp2 ansible_host=awash.ubuntunet.net ansible_user=ubuntu
+
+[et_ethernet:children]
+idp
+
+[idp]
+shibboleth_idp
+#shibboleth_idp1
+#shibboleth_idp2
+
+[idp:vars]
+#ansible_user=ubuntu

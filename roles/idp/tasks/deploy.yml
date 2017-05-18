@@ -13,6 +13,7 @@
 
 - name: Rebuild id.war
   shell: "JAVACMD=/usr/bin/java /opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
+  #shell: "/opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
   notify: restart tomcat
 
 
@@ -21,5 +22,5 @@
 - name: Enable IdP Web application
   template: > 
     src=catalina_idp.xml.j2 
-    dest=/etc/tomcat7/Catalina/localhost/idp.xml
+    dest={{ tomcat.path }}/Catalina/localhost/idp.xml
   notify: restart tomcat
