@@ -1,0 +1,30 @@
+shibboleth_version: 3.3.1
+
+postgres_version: 9.3
+openjdk_version: 7
+jre_version: java-1.7.0-openjdk-amd64
+# java_path: /usr/lib/jvm/{{ jre_version }}
+java_path: /usr/lib/jvm/{{ jre_version }}/jre
+
+# catalina_home: /usr/share/tomcat7
+# catalina_base: /var/lib/tomcat7
+tomcat:
+  version: 7
+  user: tomcat7
+  path: /etc/tomcat7
+
+
+webserver: 
+  name: apache2
+  conf_path: /etc/apache2/sites-available
+
+postgres:
+  name: postgresql
+  #version: 9.5
+  java_driver: libpostgresql-jdbc-java
+  python_driver: python-psycopg2
+  conf_path: /etc/postgresql/{{ postgres_version }}/main
+
+certificate_key_path: /etc/ssl/private/{{ fqdn }}.key
+certificate_cert_path: /etc/ssl/certs/{{ fqdn }}.crt
+certificate_chain_path: /etc/ssl/certs/{{ fqdn }}.crt

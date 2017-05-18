@@ -12,7 +12,7 @@ ERROR: command execution failed, see above. Aborting."' ERR
 INSTALLDIR={{ idp_home }}
 SCOPE={{ idp.name }}
 SVCNAME={{ fqdn }}
-TCUSER={{ tomcat_user }}
+TCUSER={{ tomcat.user }}
 
 
 if [ -d $INSTALLDIR ]; then
@@ -38,7 +38,9 @@ mkdir $INSTALLDIR/{bin,dist,doc,system,webapp}
 #   exit 1
 # fi
 
-export JAVA_HOME=${JAVA_HOME:-$(ls -d /usr/lib/jvm/{{ jre_version }} 2>/dev/null | tail -1)/jre}
+export JAVA_HOME=${JAVA_HOME:-$(ls -d {{ java_path }} 2>/dev/null | tail -1)}
+#export JAVA_HOME=${JAVA_HOME:-$(ls -d /usr/lib/jvm)/jre}
+#export JAVA_HOME=${JAVA_HOME:-$(ls -d /usr/lib/jvm)/{{ jre_version }}}
 if [ -z "$JAVA_HOME" ]; then
   echo "\$JAVA_HOME not set, and no suitable JRE version found under /usr/lib/jvm"
   exit 1

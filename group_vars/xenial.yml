@@ -1,9 +1,0 @@
-postgres_version: 9.5
-openjdk_version: 8
-jre_version: default-java
-tomcat_version: 7
-tomcat_user: tomcat7
-catalina_home: /usr/share/tomcat7
-catalina_base: /var/lib/tomcat7
-
-shibboleth_version: 3.2.1
