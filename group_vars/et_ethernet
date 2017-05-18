@@ -12,7 +12,7 @@ idp:
 organisation:
   name: EthERNet
   fqdn: ethernet.edu.et
-  url: "https://{{ fqdn }}"
+  url: "http://{{ fqdn }}"
   type: NREN
 
 country_code: ET
