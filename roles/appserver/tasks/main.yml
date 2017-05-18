@@ -11,17 +11,20 @@
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
 # 4.2. Servlet container: Apache Tomcat 7
-- name: Install Tomcat 7
-  apt: name=tomcat{{ tomcat_version }} update_cache=yes cache_valid_time=3600
+- name: Install Tomcat on Ubuntu
+  # package: name="tomcat{{ tomcat.version }}" state=latest
+  apt: name=tomcat{{ tomcat.version }} update_cache=yes cache_valid_time=3600
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
 - name: Copy Tomcat config file
   copy: > 
     src=files/tomcat.xml 
-    dest=/etc/tomcat{{ tomcat_version }}/server.xml
+    dest={{ tomcat.path }}/server.xml
   notify: restart tomcat
 
 - name: Adjust JAVA options
   replace: >
-    dest=/etc/default/tomcat{{ tomcat_version }} 
+    dest=/etc/default/tomcat{{ tomcat.version }} 
     regexp='JAVA_OPTS="-Djava.awt.headless=true -Xmx128m -XX:\+UseConcMarkSweepGC"' 
     replace='JAVA_OPTS="-server -Xmx1024m -Djava.security.egd=file:/dev/./urandom"'
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
