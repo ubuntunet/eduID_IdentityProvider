@@ -1,0 +1,24 @@
+shibboleth_version: 3.3.1
+#shibboleth_version: 3.2.1
+
+tomcat:
+  version: 7
+  user: tomcat
+  path: /opt/tomcat/tomcat/conf
+
+jre_version: current
+java_path: /opt/java/{{ jre_version }}
+
+webserver: 
+  name: httpd
+  conf_path: /etc/httpd/conf
+
+postgres:
+  name: postgresql-server
+  java_driver: postgresql-jdbc
+  python_driver: python-psycopg2
+  conf_path: /var/lib/pgsql/data
+
+certificate_key_path: /etc/pki/tls/private/{{ fqdn }}.key
+certificate_cert_path: /etc/pki/tls/certs/{{ fqdn }}.crt
+certificate_chain_path: /etc/pki/tls/certs/{{ fqdn }}.crt
