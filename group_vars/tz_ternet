@@ -22,6 +22,12 @@ metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }
 metadata_file: metadata.xml
 disregard_tsl_certificate: false
 
+federation: Grid_test
+registration_authority: https://gridp.garr.it
+metadata_url: https://gridp.garr.it/metadata/gridp-test.xml
+metadata_file: gridp-test.xml 
+disregard_tsl_certificate: false
+
 support_first_name: Support
 support_last_name: Mail
 support_email: support@ternet.or.tz
@@ -54,3 +60,15 @@ service_providers:
     attributes:
       - eduPersonPrincipalName
       - mail
+
+ # -
+  #   name: AnotherSP
+  #   entity_id: https://gridp.garr.it/metadata/gridp-test.xml 
+  #   attributes:
+  #     - surname
+  #     - given name
+  #	- email
+  #     - eduPersonPrincipalName
+  #     - eduPersonTargetedID
+
+
