@@ -11,7 +11,7 @@
 
 - name: Copy Logo
   copy: >
-    src= "{{ idp.logo | default('logo-default.png')}}"
+    src= "{{ idp.logo|default('logo-default.png', true)}}"
     dest=/opt/shibboleth-idp/webapp/images/
 
 
