@@ -61,13 +61,20 @@ service_providers:
       - eduPersonPrincipalName
       - mail
 
+  -
+    name:  Africa Grid Science Gateway
+    entity_id: https://sgw.africa-grid.org/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+
  # -
   #   name: AnotherSP
   #   entity_id: https://gridp.garr.it/metadata/gridp-test.xml 
   #   attributes:
   #     - surname
   #     - given name
-  #	- email
+  #	    - email
   #     - eduPersonPrincipalName
   #     - eduPersonTargetedID
 
