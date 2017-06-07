@@ -33,12 +33,12 @@ federations:
   
   # Additional Federations
   # Copy and paste this entry as many times as needed
-  # - 
-  #   name: unida
-  #   registration_authority: https://eduid.ubuntunet.net
-  #   metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/unida/metadata.xml
-  #   metadata_file: metadata-unida.xml
-  #   disregard_tsl_certificate: false
+  - 
+    name: unida
+    registration_authority: https://eduid.ubuntunet.net
+    metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/unida/metadata.xml
+    metadata_file: metadata-unida.xml
+    disregard_tsl_certificate: false
 
 support_first_name: Support
 support_last_name: Mail
