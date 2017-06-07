@@ -75,6 +75,16 @@ service_providers:
       - sn
       - givenName
 
+  -
+    name: Filesender2
+    entity_id: https://filesender2.ethernet.edu.et
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - cn
+      - sn
+      - givenName
+
   # -
   #   name: AnotherSP
   #   entity_id: https://example2.mw/shibboleth
