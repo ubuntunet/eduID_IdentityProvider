@@ -17,7 +17,7 @@ xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
             <mdui:UIInfo>
                 <mdui:DisplayName xml:lang="{{ idp_language }}">{{ idp.displayname }}</mdui:DisplayName>
                 <mdui:Description xml:lang="{{ idp_language }}">{{ idp.description }}</mdui:Description>
-                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp.logo }}</mdui:Logo>
+                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp.logo|default('logo-default.png', true)}}</mdui:Logo>
             </mdui:UIInfo>
         </Extensions>
 
