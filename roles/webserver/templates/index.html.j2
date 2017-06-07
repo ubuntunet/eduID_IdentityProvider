@@ -21,14 +21,14 @@
 
     <div class="container">
 
-      <h2>This is the Identity Provider of {{ organisation.name }}, a participant in the {{ federation }} federation.</h2>
+      <h2>This is the Identity Provider of {{ organisation.name }}, a participant in the {{ federations[0].name }} federation.</h2>
 
       <p>
         Accessing this page directly is unusual. You normally get redirected here when trying to access a protected resource.
       </p>
 
       <p>
-        For additional information, visit <a href="{{ registration_authority }}">the eduID website</a> or <a href="mailto:{{ support_email }}">contact our support</a>.
+        For additional information, visit <a href="{{ federations[0].registration_authority }}">the eduID website</a> or <a href="mailto:{{ support_email }}">contact our support</a>.
       </p>
 
     </div>

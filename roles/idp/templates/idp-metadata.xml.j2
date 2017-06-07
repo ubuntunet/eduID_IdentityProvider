@@ -6,7 +6,7 @@
 xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
 
     <Extensions>
-        <mdrpi:RegistrationInfo registrationAuthority="{{ registration_authority }}" />
+        <mdrpi:RegistrationInfo registrationAuthority="{{ federations[0].registration_authority }}" />
     </Extensions>
 
     <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:mace:shibboleth:1.0">
