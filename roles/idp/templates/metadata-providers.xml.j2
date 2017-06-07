@@ -28,12 +28,13 @@
     The EntityRoleWhiteList saves memory by only loading metadata from SAML roles
     that the IdP needs to interoperate with.
     -->
-    
-    <MetadataProvider id="FederationMetadata"
+  {% for federation in federations %}
+
+    <MetadataProvider id="{{ federation.name }}Metadata"
                       xsi:type="FileBackedHTTPMetadataProvider"
-                      metadataURL="{{ metadata_url }}"
-                      backingFile="{{ idp_home }}/metadata/{{ metadata_file }}"
-                      disregardTLSCertificate="{{ disregard_tsl_certificate }}" >
+                      metadataURL="{{ federation.metadata_url }}"
+                      backingFile="{{ idp_home }}/metadata/{{ federation.metadata_file }}"
+                      disregardTLSCertificate="{{ federation.disregard_tsl_certificate }}" >
        <MetadataFilter  xsi:type="SignatureValidation"
             requireSignedRoot="true"
             certificateFile="{{ idp_home }}/credentials/fedsigner.crt.pem" />
@@ -43,5 +44,7 @@
             <RetainedRole>md:SPSSODescriptor</RetainedRole>
         </MetadataFilter>
     </MetadataProvider>
+
+  {% endfor %}
 
 </MetadataProvider>

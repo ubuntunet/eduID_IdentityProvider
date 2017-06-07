@@ -3,10 +3,10 @@
 
 # 6.10. Login form customization
 
-- name: Copy View/Error Messages properties
+- name: Copy customized messages
   template: >
-    src=error-messages.properties.j2
-    dest=/opt/shibboleth-idp/messages/error-messages.properties
+    src=messages.properties.j2
+    dest=/opt/shibboleth-idp/messages/messages.properties
 
 
 - name: Copy Logo
