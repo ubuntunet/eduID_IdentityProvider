@@ -7,7 +7,7 @@ idp:
   displayname: Identity Provider for EthERNet
   description: IdP for the research community in Ethiopia
   #Add your own logo in roles/idp/files
-  logo: logo-default.png 
+  logo: logo-ethernet.png 
   
 organisation:
   name: EthERNet
