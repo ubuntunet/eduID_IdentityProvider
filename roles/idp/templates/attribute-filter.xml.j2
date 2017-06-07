@@ -29,7 +29,7 @@
     <AttributeFilterPolicy id="releaseToAnySpInYourFederation">
       <PolicyRequirementRule
          xsi:type="InEntityGroup"
-         groupID="{{ federation }}.ubuntunet.net"/>
+         groupID="{{ federations[0].name }}.ubuntunet.net"/>
 
         <AttributeRule attributeID="displayName">
             <PermitValueRule xsi:type="ANY" />

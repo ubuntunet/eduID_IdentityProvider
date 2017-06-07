@@ -14,19 +14,37 @@ idp:
   displayname: TERNET IdP
   description: IdP for the Tanzanian Science Gateways
   logo: logo-ternet.jpg
-  
-federation: eduID_tz
-registration_authority: https://eduid.ubuntunet.net
-#metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
-metadata_file: metadata.xml
-disregard_tsl_certificate: false
 
-federation: Grid_test
-registration_authority: https://gridp.garr.it
-metadata_url: https://gridp.garr.it/metadata/gridp-test.xml
-metadata_file: gridp-test.xml 
-disregard_tsl_certificate: false
+federations:
+  # Main Federation
+  - 
+    name: eduID_tz
+    registration_authority: https://eduid.ubuntunet.net
+    metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/eduID_tz/metadata.xml
+    metadata_file: metadata.xml
+    disregard_tsl_certificate: false
+  
+  # Additional Federations
+  # Copy and paste this entry as many times as needed
+  - 
+    name: Grid_test
+    registration_authority: https://gridp.garr.it
+    metadata_url: https://gridp.garr.it/metadata/gridp-test.xml
+    metadata_file: gridp-test.xml
+    disregard_tsl_certificate: false
+
+  
+# federation: eduID_tz
+# registration_authority: https://eduid.ubuntunet.net
+# metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
+# metadata_file: metadata.xml
+# disregard_tsl_certificate: false
+
+# federation: Grid_test
+# registration_authority: https://gridp.garr.it
+# metadata_url: https://gridp.garr.it/metadata/gridp-test.xml
+# metadata_file: gridp-test.xml 
+# disregard_tsl_certificate: false
 
 support_first_name: Support
 support_last_name: Mail

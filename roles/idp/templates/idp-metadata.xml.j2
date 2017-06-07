@@ -6,7 +6,7 @@
 xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
 
     <Extensions>
-        <mdrpi:RegistrationInfo registrationAuthority="{{ registration_authority }}" />
+        <mdrpi:RegistrationInfo registrationAuthority="{{ federations[0].registration_authority }}" />
     </Extensions>
 
     <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:mace:shibboleth:1.0">
@@ -17,7 +17,7 @@ xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" entityID="{{ entity_id }}">
             <mdui:UIInfo>
                 <mdui:DisplayName xml:lang="{{ idp_language }}">{{ idp.displayname }}</mdui:DisplayName>
                 <mdui:Description xml:lang="{{ idp_language }}">{{ idp.description }}</mdui:Description>
-                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp.logo }}</mdui:Logo>
+                <mdui:Logo height="80" width="80">https://{{ fqdn }}/idp/images/{{ idp.logo|default('logo-default.png', true)}}</mdui:Logo>
             </mdui:UIInfo>
         </Extensions>
 

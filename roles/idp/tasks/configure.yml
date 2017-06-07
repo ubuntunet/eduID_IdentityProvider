@@ -80,9 +80,9 @@
 
 - name: Download Metadata Backup File from RR 
   get_url: > 
-    url={{ metadata_url }}
+    url={{ federations[0].metadata_url }}
     validate_certs=no
-    dest={{ idp_home }}/metadata/{{ metadata_file }}
+    dest={{ idp_home }}/metadata/{{ federations[0].metadata_file }}
     owner={{ tomcat.user }}
   notify: restart tomcat
 
