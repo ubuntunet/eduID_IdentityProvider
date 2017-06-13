@@ -60,7 +60,8 @@ ldap:
   # Defaults: 389 for ldap; 636 for ldaps
   port: 389
   # Distinguished Name used to connect to the LDAP server
-  bind_dn: cn=Manager,dc=ubuntunet,dc=net
+  bind_dn: "{{ ldap_bind_dn_ubuntunet }}"
+  password: "{{ ldap_bind_credential_ubuntunet }}"
   # Distinguished Name under which user information can be found
   base_dn: ou=people,dc=ubuntunet,dc=net
 
