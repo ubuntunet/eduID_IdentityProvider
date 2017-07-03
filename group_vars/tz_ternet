@@ -87,6 +87,16 @@ service_providers:
       - eduPersonPrincipalName
       - mail
 
+  - 
+    name: SciGaIADiscourse
+    entity_id: https://discourse.sci-gaia.eu/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - sn
+      - givenName
+
+
  # -
   #   name: AnotherSP
   #   entity_id: https://gridp.garr.it/metadata/gridp-test.xml 
