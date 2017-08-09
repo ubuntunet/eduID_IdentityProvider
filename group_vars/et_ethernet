@@ -8,6 +8,7 @@ idp:
   description: IdP for the research community in Ethiopia
   #Add your own logo in roles/idp/files
   logo: logo-ethernet.png 
+  optional_encryption: false
   
 organisation:
   name: EthERNet

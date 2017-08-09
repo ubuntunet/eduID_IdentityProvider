@@ -13,6 +13,7 @@ idp:
   displayname: Identity Provider for RENU
   description: IdP for the staff at the RENU office
   logo: logo-renu.png 
+  optional_encryption: false
 
 federation: RIF
 registration_authority: https://eduid.ubuntunet.net

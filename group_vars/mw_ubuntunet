@@ -13,6 +13,7 @@ idp:
   displayname: UbuntuNet Alliance IdP
   description: IdP for the staff at the UbuntuNet Alliance offices
   logo: logo-ua.png
+  optional_encryption: true
 
 
 # federation: marida
@@ -112,3 +113,12 @@ service_providers:
       - eduPersonPrincipalName
       - sn
       - givenName
+
+  -
+    name: UbuntuNet Website Wordpress
+    entity_id: http://wordpress.ubuntunet.net/app/plugins/miniorange-saml-20-single-sign-on
+    attributes:
+      - mail
+      - sn
+      - givenName
+

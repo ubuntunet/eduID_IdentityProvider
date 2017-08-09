@@ -13,6 +13,7 @@ idp:
   displayname: SudREN IdP
   description: IdP for the staff at SudREN
   logo: logo-sudren.png 
+  optional_encryption: false
 
 federation: sudif
 registration_authority: https://eduid.ubuntunet.net
