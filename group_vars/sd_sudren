@@ -12,8 +12,7 @@ idp:
   name: suin.edu.sd
   displayname: SudREN IdP
   description: IdP for the staff at SudREN
-  logo: logo-sudren.png 
-  optional_encryption: false
+  logo: logo-sudren.png
 
 federation: sudif
 registration_authority: https://eduid.ubuntunet.net
