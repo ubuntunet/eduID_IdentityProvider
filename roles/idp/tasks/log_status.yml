@@ -4,23 +4,23 @@
 # 6.10. Login form customization
 
 - name: Copy customized messages
-  template: >
-    src=messages.properties.j2
-    dest=/opt/shibboleth-idp/messages/messages.properties
+  template:
+    src: messages.properties.j2
+    dest: /opt/shibboleth-idp/messages/messages.properties
 
 
 - name: Copy Logo
-  copy: >
-    src= "{{ idp.logo|default('logo-default.png', true)}}"
-    dest=/opt/shibboleth-idp/webapp/images/
+  copy:
+    src: "{{ idp.logo|default('logo-default.png', true)}}"
+    dest: /opt/shibboleth-idp/webapp/images/
 
 
 # 6.11. IdP status URL configuration
 
 - name: Download IdP Status Page
-  copy: >
-    src=jstl-1.2.jar 
-    dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
+  copy:
+    src: jstl-1.2.jar 
+    dest: /opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
   # get_url: > 
   #   url=https://repo1.maven.org/maven2/jstl/jstl/1.2/jstl-1.2.jar
   #   dest=/opt/shibboleth-idp/edit-webapp/WEB-INF/lib/jstl-1.2.jar
@@ -36,9 +36,9 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
   
 - name: Allow access from host machine
-  replace: >
-    dest=/opt/shibboleth-idp/conf/access-control.xml
-    regexp="{'127.0.0.1/32', '::1/128'}"
-    replace="{'127.0.0.1/32', '::1/128', '192.168.33.0/24'}"
+  replace:
+    dest: /opt/shibboleth-idp/conf/access-control.xml
+    regexp: "{'127.0.0.1/32', '::1/128'}"
+    replace: "{'127.0.0.1/32', '::1/128', '192.168.33.0/24'}"
   notify: restart tomcat
   
