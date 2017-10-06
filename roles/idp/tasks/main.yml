@@ -1,6 +1,6 @@
-- include: install.yml
-- include: configure.yml
-- include: authentication.yml
-- include: attribute.yml
-- include: log_status.yml
-- include: deploy.yml
+- import_tasks: install.yml
+- import_tasks: configure.yml
+- import_tasks: authentication.yml
+- import_tasks: attribute.yml
+- import_tasks: log_status.yml
+- import_tasks: deploy.yml
