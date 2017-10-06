@@ -14,8 +14,9 @@
 - name: Rebuild id.war
   shell: "JAVACMD=/usr/bin/java /opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
   #shell: "/opt/shibboleth-idp/bin/build.sh -Didp.target.dir=/opt/shibboleth-idp"
+  tags:
+    - sp
   notify: restart tomcat
-
 
 # 6.13. Web application enablement
 
