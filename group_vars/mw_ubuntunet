@@ -13,7 +13,7 @@ idp:
   displayname: UbuntuNet Alliance IdP
   description: IdP for the staff at the UbuntuNet Alliance offices
   logo: logo-ua.png
-  optional_encryption: true
+  # optional_encryption: false
 
 
 # federation: marida
@@ -88,7 +88,7 @@ service_providers:
 
   -
     name: eduroam_mw_registry
-    entity_id: https://eduroam.maren.ac.mw/shibboleth
+    entity_id: https://eduroam.ubuntunet.net/shibboleth
     attributes:
       - mail
       - eduPersonPrincipalName
@@ -115,10 +115,29 @@ service_providers:
       - givenName
 
   -
-    name: UbuntuNet Website Wordpress
-    entity_id: http://wordpress.ubuntunet.net/app/plugins/miniorange-saml-20-single-sign-on
+    name: eduID Resource Registry
+    entity_id: https://rr.ubuntunet.net/shibboleth
     attributes:
+      - eduPersonPrincipalName
       - mail
       - sn
       - givenName
+      - isMemberOf
+
+  -
+    name: UA Community Forum
+    entity_id: https://community.ubuntunet.net
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - sn
+      - givenName
+
+  -
+    name: UA Filesender
+    entity_id: https://filesender.ubuntunet.net
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - displayName
 
