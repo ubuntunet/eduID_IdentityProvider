@@ -28,9 +28,9 @@
 #     owner=tomcat{{ tomcat.version }}
 
 - name: Copy global.xml
-  copy: > 
-    src=global.xml
-    dest={{ idp_home }}/conf
+  copy:
+    src: global.xml
+    dest: "{{ idp_home }}/conf"
 
 # 6.3. Federation metadata configuration
 # - name: Copy SWITCH metadata providers

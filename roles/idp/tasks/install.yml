@@ -10,39 +10,39 @@
 
 # 6.1. IdP installation
 - name: Create download directory
-  file: >
-    path=/usr/local/dist
-    state=directory
+  file:
+    path: /usr/local/dist
+    state: directory
 
 - name: Download Shibboleth IdP
-  get_url: > 
-    url=https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
-    dest=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
-    validate_certs=no
+  get_url:
+    url: https://shibboleth.net/downloads/identity-provider/{{ shibboleth_version }}/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    dest: /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz
+    validate_certs: no
 
 - name: Extract Shibboleth IdP
-  unarchive: > 
-    src=/usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz 
-    dest=/usr/local/dist
-    copy=no
+  unarchive:
+    src: /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}.tar.gz 
+    dest: /usr/local/dist
+    copy: no
 
 - name: Copy customised install script
-  template: >
-    src=idp-install.sh.j2
-    dest=/usr/local/dist/idp-install.sh
-    mode=0700
+  template:
+    src: idp-install.sh.j2
+    dest: /usr/local/dist/idp-install.sh
+    mode: 0700
 
 - name: Copy signing cert to this machine, if it exists
-  fetch: >
-    src={{ idp_home }}/credentials/idp.crt 
-    dest=roles/idp/files/{{ fqdn }}_idp.crt 
-    flat=yes
+  fetch:
+    src: "{{ idp_home }}/credentials/idp.crt"
+    dest: roles/idp/files/{{ fqdn }}_idp.crt 
+    flat: yes
 
 - name: Copy signing key to this machine, if it exists
-  fetch: >
-    src={{ idp_home }}/credentials/idp.key 
-    dest=roles/idp/files/{{ fqdn }}_idp.key
-    flat=yes
+  fetch:
+    src: "{{ idp_home }}/credentials/idp.key" 
+    dest: roles/idp/files/{{ fqdn }}_idp.key
+    flat: yes
 
 
 # Signing Certificates
@@ -71,15 +71,15 @@
 
 ################## Then < Copy existing certificates to remote #######################
 - name: Copy signing key
-  copy: > 
-    src={{ fqdn }}_idp.key
-    dest={{ idp_home }}/credentials/idp.key
+  copy:
+    src: "{{ fqdn }}_idp.key"
+    dest: "{{ idp_home }}/credentials/idp.key"
   when: have_sign_key.stat.exists == True
 
 - name: Copy signing certificate
-  copy: > 
-    src={{ fqdn }}_idp.crt
-    dest={{ idp_home }}/credentials/idp.crt
+  copy:
+    src: "{{ fqdn }}_idp.crt"
+    dest: "{{ idp_home }}/credentials/idp.crt"
   when: have_sign_cert.stat.exists == True
 
 ############ Else > Create self-signed certificates ##################################
@@ -102,23 +102,23 @@
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 - name: Copy signing certificate to this machine
-  fetch: >
-    src={{ idp_home }}/credentials/idp.crt 
-    dest=roles/idp/files/{{ fqdn }}_idp.crt 
-    flat=yes
+  fetch:
+    src: "{{ idp_home }}/credentials/idp.crt"
+    dest: roles/idp/files/{{ fqdn }}_idp.crt 
+    flat: yes
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 - name: Copy signing key to this machine, if it exists
-  fetch: >
-    src={{ idp_home }}/credentials/idp.key 
-    dest=roles/idp/files/{{ fqdn }}_idp.key
-    flat=yes
+  fetch:
+    src: "{{ idp_home }}/credentials/idp.key"
+    dest: roles/idp/files/{{ fqdn }}_idp.key
+    flat: yes
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 
 - name: Hand ownership to Tomcat user
-  file: >
-    path={{ idp_home }}
-    owner={{ tomcat.user }}
-    recurse=yes
+  file:
+    path: "{{ idp_home }}"
+    owner: "{{ tomcat.user }}"
+    recurse: yes
 

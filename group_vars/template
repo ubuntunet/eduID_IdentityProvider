@@ -6,7 +6,7 @@ idp:
   displayname: Identity Provider for the Example University
   description: IdP for students and staff at the Example University
   #Add your own logo in roles/idp/files
-  logo: logo-default.png 
+  logo: logo-default.png
   
 organisation:
   name: Example Institutions

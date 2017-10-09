@@ -1,5 +1,4 @@
 shibboleth_version: 3.3.1
-#shibboleth_version: 3.2.1
 
 postgres_version: 9.5
 openjdk_version: 8
