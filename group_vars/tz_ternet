@@ -87,6 +87,25 @@ service_providers:
       - eduPersonPrincipalName
       - mail
 
+  -
+    name: eduroam_ua_registry
+    entity_id: https://eduroam.ubuntunet.net/shibboleth
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - eduPersonEntitlement
+      - sn
+      - givenName
+
+  - 
+    name: TerenaSPP
+    entity_id: https://terena.org/sp
+    attributes:
+      - mail
+      - eduPersonPrincipalName
+      - sn
+      - givenName
+
   - 
     name: SciGaIADiscourse
     entity_id: https://discourse.sci-gaia.eu/shibboleth
@@ -95,6 +114,33 @@ service_providers:
       - eduPersonPrincipalName
       - sn
       - givenName
+
+  -
+    name: eduID Resource Registry
+    entity_id: https://rr.ubuntunet.net/shibboleth
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - sn
+      - givenName
+      - isMemberOf
+
+  -
+    name: UA Community Forum
+    entity_id: https://community.ubuntunet.net
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - sn
+      - givenName
+
+  -
+    name: UA Filesender
+    entity_id: https://filesender.ubuntunet.net
+    attributes:
+      - eduPersonPrincipalName
+      - mail
+      - displayName
 
 
  # -

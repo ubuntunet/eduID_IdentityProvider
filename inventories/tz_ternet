@@ -1,10 +1,12 @@
-shibboleth_idp ansible_host=idp.ternet.or.tz
+shibboleth_idp ansible_host=196.223.215.18
+#shibboleth_idp2 ansible_host=196.223.215.18
 
 [idp]
 shibboleth_idp
+#shibboleth_idp2
 
 [idp:vars]
-ansible_user=sysadm
+ansible_user=ubuntu
 
 [tz_ternet:children]
 idp
