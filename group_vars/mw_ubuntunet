@@ -87,7 +87,7 @@ service_providers:
       - eduPersonEntitlement
 
   -
-    name: eduroam_mw_registry
+    name: eduroam_ua_registry
     entity_id: https://eduroam.ubuntunet.net/shibboleth
     attributes:
       - mail
