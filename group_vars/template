@@ -2,7 +2,7 @@ fqdn: idp.example.net
 entity_id: https://{{ fqdn }}/shibboleth
 
 idp:
-  name: example.net
+  scope: example.edu
   displayname: Identity Provider for the Example University
   description: IdP for students and staff at the Example University
   #Add your own logo in roles/idp/files
@@ -10,9 +10,11 @@ idp:
   
 organisation:
   name: Example Institutions
-  fqdn: example.edu
-  url: "https://{{ fqdn }}"
+  domain: example.edu
+  url: "https://{{ organisation.domain }}"
   type: NREN
+  
+# See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
 country_code: TLD
 
 federations:
@@ -54,8 +56,6 @@ ldap:
   protocol: ldap
   # Defaults: 389 for ldap; 636 for ldaps
   port: 389
-  # Distinguished Name used to connect to the LDAP server
-  bind_dn: cn=Manager,dc=example,dc=net
   # Distinguished Name under which user information can be found
   base_dn: ou=people,dc=example,dc=net
 
