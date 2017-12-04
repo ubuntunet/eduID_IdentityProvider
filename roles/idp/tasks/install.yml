@@ -115,7 +115,6 @@
     flat: yes
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
-
 - name: Hand ownership to Tomcat user
   file:
     path: "{{ idp_home }}"

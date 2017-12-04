@@ -1,4 +1,4 @@
-fqdn: idp.example.net
+fqdn: idp332.ubuntunet.net
 entity_id: https://{{ fqdn }}/shibboleth
 
 idp:
@@ -11,11 +11,10 @@ idp:
 organisation:
   name: Example Institutions
   domain: example.edu
-  url: "https://{{ organisation.domain }}"
+  url: "https://{{ fqdn }}"
   type: NREN
-  
-# See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
-country_code: TLD
+
+country_code: MW
 
 federations:
   # Main Federation
