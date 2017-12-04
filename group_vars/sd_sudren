@@ -40,8 +40,6 @@ ldap:
   protocol: ldap
   # Defaults: 389 for ldap; 636 for ldaps
   port: 389
-  # Distinguished Name used to connect to the LDAP server
-  bind_dn: cn=Manager,dc=example,dc=net
   # Distinguished Name under which user information can be found
   base_dn: ou=people,dc=example,dc=net
 

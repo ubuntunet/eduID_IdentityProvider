@@ -32,9 +32,9 @@ idp.authn.LDAP.userFilter          = (uid={user})
 # bind search configuration
 # for AD: idp.authn.LDAP.bindDN=adminuser@domain.com
 #idp.authn.LDAP.bindDN = uid=myservice,ou=system
-idp.authn.LDAP.bindDN              = {{ ldap.bind_dn }}
+idp.authn.LDAP.bindDN              = {{ ldap_bind.dn }}
 # Use credentials.properties.j2 for the password instead,
-idp.authn.LDAP.bindDNCredential    = {{ ldap.password }}
+idp.authn.LDAP.bindDNCredential    = {{ ldap_bind.credential }}
 
 # Format DN resolution, used by directAuthenticator, adAuthenticator
 # for AD use idp.authn.LDAP.dnFormat=%s@domain.com
