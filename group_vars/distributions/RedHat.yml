@@ -1,5 +1,4 @@
-shibboleth_version: 3.3.1
-#shibboleth_version: 3.2.1
+shibboleth_version: 3.3.2
 
 tomcat:
   version: 7
