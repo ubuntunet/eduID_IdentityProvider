@@ -1,3 +1,17 @@
+# Certbot
+- name: Install Prerequisites for Certbot
+  apt:
+    name: software-properties-common
+
+- name: Add PPA repository for Certbot
+  apt_repository:
+    repo: 'ppa:certbot/certbot'
+
+- name: Install Certbot
+  apt:
+    name: python-certbot-apache
+    update_cache: yes
+
 # 3. Apache HTTP Server installation
 - name: Install apache
   package: name={{ webserver.name }} state=installed
@@ -23,69 +37,10 @@
   notify: restart apache
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
-############ If Certificates exist? ##################################
-
-- name: Check if there is a website certificate locally
-  become: False
-  local_action:
-    module: stat
-    path: "roles/webserver/files/{{ fqdn }}.crt"
-  register: have_web_cert
-
-- name: Check if there is a website key locally
-  become: False
-  local_action:
-    module: stat
-    path: "roles/webserver/files/{{ fqdn }}.key"
-  register: have_web_key
-
-################## Then < Copy existing certificates to remote #######################
-- name: Copy TLS key
-  copy: > 
-    src=files/{{ fqdn }}.key 
-    dest={{ certificate_key_path }}
-    owner=root
-    group=ssl-cert
-    mode=0600
-  when: have_web_key.stat.exists == True
-  notify: restart apache
-
-- name: Copy TLS certificate
-  copy: > 
-    src=files/{{ fqdn }}.crt 
-    dest={{ certificate_cert_path }}
-  when: have_web_cert.stat.exists == True
-  notify: restart apache
-
-############ Else > Create self-signed certificates ##################################
-- name: Copy Web certificate config file
-  template: >
-    src=web_cert.cnf.j2
-    dest=/tmp/web_cert.cnf
-  when: (have_web_cert.stat.exists == False) and (have_web_key.stat.exists == False)
-
-- name: Generate key and certificate
-  command: openssl req -x509 -nodes -days 1095 -newkey rsa:2048 -config /tmp/web_cert.cnf -keyout {{ certificate_key_path }} -out {{ certificate_cert_path }}
-  when: (have_web_cert.stat.exists == False) and (have_web_key.stat.exists == False)
-
-- name: Tighten permission on key
-  file: > 
-    path={{ certificate_key_path }} 
-    owner=root
-    group=ssl-cert
-    mode=0600
-  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-################## End Certificates #######################
-
 - name: Enable SSL and AJP Proxy modules
   command: a2enmod ssl proxy_ajp rewrite
   notify: restart apache
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-
-
-################## Training Stuff #######################
-
 
 - name: Copy index with tasks
   template: >
@@ -93,9 +48,5 @@
     dest=/var/www/html/index.html
   notify: restart apache
 
-- name: Copy hands-on pic
-  copy: >
-    src=hands-on.png
-    dest=/var/www/html/hands-on.png
-
-
+- name: Install Certificate with Let's Encrypt
+  command: "certbot certonly --apache -n -d {{ fqdn }} --agree-tos --email {{ technical_email }}"
