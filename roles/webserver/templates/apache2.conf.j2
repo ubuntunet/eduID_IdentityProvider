@@ -20,9 +20,9 @@
   SSLEngine On
   SSLCipherSuite HIGH:MEDIUM:!aNULL:!kRSA:!MD5:!RC4
   SSLProtocol all -SSLv2 -SSLv3
-  SSLCertificateKeyFile {{ certificate_key_path }}
-  SSLCertificateFile {{ certificate_cert_path }}
-  SSLCertificateChainFile {{ certificate_chain_path }}
+  SSLCertificateFile /etc/letsencrypt/live/{{ fqdn }}/fullchain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/{{ fqdn }}/privkey.pem
+  Include /etc/letsencrypt/options-ssl-apache.conf
 
   ProxyPass /idp ajp://localhost:8009/idp retry=5
   <Proxy ajp://localhost:8009>
