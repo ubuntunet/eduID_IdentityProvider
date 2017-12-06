@@ -4,7 +4,7 @@ idp.additionalProperties= /conf/ldap.properties, /conf/saml-nameid.properties, /
 # Set the entityID of the IdP
 # THIS IS BEING SET IN idp-install.sh.j2
 #idp.entityID= https://idp.ubuntunet.net/idp/shibboleth
-idp.entityID= {{ entity_id }}
+idp.entityID= {{ idp.entity_id }}
 
 # Set the scope used in the attribute resolver for scoped attributes
 idp.scope= {{ idp.scope }}

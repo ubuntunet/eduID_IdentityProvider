@@ -1,27 +1,15 @@
-fqdn: idp.ubuntunet.net
-entity_id: https://{{ fqdn }}/shibboleth
-
 organisation:
   name: UbuntuNet Alliance
-  fqdn: ubuntunet.net
-  url: "https://{{ fqdn }}"
+  url: https://ubuntunet.net
   type: NREN
-country_code: MW
 
 idp:
-  name: ubuntunet.net
+  fqdn: idp.ubuntunet.net
+  entity_id: https://idp.ubuntunet.net/shibboleth
+  scope: ubuntunet.net
   displayname: UbuntuNet Alliance IdP
   description: IdP for the staff at the UbuntuNet Alliance offices
   logo: logo-ua.png
-  # optional_encryption: false
-
-
-# federation: marida
-# registration_authority: https://eduid.ubuntunet.net
-# #metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-# metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/{{ federation }}/metadata.xml
-# metadata_file: metadata.xml
-# disregard_tsl_certificate: false
 
 federations:
   # Main Federation
@@ -29,6 +17,7 @@ federations:
     name: marida
     registration_authority: https://eduid.ubuntunet.net
     metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/marida/metadata.xml
+    #metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
     metadata_file: metadata.xml
     disregard_tsl_certificate: false
   

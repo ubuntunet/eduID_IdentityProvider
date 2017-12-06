@@ -1,6 +1,20 @@
 Changelog
 =========
 
+0.8.2 - 2017/12/06
+------------------
+
+* Refactored/renamed IdP and Organisation variables in group_vars
+
+
+0.8 - 2017/12/05
+----------------
+
+* Upgraded to Idp v3.3.2
+* Added Lets Encrypt tasks for website certificate creation
+* Renamed LDAP variables in secrets.yml, so they don't clash with the public ones
+
+
 0.7.3 - 2017/06/13
 ------------------
 

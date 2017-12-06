@@ -11,7 +11,7 @@ ERROR: command execution failed, see above. Aborting."' ERR
 
 INSTALLDIR={{ idp_home }}
 SCOPE={{ idp.scope }}
-SVCNAME={{ fqdn }}
+SVCNAME={{ idp.fqdn }}
 TCUSER={{ tomcat.user }}
 
 
@@ -55,7 +55,7 @@ cd /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}
 #   read -p "Please enter the name of your home organization [$DFLT]: " SCOPE
 #   SCOPE=${SCOPE:-$DFLT}
 
-#   DFLT={{ fqdn }}
+#   DFLT={{ idp.fqdn }}
 #   read -p "Please specify the service name for your IdP [$DFLT]: " SVCNAME
 #   SVCNAME=${SVCNAME:-$DFLT}
 #   echo
@@ -86,7 +86,7 @@ idp.signing.key= %{idp.home}/credentials/idp.key
 idp.signing.cert= %{idp.home}/credentials/idp.crt
 idp.encryption.key= %{idp.home}/credentials/idp.key
 idp.encryption.cert= %{idp.home}/credentials/idp.crt
-idp.entityID= {{ entity_id }}
+idp.entityID= {{ idp.entity_id }}
 # idp.entityID= https://$SVCNAME/idp/shibboleth
 idp.scope= $SCOPE
 idp.consent.StorageService= shibboleth.JPAStorageService

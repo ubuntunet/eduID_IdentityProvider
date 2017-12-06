@@ -1,15 +1,12 @@
-fqdn: idp.ubuntunet.net
-entity_id: https://{{ fqdn }}/shibboleth
-
 organisation:
   name: RENU
-  fqdn: renu.ac.ug
-  url: "https://{{ fqdn }}"
+  url: https://renu.ac.ug
   type: NREN
-country_code: UG
 
 idp:
-  name: idp.renu.ac.ug
+  fqdn: idp.renu.ac.ug
+  entity_id: https://idp.renu.ac.ug/shibboleth
+  scope: idp.renu.ac.ug
   displayname: Identity Provider for RENU
   description: IdP for the staff at the RENU office
   logo: logo-renu.png

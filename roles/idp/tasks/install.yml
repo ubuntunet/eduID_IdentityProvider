@@ -35,13 +35,13 @@
 - name: Copy signing cert to this machine, if it exists
   fetch:
     src: "{{ idp_home }}/credentials/idp.crt"
-    dest: roles/idp/files/{{ fqdn }}_idp.crt 
+    dest: roles/idp/files/{{ idp.fqdn }}_idp.crt 
     flat: yes
 
 - name: Copy signing key to this machine, if it exists
   fetch:
     src: "{{ idp_home }}/credentials/idp.key" 
-    dest: roles/idp/files/{{ fqdn }}_idp.key
+    dest: roles/idp/files/{{ idp.fqdn }}_idp.key
     flat: yes
 
 
@@ -52,14 +52,14 @@
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp.crt"
+    path: "roles/idp/files/{{ idp.fqdn }}_idp.crt"
   register: have_sign_cert
 
 - name: Check if there is a signing key locally
   become: False
   local_action:
     module: stat
-    path: "roles/idp/files/{{ fqdn }}_idp.key"
+    path: "roles/idp/files/{{ idp.fqdn }}_idp.key"
   register: have_sign_key
 
 # Run Installation Script
@@ -72,13 +72,13 @@
 ################## Then < Copy existing certificates to remote #######################
 - name: Copy signing key
   copy:
-    src: "{{ fqdn }}_idp.key"
+    src: "{{ idp.fqdn }}_idp.key"
     dest: "{{ idp_home }}/credentials/idp.key"
   when: have_sign_key.stat.exists == True
 
 - name: Copy signing certificate
   copy:
-    src: "{{ fqdn }}_idp.crt"
+    src: "{{ idp.fqdn }}_idp.crt"
     dest: "{{ idp_home }}/credentials/idp.crt"
   when: have_sign_cert.stat.exists == True
 
@@ -89,8 +89,8 @@
   command: /usr/local/dist/shibboleth-identity-provider-{{ shibboleth_version }}/bin/keygen.sh --lifetime 3 \
     --certfile {{ idp_home }}/credentials/idp.crt \
     --keyfile {{ idp_home }}/credentials/idp.key \
-    --hostname {{ fqdn }} \
-    --uriAltName https://{{ fqdn }}/idp/shibboleth  
+    --hostname {{ idp.fqdn }} \
+    --uriAltName https://{{ idp.fqdn }}/idp/shibboleth  
   environment:
     #JAVA_HOME: /usr/lib/jvm/{{ jre_version }}
     #JAVA_HOME: /usr/lib/jvm/{{ jre_version }}/jre
@@ -104,14 +104,14 @@
 - name: Copy signing certificate to this machine
   fetch:
     src: "{{ idp_home }}/credentials/idp.crt"
-    dest: roles/idp/files/{{ fqdn }}_idp.crt 
+    dest: roles/idp/files/{{ idp.fqdn }}_idp.crt 
     flat: yes
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 
 - name: Copy signing key to this machine, if it exists
   fetch:
     src: "{{ idp_home }}/credentials/idp.key"
-    dest: roles/idp/files/{{ fqdn }}_idp.key
+    dest: roles/idp/files/{{ idp.fqdn }}_idp.key
     flat: yes
   when: (have_sign_cert.stat.exists == False) and (have_sign_key.stat.exists == False)
 

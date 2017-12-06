@@ -1,22 +1,17 @@
-fqdn: idp.example.net
-entity_id: https://{{ fqdn }}/shibboleth
-
+organisation:
+  name: Example Institutions
+  url: https://example.edu
+  type: NREN
+  
 idp:
+  fqdn: idp.example.edu
+  entity_id: https://idp.example.edu/shibboleth
   scope: example.edu
   displayname: Identity Provider for the Example University
   description: IdP for students and staff at the Example University
   #Add your own logo in roles/idp/files
   logo: logo-default.png
   
-organisation:
-  name: Example Institutions
-  domain: example.edu
-  url: "https://{{ organisation.domain }}"
-  type: NREN
-  
-# See https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements
-country_code: TLD
-
 federations:
   # Main Federation
   - 

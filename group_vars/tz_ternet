@@ -1,16 +1,12 @@
-fqdn: idp.ternet.or.tz
-entity_id: https://{{ fqdn }}/shibboleth
-
 organisation:
   name: TERNET
-  fqdn: ternet.or.tz
-  url: "https://{{ fqdn }}"
+  url: https://ternet.or.tz
   type: NREN
-country_code: TZ
-
 
 idp:
-  name: ternet.or.tz
+  fqdn: idp.ternet.or.tz
+  entity_id: https://idp.ternet.or.tz/shibboleth
+  scope: ternet.or.tz
   displayname: TERNET IdP
   description: IdP for the Tanzanian Science Gateways
   logo: logo-ternet.jpg

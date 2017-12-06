@@ -1,18 +1,17 @@
-fqdn: 192.168.33.44
-entity_id: https://{{ fqdn }}/shibboleth
-
 organisation:
   name: UbuntuNet Alliance
-  fqdn: ubuntunet.net
-  url: "https://{{ fqdn }}"
+  url: https://ubuntunet.net
   type: NREN
 
-idp_name: ubuntunet.net
-idp_displayname: Identity Provider for the UbuntuNet Alliance
-idp_description: IdP for the staff at the UbuntuNet Alliance offices
-idp_logo: logo-default.jpg 
-
-country_code: ME
+idp:
+  fqdn: 192.168.33.44
+  entity_id: https://idp.example.edu/shibboleth
+  scope: example.edu
+  displayname: Identity Provider for the Example University
+  description: IdP for students and staff at the Example University
+  #Add your own logo in roles/idp/files
+  logo: logo-default.png
+  
 federation: unida-test
 registration_authority: https://eduid.ubuntunet.net
 metadata_url: https://192.168.33.99/metadata/federation/{{ federation }}/metadata.xml

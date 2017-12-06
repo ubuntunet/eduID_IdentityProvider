@@ -24,7 +24,7 @@
 - name: Copy apache2 config file
   template: >
     src=templates/apache2.conf.j2
-    dest="{{ webserver.conf_path }}/{{ fqdn }}.conf"
+    dest="{{ webserver.conf_path }}/{{ idp.fqdn }}.conf"
   notify: restart apache
 
 - name: Disable default configuration
@@ -33,7 +33,7 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Enable IdP configuration
-  command: a2ensite {{ fqdn }}
+  command: a2ensite {{ idp.fqdn }}
   notify: restart apache
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
@@ -49,4 +49,4 @@
   notify: restart apache
 
 - name: Install Certificate with Let's Encrypt
-  command: "certbot certonly --apache -n -d {{ fqdn }} --agree-tos --email {{ technical_email }}"
+  command: "certbot --apache -n -d {{ idp.fqdn }} --agree-tos --email {{ technical_email }}"

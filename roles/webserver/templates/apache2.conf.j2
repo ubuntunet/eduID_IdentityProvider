@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-  ServerName {{ fqdn }}
+  ServerName {{ idp.fqdn }}
   DocumentRoot /var/www/html
 
   RewriteEngine on
@@ -9,10 +9,10 @@
 </VirtualHost>
 
 <VirtualHost *:443>
-  ServerName {{ fqdn }}
+  ServerName {{ idp.fqdn }}
   ServerAdmin {{ admin_email }}
-  CustomLog /var/log/apache2/{{ fqdn }}.access.log combined
-  ErrorLog /var/log/apache2/{{ fqdn }}.error.log
+  CustomLog /var/log/apache2/{{ idp.fqdn }}.access.log combined
+  ErrorLog /var/log/apache2/{{ idp.fqdn }}.error.log
 
 
   DocumentRoot /var/www/html
@@ -20,9 +20,9 @@
   SSLEngine On
   SSLCipherSuite HIGH:MEDIUM:!aNULL:!kRSA:!MD5:!RC4
   SSLProtocol all -SSLv2 -SSLv3
-  SSLCertificateFile /etc/letsencrypt/live/{{ fqdn }}/fullchain.pem
-  SSLCertificateKeyFile /etc/letsencrypt/live/{{ fqdn }}/privkey.pem
-  Include /etc/letsencrypt/options-ssl-apache.conf
+  SSLCertificateKeyFile /etc/ssl/private/{{ idp.fqdn }}.key
+  SSLCertificateFile /etc/ssl/certs/{{ idp.fqdn }}.crt
+  SSLCertificateChainFile /etc/ssl/certs/{{ idp.fqdn }}.crt
 
   ProxyPass /idp ajp://localhost:8009/idp retry=5
   <Proxy ajp://localhost:8009>
