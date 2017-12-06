@@ -1,21 +1,17 @@
-fqdn: idp332.ubuntunet.net
-entity_id: https://{{ fqdn }}/shibboleth
+organisation:
+  name: Example Institutions
+  url: https://example.edu
+  type: NREN
 
 idp:
+  fqdn: idp332.ubuntunet.net
+  entity_id: https://idp332.ubuntunet.net/shibboleth
   scope: example.edu
   displayname: Identity Provider for the Example University
   description: IdP for students and staff at the Example University
   #Add your own logo in roles/idp/files
   logo: logo-default.png
   
-organisation:
-  name: Example Institutions
-  domain: example.edu
-  url: "https://{{ fqdn }}"
-  type: NREN
-
-country_code: MW
-
 federations:
   # Main Federation
   - 

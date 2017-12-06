@@ -1,22 +1,17 @@
-fqdn: idp.ethernet.edu.et
-#fqdn: awash.ubuntunet.net
-entity_id: https://{{ fqdn }}/shibboleth
+organisation:
+  name: EthERNet
+  url: http://ethernet.edu.et
+  type: NREN
 
 idp:
-  name: ethernet.edu.et
+  fqdn: idp.ethernet.edu.et
+  entity_id: https://idp.ethernet.edu.et/shibboleth
+  scope: ethernet.edu.et
   displayname: Identity Provider for EthERNet
   description: IdP for the research community in Ethiopia
   #Add your own logo in roles/idp/files
   logo: logo-ethernet.png
   
-organisation:
-  name: EthERNet
-  fqdn: ethernet.edu.et
-  url: "http://{{ fqdn }}"
-  type: NREN
-
-country_code: ET
-
 federations:
   # Main Federation
   - 

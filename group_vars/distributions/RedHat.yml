@@ -17,7 +17,3 @@ postgres:
   java_driver: postgresql-jdbc
   python_driver: python-psycopg2
   conf_path: /var/lib/pgsql/data
-
-certificate_key_path: /etc/pki/tls/private/{{ fqdn }}.key
-certificate_cert_path: /etc/pki/tls/certs/{{ fqdn }}.crt
-certificate_chain_path: /etc/pki/tls/certs/{{ fqdn }}.crt

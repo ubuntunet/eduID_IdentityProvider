@@ -1,15 +1,12 @@
-fqdn: idp.sudren.edu.sd
-entity_id: https://{{ fqdn }}/shibboleth
-
 organisation:
   name: SudREN
-  fqdn: sudren.edu.sd
-  url: "https://{{ fqdn }}"
+  url: https://sudren.edu.sd
   type: NREN
-country_code: SD
 
 idp:
-  name: suin.edu.sd
+  fqdn: idp.sudren.edu.sd
+  entity_id: https://idp.sudren.edu.sd/shibboleth
+  scope: suin.edu.sd
   displayname: SudREN IdP
   description: IdP for the staff at SudREN
   logo: logo-sudren.png
