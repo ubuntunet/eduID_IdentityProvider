@@ -20,18 +20,17 @@
   SSLEngine On
   SSLCipherSuite HIGH:MEDIUM:!aNULL:!kRSA:!MD5:!RC4
   SSLProtocol all -SSLv2 -SSLv3
-  SSLCertificateKeyFile /etc/ssl/private/{{ idp.fqdn }}.key
-  SSLCertificateFile /etc/ssl/certs/{{ idp.fqdn }}.crt
-  SSLCertificateChainFile /etc/ssl/certs/{{ idp.fqdn }}.crt
+
+  SSLCertificateFile /etc/letsencrypt/live/{{ idp.fqdn }}/fullchain.pem
+  SSLCertificateKeyFile /etc/letsencrypt/live/{{ idp.fqdn }}/privkey.pem
+  Include /etc/letsencrypt/options-ssl-apache.conf
 
   ProxyPass /idp ajp://localhost:8009/idp retry=5
   <Proxy ajp://localhost:8009>
     Require all granted
   </Proxy>
 
-  BrowserMatch "MSIE [2-6]" \
-      nokeepalive ssl-unclean-shutdown \
-      downgrade-1.0 force-response-1.0
+  BrowserMatch "MSIE [2-6]" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
   # MSIE 7 and newer should be able to use keepalive
   BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
 
