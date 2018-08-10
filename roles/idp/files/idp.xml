@@ -1,5 +1,0 @@
-<Context docBase="/opt/shibboleth-idp/war/idp.war"
-         unpackWAR="false"
-         swallowOutput="true">
-  <Manager pathname="" />
-</Context>
