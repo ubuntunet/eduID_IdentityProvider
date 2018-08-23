@@ -10,6 +10,10 @@
   apt: name=default-jdk update_cache=yes cache_valid_time=3600
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
+- name: Install OpenJDK for 18.04
+  apt: name=default-jdk update_cache=yes cache_valid_time=3600
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+
 # 4.2. Servlet container: Apache Tomcat 7
 - name: Install Tomcat on Ubuntu
   # package: name="tomcat{{ tomcat.version }}" state=latest

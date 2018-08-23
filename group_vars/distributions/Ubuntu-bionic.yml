@@ -1,0 +1,24 @@
+shibboleth_version: 3.3.3
+
+postgres_version: 10
+openjdk_version: 8
+jre_version: default-java
+# java_path: /usr/lib/jvm/{{ jre_version }}
+java_path: /usr/lib/jvm/{{ jre_version }}
+
+# catalina_home: /usr/share/tomcat7
+# catalina_base: /var/lib/tomcat7
+tomcat:
+  version: 8
+  user: tomcat8
+  path: /etc/tomcat8
+
+webserver: 
+  name: apache2
+  conf_path: /etc/apache2/sites-available
+
+postgres:
+  name: postgresql
+  java_driver: libpostgresql-jdbc-java
+  python_driver: python-psycopg2
+  conf_path: /etc/postgresql/{{ postgres_version }}/main
