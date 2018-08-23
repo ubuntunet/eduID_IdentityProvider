@@ -20,12 +20,14 @@
   apt: name=tomcat{{ tomcat.version }} update_cache=yes cache_valid_time=3600
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
-## if using tomcat 7, you may uncomment...but not tomcat8
-# - name: Copy Tomcat config file
-#   copy: > 
-#     src=files/tomcat.xml 
-#     dest={{ tomcat.path }}/server.xml
-#   notify: restart tomcat
+# bionic has used tomcat8...see group_vars/Ubuntu-bionic.yml
+- name: Copy Tomcat config file
+  copy: > 
+    src=files/tomcat.xml 
+    dest={{ tomcat.path }}/server.xml
+  notify: restart tomcat
+  failed_when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+  ignore_errors: True 
 
 - name: Adjust JAVA options
   replace: >
