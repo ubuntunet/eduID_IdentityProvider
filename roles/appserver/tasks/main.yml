@@ -20,11 +20,12 @@
   apt: name=tomcat{{ tomcat.version }} update_cache=yes cache_valid_time=3600
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
-- name: Copy Tomcat config file
-  copy: > 
-    src=files/tomcat.xml 
-    dest={{ tomcat.path }}/server.xml
-  notify: restart tomcat
+## if using tomcat 7, you may uncomment...but not tomcat8
+# - name: Copy Tomcat config file
+#   copy: > 
+#     src=files/tomcat.xml 
+#     dest={{ tomcat.path }}/server.xml
+#   notify: restart tomcat
 
 - name: Adjust JAVA options
   replace: >

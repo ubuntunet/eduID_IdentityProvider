@@ -26,12 +26,11 @@
     dest: /usr/local/dist
     copy: no
 
-    # If using tomcat 7, you may uncomment!
-# - name: Copy customised install script
-#   template:
-#     src: idp-install.sh.j2
-#     dest: /usr/local/dist/idp-install.sh
-#     mode: 0700
+- name: Copy customised install script
+  template:
+    src: idp-install.sh.j2
+    dest: /usr/local/dist/idp-install.sh
+    mode: 0700
 
 - name: Copy signing cert to this machine, if it exists
   fetch:
