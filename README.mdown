@@ -52,10 +52,10 @@ If you want to try it out locally, and you have Vagrant/Virtualbox installed, th
 
 ## Register on UbuntuNets Resource Registry 
 
-UbuntuNet Alliance is running a resource registry at https://rr.ubuntunet.net. This registry can be used by all our member NRENs. Please get in contact with us (eduid@ubuntunet.net), so we can add you as a user.
+UbuntuNet Alliance is running a resource registry at https://registry.eduid.africa. This registry can be used by all our member NRENs. Please get in contact with us (eduid@ubuntunet.net), so we can add you as a user.
 
 If you already have a federation on the Resource Registry:
-* Login at https://rr.ubuntunet.net
+* Login at https://registry.eduid.africa
 * Go to Register > Identity Federation
 * SSH into the server
 * Copy the content of the IdP metadata file (/opt/shibboleth-idp/metadata/idp-metadata.xml) from your server into the Metadata form field and click "Next".

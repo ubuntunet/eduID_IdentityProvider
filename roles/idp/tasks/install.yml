@@ -37,12 +37,14 @@
     src: "{{ idp_home }}/credentials/idp.crt"
     dest: roles/idp/files/{{ idp.fqdn }}_idp.crt 
     flat: yes
+  ignore_errors: True
 
 - name: Copy signing key to this machine, if it exists
   fetch:
     src: "{{ idp_home }}/credentials/idp.key" 
     dest: roles/idp/files/{{ idp.fqdn }}_idp.key
     flat: yes
+  ignore_errors: True
 
 
 # Signing Certificates

@@ -17,7 +17,7 @@ federations:
   - 
     name: marida
     registration_authority: https://eduid.ubuntunet.net
-    metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/marida/metadata.xml
+    metadata_url: https://registry.eduid.africa/signedmetadata/federation/unida/metadata.xml
     metadata_file: metadata.xml
     disregard_tsl_certificate: false
   
@@ -26,7 +26,7 @@ federations:
   # - 
   #   name: unida
   #   registration_authority: https://eduid.ubuntunet.net
-  #   metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/unida/metadata.xml
+  #   metadata_url: https://registry.eduid.africa/signedmetadata/federation/marida/metadata.xml
   #   metadata_file: metadata-unida.xml
   #   disregard_tsl_certificate: false
 
