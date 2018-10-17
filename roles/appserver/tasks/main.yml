@@ -10,17 +10,24 @@
   apt: name=default-jdk update_cache=yes cache_valid_time=3600
   when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'xenial'
 
+- name: Install OpenJDK for 18.04
+  apt: name=default-jdk update_cache=yes cache_valid_time=3600
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+
 # 4.2. Servlet container: Apache Tomcat 7
 - name: Install Tomcat on Ubuntu
   # package: name="tomcat{{ tomcat.version }}" state=latest
   apt: name=tomcat{{ tomcat.version }} update_cache=yes cache_valid_time=3600
   when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
+# bionic has used tomcat8...see group_vars/Ubuntu-bionic.yml
 - name: Copy Tomcat config file
   copy: > 
     src=files/tomcat.xml 
     dest={{ tomcat.path }}/server.xml
   notify: restart tomcat
+  failed_when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'bionic'
+  ignore_errors: True 
 
 - name: Adjust JAVA options
   replace: >
