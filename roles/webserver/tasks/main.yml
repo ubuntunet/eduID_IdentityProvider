@@ -14,11 +14,11 @@
 
 # 3. Apache HTTP Server installation
 - name: Install apache
-  package: name={{ webserver.name }} state=installed
+  package: name={{ webserver.name }} state=present
   # apt: pkg=apache2 update_cache=yes cache_valid_time=3600
 
 - name: Install mod_ssl on RedHat
-  package: name=mod_ssl state=installed
+  package: name=mod_ssl state=present
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 
 - name: Copy apache2 config file
