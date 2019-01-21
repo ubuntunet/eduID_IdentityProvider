@@ -49,14 +49,14 @@
 #     dest=/opt/shibboleth-idp/credentials
 
 - name: Copy IdP properties
-  template: >
-    src=idp.properties.j2
-    dest={{ idp_home }}/conf/idp.properties
+  template:
+    src: idp.properties.j2
+    dest: "{{ idp_home }}/conf/idp.properties"
 
 - name: Copy IdP metadata.xml
-  template: >
-    src=idp-metadata.xml.j2
-    dest={{ idp_home }}/metadata/idp-metadata.xml
+  template:
+    src: idp-metadata.xml.j2
+    dest: "{{ idp_home }}/metadata/idp-metadata.xml"
 
 
 # - name: Insert Metadata Reference
@@ -66,24 +66,27 @@
 #     line="idp.metadata = switchaai, interfederation"
 
 - name: Copy metadata providers
-  template: > 
-    src=metadata-providers.xml.j2 
-    dest={{ idp_home }}/conf/metadata-providers.xml
+  template:
+    src: metadata-providers.xml.j2 
+    dest: "{{ idp_home }}/conf/metadata-providers.xml"
 
 
 - name: Copy Federation Metadata signer certificate
-  copy: >
-    src=fedsigner.crt.pem
-    dest={{ idp_home }}/credentials/fedsigner.crt.pem
+  copy:
+    src: "{{ item }}"
+    dest: "{{ idp_home }}/credentials/{{ item }}"
+  with_items:
+    - fedsigner_ua-rr.crt.pem
+    - fedsigner_afren-registry.crt.pem
   notify: restart tomcat
 
 
 - name: Download Metadata Backup File from RR 
-  get_url: > 
-    url={{ federations[0].metadata_url }}
-    validate_certs=no
-    dest={{ idp_home }}/metadata/{{ federations[0].metadata_file }}
-    owner={{ tomcat.user }}
+  get_url:
+    url: "{{ federations[0].metadata_url }}"
+    validate_certs: no
+    dest: "{{ idp_home }}/metadata/{{ federations[0].metadata_file }}"
+    owner: "{{ tomcat.user }}"
   notify: restart tomcat
 
 
