@@ -25,9 +25,9 @@
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
 
 - name: Install Postgres Java Adapter and Psycog on Debian
-  # package: name={{ item }} state=latest
-  apt: pkg={{ item }} update_cache=yes cache_valid_time=3600
-  with_items:
+  apt: name={{ packages }} cache_valid_time=3600
+  vars:
+    packages:
     - "{{ postgres.java_driver }}"
     - "{{ postgres.python_driver }}"
   notify: restart postgres
