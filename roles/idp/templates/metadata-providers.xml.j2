@@ -37,7 +37,7 @@
                       disregardTLSCertificate="{{ federation.disregard_tsl_certificate }}" >
        <MetadataFilter  xsi:type="SignatureValidation"
             requireSignedRoot="true"
-            certificateFile="{{ idp_home }}/credentials/fedsigner.crt.pem" />
+            certificateFile="{{ idp_home }}/credentials/{{ federation.signing_cert }}" />
         <MetadataFilter xsi:type="RequiredValidUntil" maxValidityInterval="P14D"/>
 
         <MetadataFilter xsi:type="EntityRoleWhiteList">
