@@ -14,21 +14,32 @@ idp:
 federations:
   # Main Federation
   - 
-    name: marida
-    registration_authority: https://eduid.ubuntunet.net
-    metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/marida/metadata.xml
-    #metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
-    metadata_file: metadata.xml
+    name: unida
+    registration_authority: https://registry.eduid.africa
+    metadata_url: https://registry.eduid.africa/signedmetadata/federation/unida/metadata.xml
+    metadata_file: metadata-unida.xml
+    signing_cert: fedsigner_afren-registry.crt.pem
     disregard_tsl_certificate: false
-  
+
   # Additional Federations
   # Copy and paste this entry as many times as needed
-  - 
-    name: unida
-    registration_authority: https://eduid.ubuntunet.net
-    metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/unida/metadata.xml
-    metadata_file: metadata-unida.xml
-    disregard_tsl_certificate: false
+  #- 
+  #  name: unida_rr
+  #  registration_authority: https://eduid.ubuntunet.net
+  #  metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/unida/metadata.xml
+  #  metadata_file: metadata-unida_rr.xml
+  #  signing_cert: fedsigner_ua-rr.crt.pem
+  #  disregard_tsl_certificate: false
+
+  #- 
+  #  name: marida
+  #  registration_authority: https://eduid.ubuntunet.net
+  #  metadata_url: https://rr.ubuntunet.net/signedmetadata/federation/marida/metadata.xml
+  #  #metadata_url: https://rr.ubuntunet.net/metadata/federation/{{ federation }}/metadata.xml
+  #  metadata_file: metadata-marida_rr.xml
+  #  signing_cert: fedsigner_ua-rr.crt.pem
+  #  disregard_tsl_certificate: false
+  
 
 support_first_name: Support
 support_last_name: Mail
